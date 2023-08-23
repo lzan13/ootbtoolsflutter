@@ -8,7 +8,7 @@ class VFLog {
   static bool isDebug = true;
   static String TAG = LOG_TAG;
 
-  static void init({bool debug, String tag}) {
+  static void init({bool debug = false, String tag = "vftools"}) {
     isDebug = debug;
     TAG = tag;
   }

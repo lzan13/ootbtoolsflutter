@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 
 class VFColors {
+  /// 主题色
+  static Color primary = const Color(0xff28af2b);
+  static final Color primary87 = primary.withAlpha(221);
+  static final Color primary54 = primary.withAlpha(138);
+  static final Color primary38 = primary.withAlpha(98);
+  static final Color primary12 = primary.withAlpha(31);
+
+  /// 色
+  static Color accent = const Color(0xff63a356);
+  static final Color accent87 = accent.withAlpha(221);
+  static final Color accent54 = accent.withAlpha(138);
+  static final Color accent38 = accent.withAlpha(98);
+  static final Color accent12 = accent.withAlpha(31);
+
   /// 透明色
   static const Color transparent = Color(0x00000000);
   static const Color translucent = Color(0x8a363636);
 
   /// 白色
   static const Color white = Color(0xffffffff);
-  static const Color white87 = Color(0xddffffff);
-  static const Color white54 = Color(0x8affffff);
-  static const Color white38 = Color(0x62ffffff);
-  static const Color white12 = Color(0x1fffffff);
+  static final Color white87 = white.withAlpha(221);
+  static final Color white54 = white.withAlpha(138);
+  static final Color white38 = white.withAlpha(98);
+  static final Color white12 = white.withAlpha(31);
 
   /// 黑色
   static const Color black = Color(0xff000000);

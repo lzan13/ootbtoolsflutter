@@ -10,21 +10,21 @@ typedef void OnTimerCallback(int millisUntilFinished);
 /// 倒计时工具类
 ///
 class VFTimer {
-  VFTimer({this.mInterval = Duration.millisecondsPerSecond, this.mTotalTime});
-
   /// Timer.
-  Timer _mTimer;
+  Timer? _mTimer;
 
   /// Timer是否启动.
   bool _isActive = false;
 
   /// Timer间隔 单位毫秒，默认1000毫秒(1秒).
-  int mInterval;
+  int mInterval = 1000;
 
   /// 倒计时总时间
-  int mTotalTime; //单位毫秒
+  int mTotalTime = 1000 * 60; //单位毫秒
 
-  OnTimerCallback _onTimerCallback;
+  late OnTimerCallback _onTimerCallback;
+
+  // VFTimer(Key? key, this.mInterval, this.mTotalTime);
 
   /// 设置Timer间隔.
   void setInterval(int interval) {
@@ -95,7 +95,7 @@ class VFTimer {
   /// 取消计时器.
   void cancel() {
     if (_mTimer != null) {
-      _mTimer.cancel();
+      _mTimer?.cancel();
       _mTimer = null;
     }
     _isActive = false;

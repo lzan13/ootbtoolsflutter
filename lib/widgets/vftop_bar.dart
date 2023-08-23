@@ -1,43 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import 'package:vftools/constants/vfconstants.dart';
+import 'package:vftools/themes/vfthemes.dart';
 
 class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
-  final double height;
-  final double top;
-  final Color bgColor;
+  double height;
+  Color? bgColor;
 
-  final PreferredSizeWidget bottom;
+  PreferredSizeWidget? bottom;
 
   // 标题
-  final String title;
-  final double titleSize;
-  final Color titleColor;
+  String title;
+  double titleSize;
+  Color titleColor;
   // 居中
-  final bool center;
-  final Widget titleWidget;
+  bool center;
+  Widget? titleWidget;
 
   // 左侧图标
-  final IconData leftIcon;
-  final VoidCallback leftAction;
-  final Widget leftWidget;
+  IconData? leftIcon;
+  VoidCallback? leftAction;
+  Widget? leftWidget;
 
   // 右侧图标
-  final IconData rightIcon;
-  final VoidCallback rightAction;
-  final Widget rightWidget;
+  IconData? rightIcon;
+  VoidCallback? rightAction;
+  Widget? rightWidget;
 
   VFTopBar({
-    Key key,
-    this.height: VFDimens.bar_normal,
-    this.top,
+    Key? key,
+    this.height = VFDimens.barNormal,
     this.bgColor,
+    this.title = "Title",
     this.bottom,
-    this.title,
-    this.titleSize: VFSizes.title,
-    this.titleColor: VFColors.greyBlack,
+    this.titleSize = VFSizes.title,
+    this.titleColor = VFColors.black87,
     this.titleWidget,
-    this.center: false,
+    this.center = false,
     this.leftIcon,
     this.leftAction,
     this.leftWidget,
@@ -62,80 +61,76 @@ class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
 class VFTopBarState extends State<VFTopBar> {
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-    final AppBarTheme appBarTheme = AppBarTheme.of(context);
-
+    final top = MediaQuery.of(context).padding.top;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      // crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
-          color: widget.bgColor ?? appBarTheme.color ?? themeData.primaryColor,
-          padding: EdgeInsets.only(top: widget.top),
-          height: widget.height + widget.top,
+          color: widget.bgColor ?? VFColors.primary,
+          padding: EdgeInsets.only(top: top),
+          height: widget.height + top,
           child: Row(
             children: <Widget>[
               widget.leftIcon != null
-                  ? Container(
-                      child: SizedBox(
-                        height: widget.height,
-                        width: widget.height,
-                        child: IconButton(
-                          icon: Icon(
-                            widget.leftIcon,
-                            size: VFDimens.d_24,
-                            color: widget.titleColor,
-                          ),
-                          onPressed: widget.leftAction == null
-                              ? () => Navigator.pop(context)
-                              : widget.leftAction,
+                  ? SizedBox(
+                      height: widget.height,
+                      width: widget.height,
+                      child: IconButton(
+                        icon: Icon(
+                          widget.leftIcon,
+                          size: VFDimens.d24,
+                          color: widget.titleColor,
                         ),
+                        onPressed: widget.leftAction ??
+                            () => {
+                                  Navigator.canPop(context)
+                                      ? Navigator.pop(context)
+                                      : SystemNavigator.pop()
+                                },
                       ),
                     )
-                  : Container(
-                      width: VFDimens.margin_normal,
+                  : SizedBox(
+                      width: VFDimens.marginNormal,
                       height: widget.height,
                     ),
-              widget.leftWidget != null ? widget.leftWidget : Container(),
-              widget.titleWidget == null
-                  ? Expanded(
-                      flex: 1,
-                      child: Text(
-                        widget.title,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign:
-                            widget.center ? TextAlign.center : TextAlign.start,
-                        style: TextStyle(
-                          color: widget.titleColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: widget.titleSize,
-                        ),
+              widget.leftWidget ?? Container(),
+              widget.titleWidget ??
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      widget.title,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign:
+                          widget.center ? TextAlign.center : TextAlign.start,
+                      style: TextStyle(
+                        color: widget.titleColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: widget.titleSize,
                       ),
-                    )
-                  : widget.titleWidget,
-              widget.rightWidget != null ? widget.rightWidget : Container(),
+                    ),
+                  ),
+              widget.rightWidget ?? Container(),
               widget.rightIcon != null
-                  ? Container(
-                      child: SizedBox(
-                        height: widget.height,
-                        width: widget.height,
-                        child: IconButton(
-                          icon: Icon(
-                            widget.rightIcon,
-                            size: VFDimens.d_24,
-                            color: widget.titleColor,
-                          ),
-                          onPressed: widget.rightAction,
+                  ? SizedBox(
+                      height: widget.height,
+                      width: widget.height,
+                      child: IconButton(
+                        icon: Icon(
+                          widget.rightIcon,
+                          size: VFDimens.d24,
+                          color: widget.titleColor,
                         ),
+                        onPressed: widget.rightAction,
                       ),
                     )
                   : Container(
-                      width: VFDimens.margin_normal,
+                      width: VFDimens.marginNormal,
                     ),
             ],
           ),
         ),
-        widget.bottom != null ? widget.bottom : Container(),
+        widget.bottom ?? Container(),
       ],
     );
   }

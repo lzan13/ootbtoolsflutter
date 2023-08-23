@@ -1,69 +1,70 @@
 import 'package:flutter/material.dart';
 
-import 'package:vftools/constants/vfconstants.dart';
+import 'package:vftools/themes/vfthemes.dart';
 
 class VFSliverDelegate extends SliverPersistentHeaderDelegate {
   // 收缩后高度
-  final double collapsedHeight;
+  double collapsedHeight;
   // 展开高度
-  final double expandedHeight;
+  double expandedHeight;
   // 顶部距离
-  final double top;
+  double top;
 
   // 背景颜色
-  final Color bgColor;
+  Color bgColor;
   // 透明度
-  final bool hasAlpha;
-  final int maxAlpha;
+  bool hasAlpha;
+  int maxAlpha;
 
   // 标题
-  final String title;
-  final double titleSize;
+  String title;
+  double titleSize;
   // 居中
-  final bool center;
+  bool center;
   //  标题颜色
-  final Color color;
+  Color color;
 
   // 左侧图标
-  final IconData leftIcon;
-  final VoidCallback leftAction;
-  final Widget leftWidget;
+  IconData? leftIcon;
+  VoidCallback? leftAction;
+  Widget? leftWidget;
   // 右侧图标
-  final IconData rightIcon;
-  final VoidCallback rightAction;
-  final Widget rightWidget;
+  IconData? rightIcon;
+  VoidCallback? rightAction;
+  Widget? rightWidget;
 
   // 封面图
-  final String cover;
+  String cover;
   // 封面控件
-  final Widget coverWidget;
+  Widget? coverWidget;
 
   VFSliverDelegate({
-    this.collapsedHeight,
-    this.expandedHeight,
-    this.top,
-    this.bgColor: VFColors.greyBlack,
-    this.hasAlpha: true,
-    this.maxAlpha: 96,
-    this.title,
+    Key? key,
+    this.bgColor = VFColors.greyBlack,
+    this.hasAlpha = true,
+    this.maxAlpha = 96,
+    this.title = "Title",
     this.titleSize = VFSizes.title,
     this.center = false,
-    this.color: VFColors.white,
+    this.color = VFColors.white,
+    this.collapsedHeight = VFDimens.d48,
+    this.expandedHeight = VFDimens.d72,
+    this.top = VFDimens.d8,
     this.leftIcon,
     this.leftAction,
     this.leftWidget,
     this.rightIcon,
     this.rightAction,
     this.rightWidget,
-    this.cover,
+    this.cover = "",
     this.coverWidget,
   });
 
   @override
-  double get minExtent => this.collapsedHeight + this.top;
+  double get minExtent => collapsedHeight + top;
 
   @override
-  double get maxExtent => this.expandedHeight;
+  double get maxExtent => expandedHeight;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
@@ -74,7 +75,7 @@ class VFSliverDelegate extends SliverPersistentHeaderDelegate {
   /// 计算滑动过程中背景色
   ///
   Color calculateBGColor(shrinkOffset) {
-    final int alpha = (shrinkOffset / (this.maxExtent - this.minExtent) * 255)
+    final int alpha = (shrinkOffset / (maxExtent - minExtent) * 255)
         .clamp(0, hasAlpha ? maxAlpha : 255)
         .toInt();
     return bgColor.withAlpha(alpha);
@@ -82,16 +83,14 @@ class VFSliverDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlaps) {
-    return Container(
+    return SizedBox(
       height: maxExtent,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            child: coverWidget == null
-                ? Image.network(cover, fit: BoxFit.cover)
-                : coverWidget,
+            child: coverWidget ?? Image.network(cover, fit: BoxFit.cover),
           ),
           Positioned(
             left: 0,
@@ -101,32 +100,29 @@ class VFSliverDelegate extends SliverPersistentHeaderDelegate {
               color: calculateBGColor(shrinkOffset),
               child: SafeArea(
                 bottom: false,
-                child: Container(
+                child: SizedBox(
                   height: collapsedHeight,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       leftIcon != null
-                          ? Container(
-                              child: SizedBox(
-                                height: collapsedHeight,
-                                width: collapsedHeight,
-                                child: IconButton(
-                                  icon: Icon(
-                                    leftIcon,
-                                    size: VFDimens.d_24,
-                                    color: color,
-                                  ),
-                                  onPressed: leftAction == null
-                                      ? () => Navigator.pop(context)
-                                      : leftAction,
+                          ? SizedBox(
+                              height: collapsedHeight,
+                              width: collapsedHeight,
+                              child: IconButton(
+                                icon: Icon(
+                                  leftIcon,
+                                  size: VFDimens.d24,
+                                  color: color,
                                 ),
+                                onPressed:
+                                    leftAction ?? () => Navigator.pop(context),
                               ),
                             )
                           : Container(
-                              width: VFDimens.margin_normal,
+                              width: VFDimens.marginNormal,
                             ),
-                      leftWidget != null ? leftWidget : Container(),
+                      leftWidget ?? Container(),
                       Expanded(
                         flex: 1,
                         child: Text(
@@ -141,24 +137,22 @@ class VFSliverDelegate extends SliverPersistentHeaderDelegate {
                           ),
                         ),
                       ),
-                      rightWidget != null ? rightWidget : Container(),
+                      rightWidget ?? Container(),
                       rightIcon != null
-                          ? Container(
-                              child: SizedBox(
-                                height: collapsedHeight,
-                                width: collapsedHeight,
-                                child: IconButton(
-                                  icon: Icon(
-                                    rightIcon,
-                                    size: VFDimens.d_24,
-                                    color: color,
-                                  ),
-                                  onPressed: rightAction,
+                          ? SizedBox(
+                              height: collapsedHeight,
+                              width: collapsedHeight,
+                              child: IconButton(
+                                icon: Icon(
+                                  rightIcon,
+                                  size: VFDimens.d24,
+                                  color: color,
                                 ),
+                                onPressed: rightAction,
                               ),
                             )
                           : Container(
-                              width: VFDimens.margin_normal,
+                              width: VFDimens.marginNormal,
                             ),
                     ],
                   ),

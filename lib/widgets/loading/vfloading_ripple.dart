@@ -1,36 +1,31 @@
 import 'package:flutter/widgets.dart';
+import 'package:vftools/themes/vfthemes.dart';
 
 class VFLRipple extends StatefulWidget {
+  final Color color;
+  final double size;
+  final double borderWidth;
+  final IndexedWidgetBuilder? itemBuilder;
+  final Duration duration;
+  final AnimationController? controller;
+
   const VFLRipple({
-    Key key,
-    this.color,
+    Key? key,
+    this.color = VFColors.red87,
     this.size = 50.0,
     this.borderWidth = 6.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  })  : assert(
-            !(itemBuilder is IndexedWidgetBuilder && color is Color) &&
-                !(itemBuilder == null && color == null),
-            'You should specify either a itemBuilder or a color'),
-        assert(size != null),
-        assert(borderWidth != null),
-        super(key: key);
-
-  final Color color;
-  final double size;
-  final double borderWidth;
-  final IndexedWidgetBuilder itemBuilder;
-  final Duration duration;
-  final AnimationController controller;
+  }) : super(key: key);
 
   @override
   VFLRippleState createState() => VFLRippleState();
 }
 
 class VFLRippleState extends State<VFLRipple> with TickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation1, _animation2;
+  late AnimationController _controller;
+  late Animation<double> _animation1, _animation2;
 
   @override
   void initState() {
@@ -78,7 +73,7 @@ class VFLRippleState extends State<VFLRipple> with TickerProviderStateMixin {
     return SizedBox.fromSize(
       size: Size.square(widget.size),
       child: widget.itemBuilder != null
-          ? widget.itemBuilder(context, index)
+          ? widget.itemBuilder!(context, index)
           : DecoratedBox(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

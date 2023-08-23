@@ -1,6 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:vftools/constants/vfconstants.dart';
-import 'package:vftools/constants/vfdimens.dart';
+import 'package:vftools/themes/vfthemes.dart';
 
 import 'package:vftools/widgets/loading/vfloading_circle.dart';
 import 'package:vftools/widgets/loading/vfloading_cube_grid.dart';
@@ -51,16 +52,15 @@ class VFLoading extends StatelessWidget {
   final VFLoadingType type;
 
   VFLoading({
-    Key key,
+    Key? key,
     this.color = VFColors.red87,
-    this.size = VFDimens.d_20,
-    this.borderWidth = VFDimens.d_2,
+    this.size = VFDimens.d20,
+    this.borderWidth = VFDimens.d2,
     this.type = VFLoadingType.wave,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    this.color = color ?? Theme.of(context).accentColor;
     switch (type) {
       case VFLoadingType.circle:
         return VFLCircle(

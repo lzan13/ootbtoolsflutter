@@ -1,25 +1,21 @@
 import 'package:flutter/widgets.dart';
+import 'package:vftools/themes/vfthemes.dart';
 
 class VFLCubeGrid extends StatefulWidget {
+  final Color color;
+  final double size;
+  final IndexedWidgetBuilder? itemBuilder;
+  final Duration duration;
+  final AnimationController? controller;
+
   const VFLCubeGrid({
-    Key key,
-    this.color,
+    Key? key,
+    this.color = VFColors.red87,
     this.size = 50.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  })  : assert(
-            !(itemBuilder is IndexedWidgetBuilder && color is Color) &&
-                !(itemBuilder == null && color == null),
-            'You should specify either a itemBuilder or a color'),
-        assert(size != null),
-        super(key: key);
-
-  final Color color;
-  final double size;
-  final IndexedWidgetBuilder itemBuilder;
-  final Duration duration;
-  final AnimationController controller;
+  }) : super(key: key);
 
   @override
   VFLCubeGridState createState() => VFLCubeGridState();
@@ -27,8 +23,8 @@ class VFLCubeGrid extends StatefulWidget {
 
 class VFLCubeGridState extends State<VFLCubeGrid>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _anim1, _anim2, _anim3, _anim4, _anim5;
+  late AnimationController _controller;
+  late Animation<double> _anim1, _anim2, _anim3, _anim4, _anim5;
 
   @override
   void initState() {
@@ -109,6 +105,6 @@ class VFLCubeGridState extends State<VFLCubeGrid>
   }
 
   Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder(context, index)
+      ? widget.itemBuilder!(context, index)
       : DecoratedBox(decoration: BoxDecoration(color: widget.color));
 }

@@ -1,26 +1,22 @@
 import 'package:flutter/widgets.dart';
-import 'package:vftools/widget/loading/vftween.dart';
+import 'package:vftools/themes/vfcolors.dart';
+import 'package:vftools/widgets/loading/vftween.dart';
 
 class VFLThreeBounce extends StatefulWidget {
+  final Color color;
+  final double size;
+  final IndexedWidgetBuilder? itemBuilder;
+  final Duration duration;
+  final AnimationController? controller;
+
   const VFLThreeBounce({
-    Key key,
-    this.color,
+    Key? key,
+    this.color = VFColors.red87,
     this.size = 50.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  })  : assert(
-            !(itemBuilder is IndexedWidgetBuilder && color is Color) &&
-                !(itemBuilder == null && color == null),
-            'You should specify either a itemBuilder or a color'),
-        assert(size != null),
-        super(key: key);
-
-  final Color color;
-  final double size;
-  final IndexedWidgetBuilder itemBuilder;
-  final Duration duration;
-  final AnimationController controller;
+  }) : super(key: key);
 
   @override
   VFLThreeBounceState createState() => VFLThreeBounceState();
@@ -28,7 +24,7 @@ class VFLThreeBounce extends StatefulWidget {
 
 class VFLThreeBounceState extends State<VFLThreeBounce>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -66,7 +62,7 @@ class VFLThreeBounceState extends State<VFLThreeBounce>
   }
 
   Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder(context, index)
+      ? widget.itemBuilder!(context, index)
       : DecoratedBox(
           decoration:
               BoxDecoration(color: widget.color, shape: BoxShape.circle));

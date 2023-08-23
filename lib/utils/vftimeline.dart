@@ -5,7 +5,7 @@
  * @Date: 2018/10/3
  */
 
-import 'package:vf_plugin/src/utils/vf_date.dart';
+import 'package:vftools/utils/vfdate.dart';
 
 ///(xx)Configurable output.
 ///(xx)为可配置输出.
@@ -50,7 +50,6 @@ abstract class TimelineInfo {
   String oneDay(int days); //a day(1天).
 
   String days(int days); //x days(x天).
-
 }
 
 class ZhInfo implements TimelineInfo {
@@ -178,9 +177,9 @@ class TimelineUtil {
   /// locDateTime: current time or schedule time.
   /// locale: output key.
   static String formatByDateTime(DateTime dateTime,
-      {DateTime locDateTime, String locale, DayFormat dayFormat}) {
+      {DateTime? locDateTime, String locale = "", DayFormat? dayFormat}) {
     int _locDateTime =
-        (locDateTime == null ? null : locDateTime.millisecondsSinceEpoch);
+        (locDateTime == null ? 0 : locDateTime.millisecondsSinceEpoch);
     return format(dateTime.millisecondsSinceEpoch,
         locTimeMillis: _locDateTime, locale: locale, dayFormat: dayFormat);
   }
@@ -190,7 +189,7 @@ class TimelineUtil {
   /// locDateTime: current time or schedule time. millis.
   /// locale: output key.
   static String format(int timeMillis,
-      {int locTimeMillis, String locale, DayFormat dayFormat}) {
+      {int locTimeMillis = 0, String locale = "", DayFormat? dayFormat}) {
     int _locTimeMillis = locTimeMillis ?? DateTime.now().millisecondsSinceEpoch;
     String _locale = locale ?? 'zh';
     TimelineInfo _info = _timelineInfoMap[_locale] ?? ZhInfo();

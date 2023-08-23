@@ -66,29 +66,31 @@ Map<int, int> MONTH_DAY = {
 /// Date Util.
 class DateUtil {
   /// get DateTime By DateStr.
-  static DateTime getDateTime(String dateStr, {bool isUtc}) {
-    DateTime dateTime = DateTime.tryParse(dateStr);
-    if (isUtc != null) {
+  static DateTime getDateTime(String dateStr, {bool isUtc = false}) {
+    DateTime? dateTime = DateTime.tryParse(dateStr);
+    if (dateTime != null) {
       if (isUtc) {
         dateTime = dateTime.toUtc();
       } else {
         dateTime = dateTime.toLocal();
       }
+    } else {
+      dateTime = DateTime(2023, 8, 8, 18, 18);
     }
     return dateTime;
   }
 
   /// get DateTime By Milliseconds.
   static DateTime getDateTimeByMs(int milliseconds, {bool isUtc = false}) {
-    return milliseconds == null
-        ? null
-        : DateTime.fromMillisecondsSinceEpoch(milliseconds, isUtc: isUtc);
+    return DateTime.fromMillisecondsSinceEpoch(milliseconds, isUtc: isUtc);
   }
 
   /// get DateMilliseconds By DateStr.
   static int getDateMsByTimeStr(String dateStr) {
-    DateTime dateTime = DateTime.tryParse(dateStr);
-    return dateTime == null ? null : dateTime.millisecondsSinceEpoch;
+    DateTime? dateTime = DateTime.tryParse(dateStr);
+    return dateTime == null
+        ? DateTime.now().millisecondsSinceEpoch
+        : dateTime.millisecondsSinceEpoch;
   }
 
   /// get Now Date Milliseconds.
@@ -109,9 +111,9 @@ class DateUtil {
   static String getDateStrByTimeStr(
     String dateStr, {
     DateFormat format = DateFormat.NORMAL,
-    String dateSeparate,
-    String timeSeparate,
-    bool isUtc,
+    String dateSeparate = "",
+    String timeSeparate = "",
+    bool isUtc = false,
   }) {
     return getDateStrByDateTime(getDateTime(dateStr, isUtc: isUtc),
         format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
@@ -124,8 +126,8 @@ class DateUtil {
   /// timeSeparate    time separate.
   static String getDateStrByMs(int milliseconds,
       {DateFormat format = DateFormat.NORMAL,
-      String dateSeparate,
-      String timeSeparate,
+      String dateSeparate = "",
+      String timeSeparate = "",
       bool isUtc = false}) {
     DateTime dateTime = getDateTimeByMs(milliseconds, isUtc: isUtc);
     return getDateStrByDateTime(dateTime,
@@ -139,9 +141,8 @@ class DateUtil {
   /// timeSeparate    time separate.
   static String getDateStrByDateTime(DateTime dateTime,
       {DateFormat format = DateFormat.NORMAL,
-      String dateSeparate,
-      String timeSeparate}) {
-    if (dateTime == null) return null;
+      String dateSeparate = "",
+      String timeSeparate = ""}) {
     String dateStr = dateTime.toString();
     if (isZHFormat(format)) {
       dateStr = formatZHDateTime(dateStr, format, timeSeparate);
@@ -288,14 +289,15 @@ class DateUtil {
   /// format date by milliseconds.
   /// milliseconds 日期毫秒
   static String formatDateMs(int milliseconds,
-      {bool isUtc = false, String format}) {
+      {bool isUtc = false, String format = ""}) {
     return formatDate(getDateTimeByMs(milliseconds, isUtc: isUtc),
         format: format);
   }
 
   /// format date by date str.
   /// dateStr 日期字符串
-  static String formatDateStr(String dateStr, {bool isUtc, String format}) {
+  static String formatDateStr(String dateStr,
+      {bool isUtc = false, String format = ""}) {
     return formatDate(getDateTime(dateStr, isUtc: isUtc), format: format);
   }
 
@@ -304,7 +306,8 @@ class DateUtil {
   /// 格式要求
   /// year -> yyyy/yy   month -> MM/M    day -> dd/d
   /// hour -> HH/H      minute -> mm/m   second -> ss/s
-  static String formatDate(DateTime dateTime, {bool isUtc, String format}) {
+  static String formatDate(DateTime dateTime,
+      {bool isUtc = false, String format = ""}) {
     if (dateTime == null) return "";
     format = format ?? DataFormats.full;
     if (format.contains("yy")) {
@@ -355,8 +358,7 @@ class DateUtil {
 
   /// get WeekDay.
   static String getWeekDay(DateTime dateTime) {
-    if (dateTime == null) return null;
-    String weekday;
+    String weekday = "";
     switch (dateTime.weekday) {
       case 1:
         weekday = "Monday";
@@ -387,8 +389,7 @@ class DateUtil {
 
   /// get ZH WeekDay.
   static String getZHWeekDay(DateTime dateTime) {
-    if (dateTime == null) return null;
-    String weekday;
+    String weekday = "";
     switch (dateTime.weekday) {
       case 1:
         weekday = "星期一";
@@ -463,7 +464,7 @@ class DateUtil {
     int month = dateTime.month;
     int days = dateTime.day;
     for (int i = 1; i < month; i++) {
-      days = days + MONTH_DAY[i];
+      days = days + MONTH_DAY[i]!;
     }
     if (isLeapYearByYear(year) && month > 2) {
       days = days + 1;

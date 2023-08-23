@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:vftools/constants/vfconstants.dart';
+import 'package:vftools/themes/vfthemes.dart';
 
 /// 自定义列表项
 class VFListItem extends StatefulWidget {
@@ -10,16 +10,16 @@ class VFListItem extends StatefulWidget {
   Color bgColor;
 
   // 左侧图标
-  IconData leftIcon;
+  IconData? leftIcon;
   Color leftIconColor;
   // 左侧控件
-  Widget leftWidget;
+  Widget? leftWidget;
 
   // 右侧图标
-  IconData rightIcon;
+  IconData? rightIcon;
   Color rightIconColor;
   // 右侧控件
-  Widget rightWidget;
+  Widget? rightWidget;
 
   // 标题
   String title;
@@ -31,24 +31,24 @@ class VFListItem extends StatefulWidget {
   // 显示 divider
   bool showDivider;
   // 点击事件
-  VoidCallback onPressed;
+  VoidCallback? onPressed;
 
   // 构造函数
   VFListItem({
-    Key key,
-    this.isNewGroup: false,
-    this.bgColor,
+    Key? key,
+    this.isNewGroup = false,
+    this.bgColor = VFColors.white,
     this.leftIcon,
     this.leftWidget,
-    this.leftIconColor,
+    this.leftIconColor = VFColors.greyBlack,
     this.rightIcon,
-    this.rightIconColor: VFColors.grey,
+    this.rightIconColor = VFColors.grey,
     this.rightWidget,
-    this.title,
-    this.titleColor,
-    this.describe,
-    this.describeColor: VFColors.grey,
-    this.showDivider: true,
+    this.title = "Title",
+    this.titleColor = VFColors.black,
+    this.describe = "",
+    this.describeColor = VFColors.grey,
+    this.showDivider = true,
     this.onPressed,
   }) : super(key: key);
 
@@ -61,18 +61,18 @@ class VFListItemState extends State<VFListItem> {
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
 
-    widget.titleColor = widget.titleColor ?? themeData.textTheme.title.color;
+    widget.titleColor = widget.titleColor;
 
     return Container(
-      margin: EdgeInsets.only(top: widget.isNewGroup ? VFDimens.d_16 : 0),
+      margin: EdgeInsets.only(top: widget.isNewGroup ? VFDimens.d16 : 0),
       color: widget.bgColor,
       child: Column(
         children: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: widget.onPressed ?? () {},
-            padding: EdgeInsets.all(VFDimens.d_0),
+            // padding: EdgeInsets.all(VFDimens.d0),
             child: Container(
-              height: VFDimens.list_item_large,
+              height: VFDimens.itemLarge,
               width: double.infinity,
               child: Row(
                 children: <Widget>[
@@ -80,20 +80,19 @@ class VFListItemState extends State<VFListItem> {
                   widget.leftIcon != null
                       ? Container(
                           child: SizedBox(
-                            height: VFDimens.list_item_large,
-                            width: VFDimens.list_item_large,
+                            height: VFDimens.itemLarge,
+                            width: VFDimens.itemLarge,
                             child: Icon(
                               widget.leftIcon,
-                              size: VFDimens.d_24,
-                              color:
-                                  widget.leftIconColor ?? themeData.accentColor,
+                              size: VFDimens.d24,
+                              color: widget.leftIconColor,
                             ),
                           ),
                         )
                       : Container(
-                          width: VFDimens.margin_normal,
+                          width: VFDimens.marginNormal,
                         ),
-                  widget.leftWidget == null ? Container() : widget.leftWidget,
+                  widget.leftWidget ?? Container(),
                   // 中间内容
                   Expanded(
                     flex: 1,
@@ -108,7 +107,7 @@ class VFListItemState extends State<VFListItem> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: widget.titleColor,
-                                  fontSize: VFSizes.list_item_title,
+                                  fontSize: VFSizes.itemTitle,
                                 ),
                               )
                             : Container(),
@@ -120,7 +119,7 @@ class VFListItemState extends State<VFListItem> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: widget.describeColor,
-                                    fontSize: VFSizes.list_item_desc),
+                                    fontSize: VFSizes.itemDesc),
                               )
                             : Container(),
                       ],
@@ -130,24 +129,24 @@ class VFListItemState extends State<VFListItem> {
                   widget.rightIcon != null
                       ? Container(
                           child: SizedBox(
-                            height: VFDimens.list_item_normal,
-                            width: VFDimens.list_item_normal,
+                            height: VFDimens.itemNormal,
+                            width: VFDimens.itemNormal,
                             child: Icon(
                               widget.rightIcon,
-                              size: VFDimens.d_20,
+                              size: VFDimens.d20,
                               color: widget.rightIconColor,
                             ),
                           ),
                         )
                       : Container(),
-                  widget.rightWidget != null ? widget.rightWidget : Container(),
+                  widget.rightWidget ?? Container(),
                 ],
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: VFDimens.d_16),
-            height: widget.showDivider ? VFDimens.d_0_5 : 0,
+            margin: EdgeInsets.only(left: VFDimens.d16),
+            height: widget.showDivider ? VFDimens.d05 : 0,
             color: VFColors.divider,
           )
         ],

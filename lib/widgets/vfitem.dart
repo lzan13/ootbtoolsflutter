@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vftools/constants/vfconstants.dart';
+import 'package:vftools/themes/vfthemes.dart';
 
 ///
 /// 示例列表项
@@ -12,22 +12,22 @@ class VFExampleItem extends StatelessWidget {
   final double width;
 
   const VFExampleItem({
-    Key key,
+    Key? key,
     this.direction = Axis.vertical,
     this.width = double.infinity,
   }) : super(key: key);
 
   Widget buildVertical() {
     return Card(
-      elevation: VFDimens.elevation_low,
-      margin: EdgeInsets.fromLTRB(
-          VFDimens.d_8, VFDimens.d_0, VFDimens.d_8, VFDimens.d_8),
+      elevation: VFDimens.elevationLow,
+      margin: const EdgeInsets.fromLTRB(
+          VFDimens.d8, VFDimens.d0, VFDimens.d8, VFDimens.d8),
       child: Container(
         child: Row(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.all(VFDimens.d_8),
-              height: VFDimens.d_64,
+              margin: const EdgeInsets.all(VFDimens.d8),
+              height: VFDimens.d64,
               child: AspectRatio(
                 aspectRatio: 1.0,
                 child: Container(
@@ -38,30 +38,30 @@ class VFExampleItem extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
-                  padding:
-                      EdgeInsets.only(left: VFDimens.d_8, right: VFDimens.d_16),
+                  padding: const EdgeInsets.only(
+                      left: VFDimens.d8, right: VFDimens.d16),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        width: VFDimens.d_128,
-                        height: VFDimens.d_16,
+                        width: VFDimens.d128,
+                        height: VFDimens.d16,
                         color: VFColors.greyWhite,
                       ),
-                      SizedBox(
-                        height: VFDimens.d_8,
+                      const SizedBox(
+                        height: VFDimens.d8,
                       ),
                       Container(
-                        height: VFDimens.d_10,
+                        height: VFDimens.d10,
                         color: VFColors.greyWhite54,
                       ),
-                      SizedBox(
-                        height: VFDimens.d_4,
+                      const SizedBox(
+                        height: VFDimens.d4,
                       ),
                       Container(
-                        height: VFDimens.d_10,
-                        width: VFDimens.d_96,
+                        height: VFDimens.d10,
+                        width: VFDimens.d96,
                         color: VFColors.greyWhite54,
                       ),
                     ],
@@ -75,61 +75,61 @@ class VFExampleItem extends StatelessWidget {
 
   Widget buildHorizontal() {
     return Card(
-      elevation: VFDimens.elevation_low,
-      margin: EdgeInsets.fromLTRB(
-          VFDimens.d_4, VFDimens.d_8, VFDimens.d_4, VFDimens.d_16),
+      elevation: VFDimens.elevationLow,
+      margin: const EdgeInsets.fromLTRB(
+          VFDimens.d4, VFDimens.d8, VFDimens.d4, VFDimens.d16),
       child: Container(
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: VFColors.greyWhite87,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(VFDimens.border_radius_normal),
-                  topRight: Radius.circular(VFDimens.border_radius_normal),
+                  topLeft: Radius.circular(VFDimens.radiusNormal),
+                  topRight: Radius.circular(VFDimens.radiusNormal),
                 ),
               ),
-              height: VFDimens.d_96,
+              height: VFDimens.d96,
               width: width,
             ),
             Container(
               width: width,
-              padding: EdgeInsets.all(VFDimens.d_8),
+              padding: const EdgeInsets.all(VFDimens.d8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    width: VFDimens.d_96,
-                    height: VFDimens.d_16,
+                    width: VFDimens.d96,
+                    height: VFDimens.d16,
                     color: VFColors.greyWhite,
                   ),
                   Container(
-                    width: VFDimens.d_64,
-                    height: VFDimens.d_10,
-                    margin: EdgeInsets.only(top: VFDimens.d_8),
+                    width: VFDimens.d64,
+                    height: VFDimens.d10,
+                    margin: const EdgeInsets.only(top: VFDimens.d8),
                     color: VFColors.greyWhite54,
                   ),
-                  SizedBox(
-                    height: VFDimens.d_8,
+                  const SizedBox(
+                    height: VFDimens.d8,
                   ),
                   Container(
-                    height: VFDimens.d_10,
+                    height: VFDimens.d10,
                     color: VFColors.greyWhite54,
                   ),
-                  SizedBox(
-                    height: VFDimens.d_4,
+                  const SizedBox(
+                    height: VFDimens.d4,
                   ),
                   Container(
-                    height: VFDimens.d_10,
+                    height: VFDimens.d10,
                     color: VFColors.greyWhite54,
                   ),
-                  SizedBox(
-                    height: VFDimens.d_4,
+                  const SizedBox(
+                    height: VFDimens.d4,
                   ),
                   Container(
-                    height: VFDimens.d_10,
-                    width: VFDimens.d_96,
+                    height: VFDimens.d10,
+                    width: VFDimens.d96,
                     color: VFColors.greyWhite54,
                   ),
                 ],

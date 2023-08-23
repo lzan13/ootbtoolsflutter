@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:vftools/constants/vfconstants.dart';
+import 'package:vftools/themes/vfthemes.dart';
 
 enum VFBlurType {
   circle,
@@ -22,12 +22,12 @@ class VFBlur extends StatelessWidget {
   final double blurRadius;
 
   const VFBlur({
-    Key key,
-    this.child,
-    this.type: VFBlurType.rect,
-    this.radius: VFDimens.d_6,
-    this.blurRadius: VFDimens.d_6,
-  });
+    Key? key,
+    required this.child,
+    this.type = VFBlurType.rect,
+    this.radius = VFDimens.d6,
+    this.blurRadius = VFDimens.d6,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +46,16 @@ class VFBlur extends StatelessWidget {
           ),
         );
       case VFBlurType.rect:
-        return Container(
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(radius)),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: blurRadius,
-                sigmaY: blurRadius,
-              ),
-              child: Container(
-                color: VFColors.white.withOpacity(0.1),
-                child: child,
-              ),
+        return ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: blurRadius,
+              sigmaY: blurRadius,
+            ),
+            child: Container(
+              color: VFColors.white.withOpacity(0.1),
+              child: child,
             ),
           ),
         );

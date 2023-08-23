@@ -6,10 +6,9 @@ import 'package:flutter/animation.dart';
 /// 定义进度补间动画
 ///
 class VFTween extends Tween<double> {
-  VFTween({double begin, double end, this.delay})
-      : super(begin: begin, end: end);
-
   final double delay;
+  VFTween({double begin = 0, double end = 360, this.delay = 0})
+      : super(begin: begin, end: end);
 
   @override
   double lerp(double t) =>
