@@ -8,13 +8,14 @@ environment:
   flutter: ">=3.3.0"
 
 dependencies:
-  device_info: ^2.0.3
   flutter:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  package_info: ^2.0.2
-  plugin_platform_interface: ^2.0.2
+  # 获取设备信息插件 https://pub.dev/packages/device_info_plus/example
+  device_info_plus: ^9.0.3
+  # 获取包信息插件 https://pub.dev/packages/package_info_plus
+  package_info_plus: ^4.1.0
 
 dev_dependencies:
   flutter_test:
