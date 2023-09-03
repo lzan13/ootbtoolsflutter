@@ -75,9 +75,7 @@ class VFTimer {
   }
 
   void _doCallback(int time) {
-    if (_onTimerCallback != null) {
-      _onTimerCallback(time);
-    }
+    _onTimerCallback(time);
   }
 
   /// 重设倒计时总时间.

@@ -179,7 +179,7 @@ class VFPlatform {
 
   Map<String, dynamic> _readWindowsDeviceInfo(WindowsDeviceInfo data) {
     return <String, dynamic>{
-      'uniqueId': data.deviceId,
+      'uniqueId': data.deviceId.replaceAll(RegExp(r'[{}]'), ''),
       'numberOfCores': data.numberOfCores,
       'computerName': data.computerName,
       'systemMemoryInMegabytes': data.systemMemoryInMegabytes,

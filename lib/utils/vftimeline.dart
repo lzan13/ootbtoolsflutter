@@ -165,8 +165,6 @@ Map<String, TimelineInfo> _timelineInfoMap = {
 
 ///add custom configuration.
 void setLocaleInfo(String locale, TimelineInfo timelineInfo) {
-  assert(locale != null, '[locale] must not be null');
-  assert(timelineInfo != null, '[timelineInfo] must not be null');
   _timelineInfoMap[locale] = timelineInfo;
 }
 
@@ -189,9 +187,11 @@ class TimelineUtil {
   /// locDateTime: current time or schedule time. millis.
   /// locale: output key.
   static String format(int timeMillis,
-      {int locTimeMillis = 0, String locale = "", DayFormat? dayFormat}) {
-    int _locTimeMillis = locTimeMillis ?? DateTime.now().millisecondsSinceEpoch;
-    String _locale = locale ?? 'zh';
+      {int locTimeMillis = 0, String locale = "zh", DayFormat? dayFormat}) {
+    int _locTimeMillis = locTimeMillis == 0
+        ? DateTime.now().millisecondsSinceEpoch
+        : locTimeMillis;
+    String _locale = locale;
     TimelineInfo _info = _timelineInfoMap[_locale] ?? ZhInfo();
     DayFormat _dayFormat = dayFormat ?? DayFormat.Common;
 
