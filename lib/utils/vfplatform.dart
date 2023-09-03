@@ -84,7 +84,7 @@ class VFPlatform {
   ///
   Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo data) {
     return <String, dynamic>{
-      'uniqueId': data.id,
+      'uniqueId': data.id.toLowerCase(),
       'version.securityPatch': data.version.securityPatch,
       'version.sdkInt': data.version.sdkInt,
       'version.release': data.version.release,
@@ -125,7 +125,7 @@ class VFPlatform {
 
   Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
     return <String, dynamic>{
-      'uniqueId': data.identifierForVendor,
+      'uniqueId': data.identifierForVendor?.toLowerCase() ?? "",
       'name': data.name,
       'systemName': data.systemName,
       'systemVersion': data.systemVersion,
@@ -143,7 +143,7 @@ class VFPlatform {
 
   Map<String, dynamic> _readLinuxDeviceInfo(LinuxDeviceInfo data) {
     return <String, dynamic>{
-      'uniqueId': data.id,
+      'uniqueId': data.id.toLowerCase(),
       'name': data.name,
       'version': data.version,
       'id': data.id,
@@ -160,7 +160,7 @@ class VFPlatform {
 
   Map<String, dynamic> _readMacOsDeviceInfo(MacOsDeviceInfo data) {
     return <String, dynamic>{
-      'uniqueId': data.systemGUID,
+      'uniqueId': data.systemGUID?.toLowerCase() ?? "",
       'computerName': data.computerName,
       'hostName': data.hostName,
       'arch': data.arch,
@@ -179,7 +179,7 @@ class VFPlatform {
 
   Map<String, dynamic> _readWindowsDeviceInfo(WindowsDeviceInfo data) {
     return <String, dynamic>{
-      'uniqueId': data.deviceId.replaceAll(RegExp(r'[{}]'), ''),
+      'uniqueId': data.deviceId.replaceAll(RegExp(r'[{}]'), '').toLowerCase(),
       'numberOfCores': data.numberOfCores,
       'computerName': data.computerName,
       'systemMemoryInMegabytes': data.systemMemoryInMegabytes,

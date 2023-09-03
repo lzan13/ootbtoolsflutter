@@ -5,7 +5,7 @@ import 'package:vftools/themes/vfthemes.dart';
 
 class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
   double height;
-  Color? bgColor;
+  Color bgColor;
 
   PreferredSizeWidget? bottom;
 
@@ -30,7 +30,7 @@ class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
   VFTopBar({
     Key? key,
     this.height = VFDimens.barNormal,
-    this.bgColor,
+    this.bgColor = VFColors.transparent,
     this.title = "Title",
     this.bottom,
     this.titleSize = VFSizes.title,
@@ -52,7 +52,7 @@ class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize =>
-      Size.fromHeight(height + (bottom?.preferredSize?.height ?? 0.0));
+      Size.fromHeight(height + (bottom?.preferredSize.height ?? 0.0));
 }
 
 ///
@@ -67,7 +67,7 @@ class VFTopBarState extends State<VFTopBar> {
       // mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
-          color: widget.bgColor ?? VFColors.primary,
+          color: widget.bgColor,
           padding: EdgeInsets.only(top: top),
           height: widget.height + top,
           child: Row(

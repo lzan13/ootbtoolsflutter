@@ -37,7 +37,7 @@ class VFListItem extends StatefulWidget {
   VFListItem({
     Key? key,
     this.isNewGroup = false,
-    this.bgColor = VFColors.white,
+    this.bgColor = VFColors.transparent,
     this.leftIcon,
     this.leftWidget,
     this.leftIconColor = VFColors.greyBlack,
