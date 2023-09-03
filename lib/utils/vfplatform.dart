@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:vftools/utils/vflog.dart';
 
 ///
 /// Create by lzan13 on 2023/9/3
@@ -72,6 +73,7 @@ class VFPlatform {
       // todo 不支持的平台
       _deviceInfo = <String, dynamic>{};
     }
+    VFLog.d(_deviceInfo);
   }
 
   /// 获取设备信息
