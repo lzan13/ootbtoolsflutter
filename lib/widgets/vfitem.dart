@@ -1,148 +1,146 @@
 import 'package:flutter/material.dart';
+
 import 'package:vftools/themes/vfthemes.dart';
 
-///
-/// 示例列表项
-///
-class VFExampleItem extends StatelessWidget {
-  /// 方向
-  final Axis direction;
+/// 自定义列表项
+class VFItem extends StatefulWidget {
+  // 是否是新分组的开头
+  bool isNewGroup;
+  // 背景色
+  Color bgColor;
 
-  /// 宽度
-  final double width;
+  // 左侧图标
+  IconData? leftIcon;
+  Color leftIconColor;
+  // 左侧控件
+  Widget? leftWidget;
 
-  const VFExampleItem({
+  // 右侧图标
+  IconData? rightIcon;
+  Color rightIconColor;
+  // 右侧控件
+  Widget? rightWidget;
+
+  // 标题
+  String title;
+  Color titleColor;
+  // 描述
+  String describe;
+  Color describeColor;
+
+  // 显示 divider
+  bool showDivider;
+  // 点击事件
+  VoidCallback? onPressed;
+
+  // 构造函数
+  VFItem({
     Key? key,
-    this.direction = Axis.vertical,
-    this.width = double.infinity,
+    this.isNewGroup = false,
+    this.bgColor = VFColors.transparent,
+    this.leftIcon,
+    this.leftWidget,
+    this.leftIconColor = VFColors.greyBlack,
+    this.rightIcon,
+    this.rightIconColor = VFColors.grey,
+    this.rightWidget,
+    this.title = "Title",
+    this.titleColor = VFColors.black,
+    this.describe = "",
+    this.describeColor = VFColors.grey,
+    this.showDivider = true,
+    this.onPressed,
   }) : super(key: key);
 
-  Widget buildVertical() {
-    return Card(
-      elevation: VFDimens.elevationLow,
-      margin: const EdgeInsets.fromLTRB(
-          VFDimens.d8, VFDimens.d0, VFDimens.d8, VFDimens.d8),
-      child: Container(
-        child: Row(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.all(VFDimens.d8),
-              height: VFDimens.d64,
-              child: AspectRatio(
-                aspectRatio: 1.0,
-                child: Container(
-                  color: VFColors.greyWhite87,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                  padding: const EdgeInsets.only(
-                      left: VFDimens.d8, right: VFDimens.d16),
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: VFDimens.d128,
-                        height: VFDimens.d16,
-                        color: VFColors.greyWhite,
-                      ),
-                      const SizedBox(
-                        height: VFDimens.d8,
-                      ),
-                      Container(
-                        height: VFDimens.d10,
-                        color: VFColors.greyWhite54,
-                      ),
-                      const SizedBox(
-                        height: VFDimens.d4,
-                      ),
-                      Container(
-                        height: VFDimens.d10,
-                        width: VFDimens.d96,
-                        color: VFColors.greyWhite54,
-                      ),
-                    ],
-                  )),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  @override
+  VFItemState createState() => VFItemState();
+}
 
-  Widget buildHorizontal() {
-    return Card(
-      elevation: VFDimens.elevationLow,
-      margin: const EdgeInsets.fromLTRB(
-          VFDimens.d4, VFDimens.d8, VFDimens.d4, VFDimens.d16),
-      child: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: <Widget>[
-            Container(
-              decoration: const BoxDecoration(
-                color: VFColors.greyWhite87,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(VFDimens.radiusNormal),
-                  topRight: Radius.circular(VFDimens.radiusNormal),
-                ),
-              ),
-              height: VFDimens.d96,
-              width: width,
-            ),
-            Container(
-              width: width,
-              padding: const EdgeInsets.all(VFDimens.d8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+class VFItemState extends State<VFItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: widget.isNewGroup ? VFDimens.d16 : 0),
+      color: widget.bgColor,
+      child: Column(
+        children: <Widget>[
+          InkWell(
+            onTap: widget.onPressed ?? () {},
+            // padding: EdgeInsets.all(VFDimens.d0),
+            child: SizedBox(
+              height: VFDimens.itemLarge,
+              width: double.infinity,
+              child: Row(
                 children: <Widget>[
-                  Container(
-                    width: VFDimens.d96,
-                    height: VFDimens.d16,
-                    color: VFColors.greyWhite,
+                  // 左侧图标
+                  widget.leftIcon != null
+                      ? SizedBox(
+                          height: VFDimens.itemLarge,
+                          width: VFDimens.itemLarge,
+                          child: Icon(
+                            widget.leftIcon,
+                            size: VFDimens.d24,
+                            color: widget.leftIconColor,
+                          ),
+                        )
+                      : Container(
+                          width: VFDimens.marginNormal,
+                        ),
+                  widget.leftWidget ?? Container(),
+                  // 中间内容
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // 标题
+                        Text(
+                          widget.title,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: widget.titleColor,
+                            fontSize: VFSizes.itemTitle,
+                          ),
+                        ),
+                        // 描述
+                        widget.describe == ""
+                            ? const SizedBox(height: VFDimens.d0)
+                            : Text(
+                                widget.describe,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: widget.describeColor,
+                                    fontSize: VFSizes.itemDesc),
+                              ),
+                      ],
+                    ),
                   ),
-                  Container(
-                    width: VFDimens.d64,
-                    height: VFDimens.d10,
-                    margin: const EdgeInsets.only(top: VFDimens.d8),
-                    color: VFColors.greyWhite54,
-                  ),
-                  const SizedBox(
-                    height: VFDimens.d8,
-                  ),
-                  Container(
-                    height: VFDimens.d10,
-                    color: VFColors.greyWhite54,
-                  ),
-                  const SizedBox(
-                    height: VFDimens.d4,
-                  ),
-                  Container(
-                    height: VFDimens.d10,
-                    color: VFColors.greyWhite54,
-                  ),
-                  const SizedBox(
-                    height: VFDimens.d4,
-                  ),
-                  Container(
-                    height: VFDimens.d10,
-                    width: VFDimens.d96,
-                    color: VFColors.greyWhite54,
-                  ),
+                  // 右侧图标
+                  widget.rightIcon != null
+                      ? SizedBox(
+                          height: VFDimens.itemNormal,
+                          width: VFDimens.itemNormal,
+                          child: Icon(
+                            widget.rightIcon,
+                            size: VFDimens.d20,
+                            color: widget.rightIconColor,
+                          ),
+                        )
+                      : Container(),
+                  widget.rightWidget ?? Container(),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: VFDimens.d16),
+            height: widget.showDivider ? VFDimens.d05 : 0,
+            color: VFColors.divider,
+          )
+        ],
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return direction == Axis.vertical ? buildVertical() : buildHorizontal();
   }
 }

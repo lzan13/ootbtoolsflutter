@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:android_id/android_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
 import 'package:vftools/utils/vflog.dart';
 
 ///
@@ -19,6 +21,7 @@ class VFPlatform {
 
   /// DeviceInfo 相关信息
   late Map<String, dynamic> _deviceInfo;
+  String _deviceId = "";
 
   /// PackageInfo 相关信息
   late PackageInfo _packageInfo;
@@ -29,11 +32,13 @@ class VFPlatform {
   /// 初始化平台工具类
   ///
   init() async {
-    initDeviceInfo();
-    _packageInfo = await PackageInfo.fromPlatform();
+    await setupPackageInfo();
 
-    _appName = _packageInfo.appName;
-    _appVersion = _packageInfo.version;
+    await setupDeviceInfo();
+
+    await setupAndroidId();
+
+    VFLog.d(_deviceInfo);
   }
 
   /// 判断平台
@@ -45,6 +50,16 @@ class VFPlatform {
   static bool get isWindows => isWeb ? false : Platform.isWindows;
   static bool get isFuchsia => isWeb ? false : Platform.isFuchsia;
 
+  ///
+  /// 初始化包信息
+  ///
+  setupPackageInfo() async {
+    _packageInfo = await PackageInfo.fromPlatform();
+
+    _appName = _packageInfo.appName;
+    _appVersion = _packageInfo.version;
+  }
+
   /// 获取包信息
   PackageInfo getAppPackageInfo() => _packageInfo;
   // 获取 AppName
@@ -55,7 +70,7 @@ class VFPlatform {
   ///
   /// 初始化设备信息
   ///
-  initDeviceInfo() async {
+  setupDeviceInfo() async {
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     if (kIsWeb) {
       _deviceInfo = _readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
@@ -73,8 +88,20 @@ class VFPlatform {
       // todo 不支持的平台
       _deviceInfo = <String, dynamic>{};
     }
-    VFLog.d(_deviceInfo);
   }
+
+  // 初始化 android id
+  setupAndroidId() async {
+    if (isAndroid) {
+      const androidIdPlugin = AndroidId();
+      final androidId = await androidIdPlugin.getId() ?? "";
+      _deviceId = androidId.toLowerCase();
+      _deviceInfo['uniqueId'] = _deviceId;
+    }
+  }
+
+  /// 获取设备id
+  String getDeviceId() => _deviceId;
 
   /// 获取设备信息
   Map<String, dynamic> getDeviceInfo() => _deviceInfo;
@@ -83,8 +110,9 @@ class VFPlatform {
   /// 获取指定平台deviceInfo
   ///
   Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo data) {
+    _deviceId = data.id.toLowerCase();
     return <String, dynamic>{
-      'uniqueId': data.id.toLowerCase(),
+      'uniqueId': _deviceId,
       'version.securityPatch': data.version.securityPatch,
       'version.sdkInt': data.version.sdkInt,
       'version.release': data.version.release,
@@ -124,8 +152,9 @@ class VFPlatform {
   }
 
   Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
+    _deviceId = data.identifierForVendor?.toLowerCase() ?? "";
     return <String, dynamic>{
-      'uniqueId': data.identifierForVendor?.toLowerCase() ?? "",
+      'uniqueId': _deviceId,
       'name': data.name,
       'systemName': data.systemName,
       'systemVersion': data.systemVersion,
@@ -142,8 +171,9 @@ class VFPlatform {
   }
 
   Map<String, dynamic> _readLinuxDeviceInfo(LinuxDeviceInfo data) {
+    _deviceId = data.machineId?.toLowerCase() ?? "";
     return <String, dynamic>{
-      'uniqueId': data.id.toLowerCase(),
+      'uniqueId': _deviceId,
       'name': data.name,
       'version': data.version,
       'id': data.id,
@@ -159,8 +189,9 @@ class VFPlatform {
   }
 
   Map<String, dynamic> _readMacOsDeviceInfo(MacOsDeviceInfo data) {
+    _deviceId = data.systemGUID?.toLowerCase() ?? "";
     return <String, dynamic>{
-      'uniqueId': data.systemGUID?.toLowerCase() ?? "",
+      'uniqueId': _deviceId,
       'computerName': data.computerName,
       'hostName': data.hostName,
       'arch': data.arch,
@@ -178,8 +209,9 @@ class VFPlatform {
   }
 
   Map<String, dynamic> _readWindowsDeviceInfo(WindowsDeviceInfo data) {
+    _deviceId = data.deviceId.replaceAll(RegExp(r'[{}]'), '').toLowerCase();
     return <String, dynamic>{
-      'uniqueId': data.deviceId.replaceAll(RegExp(r'[{}]'), '').toLowerCase(),
+      'uniqueId': _deviceId,
       'numberOfCores': data.numberOfCores,
       'computerName': data.computerName,
       'systemMemoryInMegabytes': data.systemMemoryInMegabytes,
@@ -209,8 +241,10 @@ class VFPlatform {
   }
 
   Map<String, dynamic> _readWebBrowserInfo(WebBrowserInfo data) {
+    _deviceId =
+        '${data.vendor ?? '-'} + ${data.userAgent ?? '-'} + ${data.hardwareConcurrency.toString()}';
     return <String, dynamic>{
-      'uniqueId': "webId",
+      'uniqueId': _deviceId,
       'browserName': describeEnum(data.browserName),
       'appCodeName': data.appCodeName,
       'appName': data.appName,

@@ -4,16 +4,17 @@ export 'loading/vfloading.dart';
 
 export 'vfblur.dart';
 
-export 'vfbtn_flat_borderless.dart';
-export 'vfbtn_flat.dart';
-export 'vfbtn_gradient.dart';
-export 'vfbtn_round_border.dart';
-export 'vfbtn_round.dart';
+export 'vfbtn.dart';
+
+export 'vfedit_multiple.dart';
+export 'vfedit.dart';
 
 export 'vficon.dart';
+export 'vfdialog.dart';
 
+export 'vfitem_example.dart';
 export 'vfitem.dart';
-export 'vflitem.dart';
+
 export 'vfsliver_delegate.dart';
 export 'vftab.dart';
 export 'vftop_bar.dart';

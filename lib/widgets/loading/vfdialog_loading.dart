@@ -13,7 +13,7 @@ class VFDialogLoading extends StatelessWidget {
 
   VFDialogLoading({
     Key? key,
-    this.color = VFColors.red87,
+    this.color = VFColors.red,
     this.type = VFLoadingType.circle,
   }) : super(key: key);
 

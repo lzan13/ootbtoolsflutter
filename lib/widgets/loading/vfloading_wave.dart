@@ -14,7 +14,7 @@ class VFLWave extends StatefulWidget {
 
   const VFLWave(
       {Key? key,
-      this.color = VFColors.red87,
+      this.color = VFColors.red,
       this.type = VFLWaveType.start,
       this.size = 50.0,
       this.itemBuilder,

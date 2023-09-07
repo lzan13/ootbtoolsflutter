@@ -16,6 +16,8 @@ dependencies:
   device_info_plus: ^9.0.3
   # 获取包信息插件 https://pub.dev/packages/package_info_plus
   package_info_plus: ^4.1.0
+  # 获取 androidid 插件 https://pub.dev/packages/android_id
+  android_id: ^0.3.5
 
 dev_dependencies:
   flutter_test:

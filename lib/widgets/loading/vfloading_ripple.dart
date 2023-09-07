@@ -11,7 +11,7 @@ class VFLRipple extends StatefulWidget {
 
   const VFLRipple({
     Key? key,
-    this.color = VFColors.red87,
+    this.color = VFColors.red,
     this.size = 50.0,
     this.borderWidth = 6.0,
     this.itemBuilder,
