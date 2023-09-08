@@ -38,7 +38,7 @@ class VFPlatform {
 
     await setupAndroidId();
 
-    VFLog.d(_deviceInfo);
+    // VFLog.d(_deviceInfo);
   }
 
   /// 判断平台

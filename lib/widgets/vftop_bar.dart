@@ -31,7 +31,7 @@ class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
     Key? key,
     this.height = VFDimens.barNormal,
     this.bgColor = VFColors.transparent,
-    this.title = "Title",
+    this.title = "",
     this.bottom,
     this.titleSize = VFSizes.title,
     this.titleColor = VFColors.black,
