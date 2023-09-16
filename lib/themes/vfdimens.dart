@@ -42,7 +42,13 @@ class VFDimens {
   static const double d220 = 220.0;
   static const double d256 = 256.0;
   static const double d320 = 320.0;
+  static const double d360 = 360.0;
+  static const double d400 = 400.0;
+  static const double d420 = 420.0;
+  static const double d480 = 480.0;
   static const double d512 = 512.0;
+  static const double d520 = 520.0;
+  static const double d640 = 640.0;
 
   /// 定义头像尺寸
   static const double avatarLittle = d24;
@@ -124,6 +130,7 @@ class VFSizes {
   static const double title = VFDimens.d16;
   static const double subTitle = VFDimens.d16;
   static const double body = VFDimens.d14;
+  static const double desc = VFDimens.d12;
   static const double more = VFDimens.d12;
   static const double tips = VFDimens.d10;
 

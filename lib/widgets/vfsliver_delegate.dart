@@ -43,7 +43,7 @@ class VFSliverDelegate extends SliverPersistentHeaderDelegate {
     this.bgColor = VFColors.greyBlack,
     this.hasAlpha = true,
     this.maxAlpha = 96,
-    this.title = "Title",
+    this.title = "",
     this.titleSize = VFSizes.title,
     this.center = false,
     this.color = VFColors.white,

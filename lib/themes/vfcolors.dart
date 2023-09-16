@@ -48,7 +48,7 @@ class VFColors {
   static final Color grey12 = grey.withAlpha(31);
 
   /// 灰白色
-  static const Color greyWhite = Color(0xffbdbdbd);
+  static const Color greyWhite = Color(0xffdadada);
   static final Color greyWhite87 = greyWhite.withAlpha(221);
   static final Color greyWhite54 = greyWhite.withAlpha(138);
   static final Color greyWhite38 = greyWhite.withAlpha(98);
@@ -188,4 +188,6 @@ class VFColors {
   static final Color brown12 = brown.withAlpha(31);
 
   static final Color divider = grey12;
+  static const Color bgLight = Color(0xfff6f7f8);
+  static const Color bgDark = Color(0xff000000);
 }

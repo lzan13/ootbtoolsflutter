@@ -16,5 +16,8 @@ export 'vfitem_example.dart';
 export 'vfitem.dart';
 
 export 'vfsliver_delegate.dart';
+
 export 'vftab.dart';
+export 'vftabindicator.dart';
+
 export 'vftop_bar.dart';

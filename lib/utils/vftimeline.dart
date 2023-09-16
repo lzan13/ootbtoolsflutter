@@ -207,11 +207,11 @@ class TimelineUtil {
 
     String timeline;
     if (_info.customYesterday().isNotEmpty &&
-        DateUtil.isYesterdayByMillis(timeMillis, _locTimeMillis)) {
+        VFDate.isYesterdayByMillis(timeMillis, _locTimeMillis)) {
       return _getYesterday(timeMillis, _info, _dayFormat);
     }
 
-    if (!DateUtil.yearIsEqualByMillis(timeMillis, _locTimeMillis)) {
+    if (!VFDate.yearIsEqualByMillis(timeMillis, _locTimeMillis)) {
       timeline = _getYear(timeMillis, _dayFormat);
       if (timeline.isNotEmpty) return timeline;
     }
@@ -250,7 +250,7 @@ class TimelineUtil {
     return info.customYesterday() +
         (dayFormat == DayFormat.Full
             ? (" " +
-                DateUtil.getDateStrByMs(timeMillis,
+                VFDate.getDateStrByMs(timeMillis,
                     format: DateFormat.HOUR_MINUTE))
             : "");
   }
@@ -259,7 +259,7 @@ class TimelineUtil {
   /// 获取非今年信息.
   static String _getYear(int timeMillis, DayFormat dayFormat) {
     if (dayFormat != DayFormat.Simple) {
-      return DateUtil.getDateStrByMs(timeMillis,
+      return VFDate.getDateStrByMs(timeMillis,
           format: (dayFormat == DayFormat.Common
               ? DateFormat.YEAR_MONTH_DAY
               : DateFormat.YEAR_MONTH_DAY_HOUR_MINUTE));
@@ -279,10 +279,10 @@ class TimelineUtil {
         break;
       case DayFormat.Common:
         timeline =
-            DateUtil.getDateStrByMs(timeMillis, format: DateFormat.MONTH_DAY);
+            VFDate.getDateStrByMs(timeMillis, format: DateFormat.MONTH_DAY);
         break;
       case DayFormat.Full:
-        timeline = DateUtil.getDateStrByMs(timeMillis,
+        timeline = VFDate.getDateStrByMs(timeMillis,
             format: DateFormat.MONTH_DAY_HOUR_MINUTE);
         break;
     }

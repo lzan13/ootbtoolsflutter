@@ -64,7 +64,7 @@ Map<int, int> MONTH_DAY = {
 };
 
 /// Date Util.
-class DateUtil {
+class VFDate {
   /// get DateTime By DateStr.
   static DateTime getDateTime(String dateStr, {bool isUtc = false}) {
     DateTime? dateTime = DateTime.tryParse(dateStr);

@@ -27,18 +27,37 @@ class VFStyles {
     fontWeight: FontWeight.w300,
   );
 
+  /// TabBar 文字样式
+  static final TextStyle appTextTab = TextStyle(
+    fontSize: VFSizes.tabNormal,
+    color: VFColors.black87,
+    fontWeight: FontWeight.w800,
+  );
+  static final TextStyle appTextTabUnselected = TextStyle(
+    fontSize: VFSizes.tabNormal,
+    color: VFColors.black54,
+    fontWeight: FontWeight.w500,
+  );
+
   /// 输入框文字样式
   static final TextStyle appTextEdit = TextStyle(
     fontSize: VFSizes.body,
     color: VFColors.black87,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
   );
 
   /// 输入框文字样式
   static final TextStyle appTextHint = TextStyle(
     fontSize: VFSizes.body,
     color: VFColors.grey87,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
+  );
+
+  /// 描述文字样式
+  static final TextStyle appTextDesc = TextStyle(
+    fontSize: VFSizes.desc,
+    color: VFColors.black87,
+    fontWeight: FontWeight.w500,
   );
 
   /// 更多文字样式

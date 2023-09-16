@@ -43,7 +43,11 @@ class VFRouter {
   }
 
   /// 通用跳转
-  void go(BuildContext context, String name) {
-    Navigator.pushNamed(context, name);
+  void go(BuildContext context, String name, {params}) {
+    if (params == null) {
+      Navigator.pushNamed(context, name);
+    } else {
+      Navigator.pushNamed(context, name, arguments: params);
+    }
   }
 }

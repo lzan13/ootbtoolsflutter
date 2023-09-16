@@ -1,6 +1,6 @@
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
-// import 'package:vftools/themes/vfconstants.dart';
+// import 'package:vftools/vftools.dart';
 
 // // Tab 默认高度
 // const double _kTabHeight = VFDimens.d36;
@@ -154,7 +154,10 @@
 //   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
 //     super.debugFillProperties(properties);
 //     properties.add(StringProperty('text', text, defaultValue: null));
-//     properties
-//         .add(DiagnosticsProperty<Widget>('icon', icon, defaultValue: null));
+//     properties.add(DiagnosticsProperty<Widget>(
+//       'icon',
+//       icon,
+//       defaultValue: null,
+//     ));
 //   }
 // }
