@@ -6,11 +6,13 @@ export 'vfblur.dart';
 
 export 'vfbtn.dart';
 
+export 'vfdialog.dart';
+
 export 'vfedit_multiple.dart';
 export 'vfedit.dart';
 
 export 'vficon.dart';
-export 'vfdialog.dart';
+export 'vfimg.dart';
 
 export 'vfitem_example.dart';
 export 'vfitem.dart';

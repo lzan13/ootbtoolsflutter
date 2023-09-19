@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:vftools/page/display/vfdisplay_page.dart';
 import 'package:vftools/page/vfnot_fount.dart';
+import 'package:vftools/vftools.dart';
 
 /*
  * 路由器
@@ -18,7 +19,7 @@ class VFRouter {
       case _displayPage:
         return MaterialPageRoute(
             builder: (context) =>
-                VFDisplayPage(route.arguments as Map<String, String>));
+                VFDisplayPage(route.arguments as Map<String, dynamic>));
       default:
         return MaterialPageRoute(
             builder: (context) => VFNotFoundPage(route.name!));
@@ -26,9 +27,9 @@ class VFRouter {
   }
 
   /// 预览
-  void toDisplayMulti(context, list, index) {
+  void toDisplayMulti(List<String> list, int index) {
     Navigator.pushNamed(
-      context,
+      VFTools().appContext!,
       _displayPage,
       arguments: {
         'data': list,
@@ -38,16 +39,16 @@ class VFRouter {
   }
 
   /// 测试找不到的页面跳转
-  void toNotFound(context) {
-    Navigator.pushNamed(context, _notFound);
+  void toNotFound() {
+    Navigator.pushNamed(VFTools().appContext!, _notFound);
   }
 
   /// 通用跳转
-  void go(BuildContext context, String name, {params}) {
+  void go(String name, {params}) {
     if (params == null) {
-      Navigator.pushNamed(context, name);
+      Navigator.pushNamed(VFTools().appContext!, name);
     } else {
-      Navigator.pushNamed(context, name, arguments: params);
+      Navigator.pushNamed(VFTools().appContext!, name, arguments: params);
     }
   }
 }
