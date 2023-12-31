@@ -45,4 +45,11 @@ class VFPlatform {
       return null;
     }
   }
+
+  ///
+  /// 获取系统平台
+  ///
+  static String getOperatingSystem() {
+    return Platform.operatingSystem;
+  }
 }
