@@ -18,6 +18,8 @@ class VFEdit extends StatelessWidget {
   final double borderWidth;
   // 圆形倒角
   final bool isRound;
+  // 圆角大小
+  final double radius;
   // 隐藏输入
   final bool isObscure;
   // 是否激活
@@ -29,10 +31,11 @@ class VFEdit extends StatelessWidget {
     this.hint = "",
     this.iconColor,
     this.iconData,
-    this.borderColor = VFColors.grey87,
-    this.borderFocusedColor = VFColors.red87,
+    this.borderColor = VFColors.grey,
+    this.borderFocusedColor = VFColors.red,
     this.borderWidth = VFDimens.d1,
     this.isRound = true,
+    this.radius = VFDimens.radiusNormal,
     this.isObscure = false,
     this.isEnable = true,
   }) : super(key: key);
@@ -41,12 +44,13 @@ class VFEdit extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      keyboardType: TextInputType.text,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: VFStyles.appTextHint,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            isRound ? VFDimens.roundRadiusLarge : VFDimens.radiusSmall,
+            isRound ? VFDimens.roundRadiusLarge : radius,
           ),
           borderSide: BorderSide(
             color: borderColor,
@@ -55,7 +59,7 @@ class VFEdit extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            isRound ? VFDimens.roundRadiusLarge : VFDimens.radiusSmall,
+            isRound ? VFDimens.roundRadiusLarge : radius,
           ),
           borderSide: BorderSide(
             color: borderFocusedColor,
@@ -64,7 +68,7 @@ class VFEdit extends StatelessWidget {
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
-            isRound ? VFDimens.roundRadiusLarge : VFDimens.radiusSmall,
+            isRound ? VFDimens.roundRadiusLarge : radius,
           ),
           borderSide: BorderSide(
             color: borderColor.withAlpha(128),
@@ -77,15 +81,17 @@ class VFEdit extends StatelessWidget {
           VFDimens.paddingNormal,
           VFDimens.paddingSmall,
         ),
-        prefixIcon: Container(
-          width: VFDimens.d42,
-          height: VFDimens.d42,
-          alignment: Alignment.center,
-          child: VFIcon(
-            data: iconData,
-            color: iconColor,
-          ),
-        ),
+        prefixIcon: iconData != null
+            ? Container(
+                width: VFDimens.d42,
+                height: VFDimens.d42,
+                alignment: Alignment.center,
+                child: VFIcon(
+                  data: iconData,
+                  color: iconColor,
+                ),
+              )
+            : null,
       ),
       enabled: isEnable,
       obscureText: isObscure,

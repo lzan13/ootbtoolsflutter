@@ -10,7 +10,7 @@ class VFLRotatingSquare extends StatefulWidget {
 
   const VFLRotatingSquare({
     Key? key,
-    this.color = VFColors.red87,
+    this.color = VFColors.red,
     this.size = 50.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),

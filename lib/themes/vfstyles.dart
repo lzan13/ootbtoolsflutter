@@ -11,45 +11,64 @@ class VFStyles {
   );
 
   /// 亮色标题
-  static TextStyle appTextTitleLight = appTextTitle.copyWith(
+  static final TextStyle appTextTitleLight = appTextTitle.copyWith(
     color: VFColors.white,
   );
 
   /// 标题文字样式
-  static TextStyle appTextHeadline = appTextTitle.copyWith(
+  static final TextStyle appTextHeadline = appTextTitle.copyWith(
     fontSize: VFSizes.headline,
   );
 
   /// 内容文字样式
-  static const TextStyle appTextBody = TextStyle(
+  static final TextStyle appTextBody = TextStyle(
     fontSize: VFSizes.body,
     color: VFColors.black54,
     fontWeight: FontWeight.w300,
   );
 
-  /// 输入框文字样式
-  static const TextStyle appTextEdit = TextStyle(
-    fontSize: VFSizes.body,
+  /// TabBar 文字样式
+  static final TextStyle appTextTab = TextStyle(
+    fontSize: VFSizes.tabNormal,
     color: VFColors.black87,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w800,
+  );
+  static final TextStyle appTextTabUnselected = TextStyle(
+    fontSize: VFSizes.tabNormal,
+    color: VFColors.black54,
+    fontWeight: FontWeight.w500,
   );
 
   /// 输入框文字样式
-  static const TextStyle appTextHint = TextStyle(
+  static final TextStyle appTextEdit = TextStyle(
+    fontSize: VFSizes.body,
+    color: VFColors.black87,
+    fontWeight: FontWeight.w500,
+  );
+
+  /// 输入框文字样式
+  static final TextStyle appTextHint = TextStyle(
     fontSize: VFSizes.body,
     color: VFColors.grey87,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
+  );
+
+  /// 描述文字样式
+  static final TextStyle appTextDesc = TextStyle(
+    fontSize: VFSizes.desc,
+    color: VFColors.black87,
+    fontWeight: FontWeight.w500,
   );
 
   /// 更多文字样式
-  static const TextStyle appTextMore = TextStyle(
+  static final TextStyle appTextMore = TextStyle(
     fontSize: VFSizes.more,
     color: VFColors.black54,
     fontWeight: FontWeight.w500,
   );
 
   /// tips文字样式
-  static const TextStyle appTextTips = TextStyle(
+  static final TextStyle appTextTips = TextStyle(
     fontSize: VFSizes.tips,
     color: VFColors.black54,
     fontWeight: FontWeight.w500,
@@ -64,9 +83,9 @@ class VFStyles {
     )
   ];
   static final List<BoxShadow> boxShadowBlack = [
-    const BoxShadow(
+    BoxShadow(
       color: VFColors.black38,
-      offset: Offset(0, VFDimens.elevationNormal),
+      offset: const Offset(0, VFDimens.elevationNormal),
       blurRadius: VFDimens.blurRadiusLarge,
     )
   ];

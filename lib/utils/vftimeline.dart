@@ -165,8 +165,6 @@ Map<String, TimelineInfo> _timelineInfoMap = {
 
 ///add custom configuration.
 void setLocaleInfo(String locale, TimelineInfo timelineInfo) {
-  assert(locale != null, '[locale] must not be null');
-  assert(timelineInfo != null, '[timelineInfo] must not be null');
   _timelineInfoMap[locale] = timelineInfo;
 }
 
@@ -189,9 +187,11 @@ class TimelineUtil {
   /// locDateTime: current time or schedule time. millis.
   /// locale: output key.
   static String format(int timeMillis,
-      {int locTimeMillis = 0, String locale = "", DayFormat? dayFormat}) {
-    int _locTimeMillis = locTimeMillis ?? DateTime.now().millisecondsSinceEpoch;
-    String _locale = locale ?? 'zh';
+      {int locTimeMillis = 0, String locale = "zh", DayFormat? dayFormat}) {
+    int _locTimeMillis = locTimeMillis == 0
+        ? DateTime.now().millisecondsSinceEpoch
+        : locTimeMillis;
+    String _locale = locale;
     TimelineInfo _info = _timelineInfoMap[_locale] ?? ZhInfo();
     DayFormat _dayFormat = dayFormat ?? DayFormat.Common;
 
@@ -207,11 +207,11 @@ class TimelineUtil {
 
     String timeline;
     if (_info.customYesterday().isNotEmpty &&
-        DateUtil.isYesterdayByMillis(timeMillis, _locTimeMillis)) {
+        VFDate.isYesterdayByMillis(timeMillis, _locTimeMillis)) {
       return _getYesterday(timeMillis, _info, _dayFormat);
     }
 
-    if (!DateUtil.yearIsEqualByMillis(timeMillis, _locTimeMillis)) {
+    if (!VFDate.yearIsEqualByMillis(timeMillis, _locTimeMillis)) {
       timeline = _getYear(timeMillis, _dayFormat);
       if (timeline.isNotEmpty) return timeline;
     }
@@ -250,7 +250,7 @@ class TimelineUtil {
     return info.customYesterday() +
         (dayFormat == DayFormat.Full
             ? (" " +
-                DateUtil.getDateStrByMs(timeMillis,
+                VFDate.getDateStrByMs(timeMillis,
                     format: DateFormat.HOUR_MINUTE))
             : "");
   }
@@ -259,7 +259,7 @@ class TimelineUtil {
   /// 获取非今年信息.
   static String _getYear(int timeMillis, DayFormat dayFormat) {
     if (dayFormat != DayFormat.Simple) {
-      return DateUtil.getDateStrByMs(timeMillis,
+      return VFDate.getDateStrByMs(timeMillis,
           format: (dayFormat == DayFormat.Common
               ? DateFormat.YEAR_MONTH_DAY
               : DateFormat.YEAR_MONTH_DAY_HOUR_MINUTE));
@@ -279,10 +279,10 @@ class TimelineUtil {
         break;
       case DayFormat.Common:
         timeline =
-            DateUtil.getDateStrByMs(timeMillis, format: DateFormat.MONTH_DAY);
+            VFDate.getDateStrByMs(timeMillis, format: DateFormat.MONTH_DAY);
         break;
       case DayFormat.Full:
-        timeline = DateUtil.getDateStrByMs(timeMillis,
+        timeline = VFDate.getDateStrByMs(timeMillis,
             format: DateFormat.MONTH_DAY_HOUR_MINUTE);
         break;
     }

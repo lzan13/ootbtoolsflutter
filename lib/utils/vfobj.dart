@@ -5,7 +5,7 @@ class VFObj {
   ///
   /// 判断对象是否为空
   ///
-  static bool isEmpty(Object object) {
+  static bool isEmpty(Object? object) {
     if (object == null) {
       return true;
     }
@@ -29,12 +29,12 @@ class VFObj {
   ///
   /// 比较两个列表
   ///
-  static bool equalList(List listA, List listB) {
-    if (listA == listB) {
-      return true;
-    }
+  static bool equalList(List? listA, List? listB) {
     if (listA == null || listB == null) {
       return false;
+    }
+    if (listA == listB) {
+      return true;
     }
     int length = listA.length;
     if (length != listB.length) return false;
