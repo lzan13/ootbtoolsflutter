@@ -2,25 +2,25 @@
 /// 时间日期工具类
 ///
 enum DateFormat {
-  DEFAULT, //yyyy-MM-dd HH:mm:ss.SSS
-  NORMAL, //yyyy-MM-dd HH:mm:ss
-  YEAR_MONTH_DAY_HOUR_MINUTE, //yyyy-MM-dd HH:mm
-  YEAR_MONTH_DAY, //yyyy-MM-dd
-  YEAR_MONTH, //yyyy-MM
-  MONTH_DAY, //MM-dd
-  MONTH_DAY_HOUR_MINUTE, //MM-dd HH:mm
-  HOUR_MINUTE_SECOND, //HH:mm:ss
-  HOUR_MINUTE, //HH:mm
+  defaultMilli, //yyyy-MM-dd HH:mm:ss.SSS
+  normal, //yyyy-MM-dd HH:mm:ss
+  yearMonthDayHourMinute, //yyyy-MM-dd HH:mm
+  yearMonthDay, //yyyy-MM-dd
+  yearMonth, //yyyy-MM
+  monthDay, //MM-dd
+  monthDayHourMinute, //MM-dd HH:mm
+  hourMinuteSecond, //HH:mm:ss
+  hourMinute, //HH:mm
 
-  ZH_DEFAULT, //yyyy年MM月dd日 HH时mm分ss秒SSS毫秒
-  ZH_NORMAL, //yyyy年MM月dd日 HH时mm分ss秒  /  timeSeparate: ":" --> yyyy年MM月dd日 HH:mm:ss
-  ZH_YEAR_MONTH_DAY_HOUR_MINUTE, //yyyy年MM月dd日 HH时mm分  /  timeSeparate: ":" --> yyyy年MM月dd日 HH:mm
-  ZH_YEAR_MONTH_DAY, //yyyy年MM月dd日
-  ZH_YEAR_MONTH, //yyyy年MM月
-  ZH_MONTH_DAY, //MM月dd日
-  ZH_MONTH_DAY_HOUR_MINUTE, //MM月dd日 HH时mm分  /  timeSeparate: ":" --> MM月dd日 HH:mm
-  ZH_HOUR_MINUTE_SECOND, //HH时mm分ss秒
-  ZH_HOUR_MINUTE, //HH时mm分
+  zhDefaultMilli, //yyyy年MM月dd日 HH时mm分ss秒SSS毫秒
+  zhNormal, //yyyy年MM月dd日 HH时mm分ss秒  /  timeSeparate: ":" --> yyyy年MM月dd日 HH:mm:ss
+  zhYearMonthDayHourMinute, //yyyy年MM月dd日 HH时mm分  /  timeSeparate: ":" --> yyyy年MM月dd日 HH:mm
+  zhYearMonthDay, //yyyy年MM月dd日
+  zhYearMonth, //yyyy年MM月
+  zhMonthDay, //MM月dd日
+  zhMonthDayHourMinute, //MM月dd日 HH时mm分  /  timeSeparate: ":" --> MM月dd日 HH:mm
+  zhHourMinuteSecond, //HH时mm分ss秒
+  zhHourMinute, //HH时mm分
 }
 
 /// 一些常用格式参照。可以自定义格式，例如："yyyy/MM/dd HH:mm:ss"，"yyyy/M/d HH:mm:ss"。
@@ -48,7 +48,7 @@ class DataFormats {
 }
 
 /// month->days.
-Map<int, int> MONTH_DAY = {
+Map<int, int> monthDay = {
   1: 31,
   2: 28,
   3: 31,
@@ -88,9 +88,7 @@ class VFDate {
   /// get DateMilliseconds By DateStr.
   static int getDateMsByTimeStr(String dateStr) {
     DateTime? dateTime = DateTime.tryParse(dateStr);
-    return dateTime == null
-        ? DateTime.now().millisecondsSinceEpoch
-        : dateTime.millisecondsSinceEpoch;
+    return dateTime == null ? DateTime.now().millisecondsSinceEpoch : dateTime.millisecondsSinceEpoch;
   }
 
   /// get Now Date Milliseconds.
@@ -110,13 +108,12 @@ class VFDate {
   /// timeSeparate    time separate.
   static String getDateStrByTimeStr(
     String dateStr, {
-    DateFormat format = DateFormat.NORMAL,
+    DateFormat format = DateFormat.normal,
     String dateSeparate = "",
     String timeSeparate = "",
     bool isUtc = false,
   }) {
-    return getDateStrByDateTime(getDateTime(dateStr, isUtc: isUtc),
-        format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
+    return getDateStrByDateTime(getDateTime(dateStr, isUtc: isUtc), format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
   }
 
   /// get DateStr By Milliseconds.
@@ -125,13 +122,9 @@ class VFDate {
   /// dateSeparate    date separate.
   /// timeSeparate    time separate.
   static String getDateStrByMs(int milliseconds,
-      {DateFormat format = DateFormat.NORMAL,
-      String dateSeparate = "",
-      String timeSeparate = "",
-      bool isUtc = false}) {
+      {DateFormat format = DateFormat.normal, String dateSeparate = "", String timeSeparate = "", bool isUtc = false}) {
     DateTime dateTime = getDateTimeByMs(milliseconds, isUtc: isUtc);
-    return getDateStrByDateTime(dateTime,
-        format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
+    return getDateStrByDateTime(dateTime, format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
   }
 
   /// get DateStr By DateTime.
@@ -139,10 +132,7 @@ class VFDate {
   /// format          DateFormat type.
   /// dateSeparate    date separate.
   /// timeSeparate    time separate.
-  static String getDateStrByDateTime(DateTime dateTime,
-      {DateFormat format = DateFormat.NORMAL,
-      String dateSeparate = "",
-      String timeSeparate = ""}) {
+  static String getDateStrByDateTime(DateTime dateTime, {DateFormat format = DateFormat.normal, String dateSeparate = "", String timeSeparate = ""}) {
     String dateStr = dateTime.toString();
     if (isZHFormat(format)) {
       dateStr = formatZHDateTime(dateStr, format, timeSeparate);
@@ -156,48 +146,32 @@ class VFDate {
   /// time            time string.
   /// format          DateFormat type.
   ///timeSeparate    time separate.
-  static String formatZHDateTime(
-      String time, DateFormat format, String timeSeparate) {
+  static String formatZHDateTime(String time, DateFormat format, String timeSeparate) {
     time = convertToZHDateTimeString(time, timeSeparate);
     switch (format) {
-      case DateFormat.ZH_NORMAL: //yyyy年MM月dd日 HH时mm分ss秒
-        time = time.substring(
-            0,
-            "yyyy年MM月dd日 HH时mm分ss秒".length -
-                (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
+      case DateFormat.zhNormal: //yyyy年MM月dd日 HH时mm分ss秒
+        time = time.substring(0, "yyyy年MM月dd日 HH时mm分ss秒".length - (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
-      case DateFormat.ZH_YEAR_MONTH_DAY_HOUR_MINUTE: //yyyy年MM月dd日 HH时mm分
-        time = time.substring(
-            0,
-            "yyyy年MM月dd日 HH时mm分".length -
-                (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
+      case DateFormat.zhYearMonthDayHourMinute: //yyyy年MM月dd日 HH时mm分
+        time = time.substring(0, "yyyy年MM月dd日 HH时mm分".length - (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
-      case DateFormat.ZH_YEAR_MONTH_DAY: //yyyy年MM月dd日
+      case DateFormat.zhYearMonthDay: //yyyy年MM月dd日
         time = time.substring(0, "yyyy年MM月dd日".length);
         break;
-      case DateFormat.ZH_YEAR_MONTH: //yyyy年MM月
+      case DateFormat.zhYearMonth: //yyyy年MM月
         time = time.substring(0, "yyyy年MM月".length);
         break;
-      case DateFormat.ZH_MONTH_DAY: //MM月dd日
+      case DateFormat.zhMonthDay: //MM月dd日
         time = time.substring("yyyy年".length, "yyyy年MM月dd日".length);
         break;
-      case DateFormat.ZH_MONTH_DAY_HOUR_MINUTE: //MM月dd日 HH时mm分
-        time = time.substring(
-            "yyyy年".length,
-            "yyyy年MM月dd日 HH时mm分".length -
-                (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
+      case DateFormat.zhMonthDayHourMinute: //MM月dd日 HH时mm分
+        time = time.substring("yyyy年".length, "yyyy年MM月dd日 HH时mm分".length - (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
-      case DateFormat.ZH_HOUR_MINUTE_SECOND: //HH时mm分ss秒
-        time = time.substring(
-            "yyyy年MM月dd日 ".length,
-            "yyyy年MM月dd日 HH时mm分ss秒".length -
-                (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
+      case DateFormat.zhHourMinuteSecond: //HH时mm分ss秒
+        time = time.substring("yyyy年MM月dd日 ".length, "yyyy年MM月dd日 HH时mm分ss秒".length - (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
-      case DateFormat.ZH_HOUR_MINUTE: //HH时mm分
-        time = time.substring(
-            "yyyy年MM月dd日 ".length,
-            "yyyy年MM月dd日 HH时mm分".length -
-                (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
+      case DateFormat.zhHourMinute: //HH时mm分
+        time = time.substring("yyyy年MM月dd日 ".length, "yyyy年MM月dd日 HH时mm分".length - (timeSeparate == null || timeSeparate.isEmpty ? 0 : 1));
         break;
       default:
         break;
@@ -210,32 +184,30 @@ class VFDate {
   /// format          DateFormat type.
   /// dateSeparate    date separate.
   /// timeSeparate    time separate.
-  static String formatDateTime(String time, DateFormat format,
-      String dateSeparate, String timeSeparate) {
+  static String formatDateTime(String time, DateFormat format, String dateSeparate, String timeSeparate) {
     switch (format) {
-      case DateFormat.NORMAL: //yyyy-MM-dd HH:mm:ss
+      case DateFormat.normal: //yyyy-MM-dd HH:mm:ss
         time = time.substring(0, "yyyy-MM-dd HH:mm:ss".length);
         break;
-      case DateFormat.YEAR_MONTH_DAY_HOUR_MINUTE: //yyyy-MM-dd HH:mm
+      case DateFormat.yearMonthDayHourMinute: //yyyy-MM-dd HH:mm
         time = time.substring(0, "yyyy-MM-dd HH:mm".length);
         break;
-      case DateFormat.YEAR_MONTH_DAY: //yyyy-MM-dd
+      case DateFormat.yearMonthDay: //yyyy-MM-dd
         time = time.substring(0, "yyyy-MM-dd".length);
         break;
-      case DateFormat.YEAR_MONTH: //yyyy-MM
+      case DateFormat.yearMonth: //yyyy-MM
         time = time.substring(0, "yyyy-MM".length);
         break;
-      case DateFormat.MONTH_DAY: //MM-dd
+      case DateFormat.monthDay: //MM-dd
         time = time.substring("yyyy-".length, "yyyy-MM-dd".length);
         break;
-      case DateFormat.MONTH_DAY_HOUR_MINUTE: //MM-dd HH:mm
+      case DateFormat.monthDayHourMinute: //MM-dd HH:mm
         time = time.substring("yyyy-".length, "yyyy-MM-dd HH:mm".length);
         break;
-      case DateFormat.HOUR_MINUTE_SECOND: //HH:mm:ss
-        time =
-            time.substring("yyyy-MM-dd ".length, "yyyy-MM-dd HH:mm:ss".length);
+      case DateFormat.hourMinuteSecond: //HH:mm:ss
+        time = time.substring("yyyy-MM-dd ".length, "yyyy-MM-dd HH:mm:ss".length);
         break;
-      case DateFormat.HOUR_MINUTE: //HH:mm
+      case DateFormat.hourMinute: //HH:mm
         time = time.substring("yyyy-MM-dd ".length, "yyyy-MM-dd HH:mm".length);
         break;
       default:
@@ -247,15 +219,15 @@ class VFDate {
 
   /// is format to ZH DateTime String
   static bool isZHFormat(DateFormat format) {
-    return format == DateFormat.ZH_DEFAULT ||
-        format == DateFormat.ZH_NORMAL ||
-        format == DateFormat.ZH_YEAR_MONTH_DAY_HOUR_MINUTE ||
-        format == DateFormat.ZH_YEAR_MONTH_DAY ||
-        format == DateFormat.ZH_YEAR_MONTH ||
-        format == DateFormat.ZH_MONTH_DAY ||
-        format == DateFormat.ZH_MONTH_DAY_HOUR_MINUTE ||
-        format == DateFormat.ZH_HOUR_MINUTE_SECOND ||
-        format == DateFormat.ZH_HOUR_MINUTE;
+    return format == DateFormat.zhDefaultMilli ||
+        format == DateFormat.zhNormal ||
+        format == DateFormat.zhYearMonthDayHourMinute ||
+        format == DateFormat.zhYearMonthDay ||
+        format == DateFormat.zhYearMonth ||
+        format == DateFormat.zhMonthDay ||
+        format == DateFormat.zhMonthDayHourMinute ||
+        format == DateFormat.zhHourMinuteSecond ||
+        format == DateFormat.zhHourMinute;
   }
 
   /// convert To ZH DateTime String
@@ -275,8 +247,7 @@ class VFDate {
   }
 
   /// date Time Separate.
-  static String dateTimeSeparate(
-      String time, String dateSeparate, String timeSeparate) {
+  static String dateTimeSeparate(String time, String dateSeparate, String timeSeparate) {
     if (dateSeparate != null) {
       time = time.replaceAll("-", dateSeparate);
     }
@@ -288,16 +259,13 @@ class VFDate {
 
   /// format date by milliseconds.
   /// milliseconds 日期毫秒
-  static String formatDateMs(int milliseconds,
-      {bool isUtc = false, String format = ""}) {
-    return formatDate(getDateTimeByMs(milliseconds, isUtc: isUtc),
-        format: format);
+  static String formatDateMs(int milliseconds, {bool isUtc = false, String format = ""}) {
+    return formatDate(getDateTimeByMs(milliseconds, isUtc: isUtc), format: format);
   }
 
   /// format date by date str.
   /// dateStr 日期字符串
-  static String formatDateStr(String dateStr,
-      {bool isUtc = false, String format = ""}) {
+  static String formatDateStr(String dateStr, {bool isUtc = false, String format = ""}) {
     return formatDate(getDateTime(dateStr, isUtc: isUtc), format: format);
   }
 
@@ -306,8 +274,7 @@ class VFDate {
   /// 格式要求
   /// year -> yyyy/yy   month -> MM/M    day -> dd/d
   /// hour -> HH/H      minute -> mm/m   second -> ss/s
-  static String formatDate(DateTime dateTime,
-      {bool isUtc = false, String format = ""}) {
+  static String formatDate(DateTime dateTime, {bool isUtc = false, String format = ""}) {
     if (dateTime == null) return "";
     format = format ?? DataFormats.full;
     if (format.contains("yy")) {
@@ -315,8 +282,7 @@ class VFDate {
       if (format.contains("yyyy")) {
         format = format.replaceAll("yyyy", year);
       } else {
-        format = format.replaceAll(
-            "yy", year.substring(year.length - 2, year.length));
+        format = format.replaceAll("yy", year.substring(year.length - 2, year.length));
       }
     }
 
@@ -331,12 +297,10 @@ class VFDate {
   }
 
   /// com format.
-  static String _comFormat(
-      int value, String format, String single, String full) {
+  static String _comFormat(int value, String format, String single, String full) {
     if (format.contains(single)) {
       if (format.contains(full)) {
-        format =
-            format.replaceAll(full, value < 10 ? '0$value' : value.toString());
+        format = format.replaceAll(full, value < 10 ? '0$value' : value.toString());
       } else {
         format = format.replaceAll(single, value.toString());
       }
@@ -431,8 +395,7 @@ class VFDate {
   /// is yesterday by millis.
   /// 是否是昨天.
   static bool isYesterdayByMillis(int millis, int locMillis) {
-    return isYesterday(DateTime.fromMillisecondsSinceEpoch(millis),
-        DateTime.fromMillisecondsSinceEpoch(locMillis));
+    return isYesterday(DateTime.fromMillisecondsSinceEpoch(millis), DateTime.fromMillisecondsSinceEpoch(locMillis));
   }
 
   /// is yesterday by dateTime.
@@ -442,19 +405,14 @@ class VFDate {
       int spDay = getDayOfYear(locDateTime) - getDayOfYear(dateTime);
       return spDay == 1;
     } else {
-      return ((locDateTime.year - dateTime.year == 1) &&
-          dateTime.month == 12 &&
-          locDateTime.month == 1 &&
-          dateTime.day == 31 &&
-          locDateTime.day == 1);
+      return ((locDateTime.year - dateTime.year == 1) && dateTime.month == 12 && locDateTime.month == 1 && dateTime.day == 31 && locDateTime.day == 1);
     }
   }
 
   /// get day of year.
   /// 在今年的第几天.
   static int getDayOfYearByMillis(int millis, {bool isUtc = false}) {
-    return getDayOfYear(
-        DateTime.fromMillisecondsSinceEpoch(millis, isUtc: isUtc));
+    return getDayOfYear(DateTime.fromMillisecondsSinceEpoch(millis, isUtc: isUtc));
   }
 
   /// get day of year.
@@ -464,7 +422,7 @@ class VFDate {
     int month = dateTime.month;
     int days = dateTime.day;
     for (int i = 1; i < month; i++) {
-      days = days + MONTH_DAY[i]!;
+      days = days + monthDay[i]!;
     }
     if (isLeapYearByYear(year) && month > 2) {
       days = days + 1;
@@ -475,8 +433,7 @@ class VFDate {
   /// year is equal.
   /// 是否同年.
   static bool yearIsEqualByMillis(int millis, int locMillis) {
-    return yearIsEqual(DateTime.fromMillisecondsSinceEpoch(millis),
-        DateTime.fromMillisecondsSinceEpoch(locMillis));
+    return yearIsEqual(DateTime.fromMillisecondsSinceEpoch(millis), DateTime.fromMillisecondsSinceEpoch(locMillis));
   }
 
   /// year is equal.
@@ -489,8 +446,7 @@ class VFDate {
   /// 是否是当天.
   static bool isToday(int milliseconds, {bool isUtc = false}) {
     if (milliseconds == null || milliseconds == 0) return false;
-    DateTime old =
-        DateTime.fromMillisecondsSinceEpoch(milliseconds, isUtc: isUtc);
+    DateTime old = DateTime.fromMillisecondsSinceEpoch(milliseconds, isUtc: isUtc);
     DateTime now = isUtc ? DateTime.now().toUtc() : DateTime.now().toLocal();
     return old.year == now.year && old.month == now.month && old.day == now.day;
   }
@@ -501,15 +457,10 @@ class VFDate {
     if (milliseconds == null || milliseconds <= 0) {
       return false;
     }
-    DateTime _old =
-        DateTime.fromMillisecondsSinceEpoch(milliseconds, isUtc: isUtc);
+    DateTime _old = DateTime.fromMillisecondsSinceEpoch(milliseconds, isUtc: isUtc);
     DateTime _now = isUtc ? DateTime.now().toUtc() : DateTime.now().toLocal();
-    DateTime old =
-        _now.millisecondsSinceEpoch > _old.millisecondsSinceEpoch ? _old : _now;
-    DateTime now =
-        _now.millisecondsSinceEpoch > _old.millisecondsSinceEpoch ? _now : _old;
-    return (now.weekday >= old.weekday) &&
-        (now.millisecondsSinceEpoch - old.millisecondsSinceEpoch <=
-            7 * 24 * 60 * 60 * 1000);
+    DateTime old = _now.millisecondsSinceEpoch > _old.millisecondsSinceEpoch ? _old : _now;
+    DateTime now = _now.millisecondsSinceEpoch > _old.millisecondsSinceEpoch ? _now : _old;
+    return (now.weekday >= old.weekday) && (now.millisecondsSinceEpoch - old.millisecondsSinceEpoch <= 7 * 24 * 60 * 60 * 1000);
   }
 }

@@ -174,23 +174,17 @@ class TimelineUtil {
   /// dateTime
   /// locDateTime: current time or schedule time.
   /// locale: output key.
-  static String formatByDateTime(DateTime dateTime,
-      {DateTime? locDateTime, String locale = "", DayFormat? dayFormat}) {
-    int _locDateTime =
-        (locDateTime == null ? 0 : locDateTime.millisecondsSinceEpoch);
-    return format(dateTime.millisecondsSinceEpoch,
-        locTimeMillis: _locDateTime, locale: locale, dayFormat: dayFormat);
+  static String formatByDateTime(DateTime dateTime, {DateTime? locDateTime, String locale = "", DayFormat? dayFormat}) {
+    int _locDateTime = (locDateTime == null ? 0 : locDateTime.millisecondsSinceEpoch);
+    return format(dateTime.millisecondsSinceEpoch, locTimeMillis: _locDateTime, locale: locale, dayFormat: dayFormat);
   }
 
   /// format time by millis.
   /// dateTime : millis.
   /// locDateTime: current time or schedule time. millis.
   /// locale: output key.
-  static String format(int timeMillis,
-      {int locTimeMillis = 0, String locale = "zh", DayFormat? dayFormat}) {
-    int _locTimeMillis = locTimeMillis == 0
-        ? DateTime.now().millisecondsSinceEpoch
-        : locTimeMillis;
+  static String format(int timeMillis, {int locTimeMillis = 0, String locale = "zh", DayFormat? dayFormat}) {
+    int _locTimeMillis = locTimeMillis == 0 ? DateTime.now().millisecondsSinceEpoch : locTimeMillis;
     String _locale = locale;
     TimelineInfo _info = _timelineInfoMap[_locale] ?? ZhInfo();
     DayFormat _dayFormat = dayFormat ?? DayFormat.Common;
@@ -206,8 +200,7 @@ class TimelineUtil {
     }
 
     String timeline;
-    if (_info.customYesterday().isNotEmpty &&
-        VFDate.isYesterdayByMillis(timeMillis, _locTimeMillis)) {
+    if (_info.customYesterday().isNotEmpty && VFDate.isYesterdayByMillis(timeMillis, _locTimeMillis)) {
       return _getYesterday(timeMillis, _info, _dayFormat);
     }
 
@@ -222,9 +215,7 @@ class TimelineUtil {
     final num days = hours / 24;
     if (seconds < 120) {
       timeline = _info.oneMinute(1);
-      if (suffix != _info.suffixAfter() &&
-          _info.lessThanTenSecond().isNotEmpty &&
-          seconds < 10) {
+      if (suffix != _info.suffixAfter() && _info.lessThanTenSecond().isNotEmpty && seconds < 10) {
         timeline = _info.lessThanTenSecond();
         suffix = "";
       }
@@ -233,8 +224,7 @@ class TimelineUtil {
     } else if (hours < 24) {
       timeline = _info.hours(hours.round());
     } else {
-      if ((days.round() == 1 && _info.keepOneDay() == true) ||
-          (days.round() == 2 && _info.keepTwoDays() == true)) {
+      if ((days.round() == 1 && _info.keepOneDay() == true) || (days.round() == 2 && _info.keepTwoDays() == true)) {
         _dayFormat = DayFormat.Simple;
       }
       timeline = _formatDays(timeMillis, days.round(), _info, _dayFormat);
@@ -245,45 +235,31 @@ class TimelineUtil {
 
   /// get Yesterday.
   /// 获取昨天.
-  static String _getYesterday(
-      int timeMillis, TimelineInfo info, DayFormat dayFormat) {
-    return info.customYesterday() +
-        (dayFormat == DayFormat.Full
-            ? (" " +
-                VFDate.getDateStrByMs(timeMillis,
-                    format: DateFormat.HOUR_MINUTE))
-            : "");
+  static String _getYesterday(int timeMillis, TimelineInfo info, DayFormat dayFormat) {
+    return info.customYesterday() + (dayFormat == DayFormat.Full ? (" " + VFDate.getDateStrByMs(timeMillis, format: DateFormat.hourMinute)) : "");
   }
 
   /// get is not year info.
   /// 获取非今年信息.
   static String _getYear(int timeMillis, DayFormat dayFormat) {
     if (dayFormat != DayFormat.Simple) {
-      return VFDate.getDateStrByMs(timeMillis,
-          format: (dayFormat == DayFormat.Common
-              ? DateFormat.YEAR_MONTH_DAY
-              : DateFormat.YEAR_MONTH_DAY_HOUR_MINUTE));
+      return VFDate.getDateStrByMs(timeMillis, format: (dayFormat == DayFormat.Common ? DateFormat.yearMonthDay : DateFormat.yearMonthDayHourMinute));
     }
     return "";
   }
 
   /// format Days.
-  static String _formatDays(int timeMillis, num days, TimelineInfo timelineInfo,
-      DayFormat dayFormat) {
+  static String _formatDays(int timeMillis, num days, TimelineInfo timelineInfo, DayFormat dayFormat) {
     String timeline;
     switch (dayFormat) {
       case DayFormat.Simple:
-        timeline = (days == 1
-            ? timelineInfo.oneDay(days.round())
-            : timelineInfo.days(days.round()));
+        timeline = (days == 1 ? timelineInfo.oneDay(days.round()) : timelineInfo.days(days.round()));
         break;
       case DayFormat.Common:
-        timeline =
-            VFDate.getDateStrByMs(timeMillis, format: DateFormat.MONTH_DAY);
+        timeline = VFDate.getDateStrByMs(timeMillis, format: DateFormat.monthDay);
         break;
       case DayFormat.Full:
-        timeline = VFDate.getDateStrByMs(timeMillis,
-            format: DateFormat.MONTH_DAY_HOUR_MINUTE);
+        timeline = VFDate.getDateStrByMs(timeMillis, format: DateFormat.monthDayHourMinute);
         break;
     }
     return timeline;

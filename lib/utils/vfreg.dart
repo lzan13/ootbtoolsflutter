@@ -42,8 +42,7 @@ List<String> idCardProvinceDict = [
 ///
 class VFReg {
   /// 验证电子邮箱格式
-  static const String email =
-      "^\\w+((-\\w+)|(\\.\\w+))*\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+\$";
+  static const String email = "^\\w+((-\\w+)|(\\.\\w+))*\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+\$";
 
   /// 简单的手机号正则
   static const String phoneSimple = "^1[23456789]\\d{9}\$";
@@ -56,8 +55,7 @@ class VFReg {
   /// 卫星电话: 1349
   /// 虚拟电话: 170
   ///
-  static const String phoneExact =
-      "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(16[6])|(17[0,1,3,5-8])|(18[0-9])|(19[1,8,9]))\\d{8}\$";
+  static const String phoneExact = "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(16[6])|(17[0,1,3,5-8])|(18[0-9])|(19[1,8,9]))\\d{8}\$";
 
   /// 电话号码正则
   static const String tel = "^0\\d{2,3}[- ]?\\d{7,8}";
@@ -66,40 +64,33 @@ class VFReg {
   static const String landline = "^\\d{3,4}-\\d{7,8}(-\\d{3,4})?\$";
 
   /// ISO类型的日期格式
-  static const String dateISO =
-      "\\d{4}[\\/\\-](0?[1-9]|1[012])[\\/\\-](0?[1-9]|[12][0-9]|3[01])\$";
+  static const String dateISO = "\\d{4}[\\/\\-](0?[1-9]|1[012])[\\/\\-](0?[1-9]|[12][0-9]|3[01])\$";
 
   /// 日期正则
   static const String date =
       "^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)\$";
 
   /// 十进制数字
-  static const String num =
-      "[\\+-]?(\\d+\\.?\\d*|\\.\\d+|\\d\\.\\d+e\\+\\d+)\$";
+  static const String num = "[\\+-]?(\\d+\\.?\\d*|\\.\\d+|\\d\\.\\d+e\\+\\d+)\$";
 
   /// 整数
   static const String digits = "\\d+\$";
 
   /// IP 正则
-  static const String ip =
-      "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
+  static const String ip = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
 
   /// 长度为15的身份证号码的正则
-  static const String idCard15 =
-      "^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}\$";
+  static const String idCard15 = "^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}\$";
 
   /// 长度为18的身份证号码的正则
-  static const String idCard18 =
-      "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9Xx])\$";
+  static const String idCard18 = "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9Xx])\$";
 
   /// 是否车牌号
   /// 新能源车牌
-  static const String carX =
-      "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]\$)|([DF][A-HJ-NP-Z0-9][0-9]{4}\$))";
+  static const String carX = "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]\$)|([DF][A-HJ-NP-Z0-9][0-9]{4}\$))";
 
   /// 旧车牌
-  static const String carC =
-      "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}\$";
+  static const String carC = "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}\$";
   // if (value.length === 7) {
   //   return creg.test(value);
   // }
@@ -108,8 +99,7 @@ class VFReg {
   // }
 
   /// 金额，只允许保留两位小数
-  static const String amount =
-      "[1-9]\\d*(,\\d{3})*(\\.\\d{1,2})?\$|^0\\.\\d{1,2}\$";
+  static const String amount = "[1-9]\\d*(,\\d{3})*(\\.\\d{1,2})?\$|^0\\.\\d{1,2}\$";
 
   /// 中文
   static const String chiese = "^[\\u4e00-\\u9fa5]+\$/gi";
@@ -124,8 +114,7 @@ class VFReg {
   static const String img = "\\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i";
 
   /// 是否视频格式
-  static const String video =
-      "\\.(mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv)/i";
+  static const String video = "\\.(mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv)/i";
 
   /// URL格式
   static const String url =
@@ -187,19 +176,7 @@ class VFReg {
   static bool isIDCard18Exact(String input) {
     if (isIDCard18(input)) {
       List<int> factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-      List<String> suffix = [
-        '1',
-        '0',
-        'X',
-        '9',
-        '8',
-        '7',
-        '6',
-        '5',
-        '4',
-        '3',
-        '2'
-      ];
+      List<String> suffix = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
       if (cityMap.isEmpty) {
         List<String> list = idCardProvinceDict;
         List<MapEntry<String, String>> mapEntryList = [];

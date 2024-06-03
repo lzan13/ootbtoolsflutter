@@ -17,12 +17,9 @@ class VFRouter {
   Route<dynamic> generateRoute(RouteSettings route) {
     switch (route.name) {
       case _displayPage:
-        return MaterialPageRoute(
-            builder: (context) =>
-                VFDisplayPage(route.arguments as Map<String, dynamic>));
+        return MaterialPageRoute(builder: (context) => VFDisplayPage(route.arguments as Map<String, dynamic>));
       default:
-        return MaterialPageRoute(
-            builder: (context) => VFNotFoundPage(route.name!));
+        return MaterialPageRoute(builder: (context) => VFNotFoundPage(route.name!));
     }
   }
 

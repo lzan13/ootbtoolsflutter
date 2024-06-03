@@ -36,7 +36,9 @@ class VFPlatform {
 
     await setupDeviceInfo();
 
-    await setupAndroidId();
+    if (isAndroid) {
+      await setupAndroidId();
+    }
 
     // VFLog.d(_deviceInfo);
   }
@@ -49,6 +51,10 @@ class VFPlatform {
   static bool get isMacOS => isWeb ? false : Platform.isMacOS;
   static bool get isWindows => isWeb ? false : Platform.isWindows;
   static bool get isFuchsia => isWeb ? false : Platform.isFuchsia;
+  // 移动平台
+  static bool get isMobile => isAndroid || isFuchsia || isIOS;
+  // 桌面平台
+  static bool get isDesktop => isLinux || isMacOS || isWindows;
 
   ///
   /// 初始化包信息
@@ -139,14 +145,6 @@ class VFPlatform {
       'type': data.type,
       'isPhysicalDevice': data.isPhysicalDevice,
       'systemFeatures': data.systemFeatures,
-      'displaySizeInches':
-          ((data.displayMetrics.sizeInches * 10).roundToDouble() / 10),
-      'displayWidthPixels': data.displayMetrics.widthPx,
-      'displayWidthInches': data.displayMetrics.widthInches,
-      'displayHeightPixels': data.displayMetrics.heightPx,
-      'displayHeightInches': data.displayMetrics.heightInches,
-      'displayXDpi': data.displayMetrics.xDpi,
-      'displayYDpi': data.displayMetrics.yDpi,
       'serialNumber': data.serialNumber,
     };
   }
@@ -241,8 +239,7 @@ class VFPlatform {
   }
 
   Map<String, dynamic> _readWebBrowserInfo(WebBrowserInfo data) {
-    _deviceId =
-        '${data.vendor ?? '-'} + ${data.userAgent ?? '-'} + ${data.hardwareConcurrency.toString()}';
+    _deviceId = '${data.vendor ?? '-'} + ${data.userAgent ?? '-'} + ${data.hardwareConcurrency.toString()}';
     return <String, dynamic>{
       'uniqueId': _deviceId,
       'browserName': describeEnum(data.browserName),
