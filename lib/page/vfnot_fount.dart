@@ -20,6 +20,12 @@ class VFNotFoundPage extends StatefulWidget {
 
 class _PageState extends State<VFNotFoundPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
       // backgroundColor: VFColors.white,

@@ -30,6 +30,7 @@ class VFTools {
     VFColors.accent = options.accent;
 
     VFPlatform().init();
+    VFLog.init(debug: options.isDebug, tag: options.tag);
   }
 
   /// 给根布局的 MaterialApp navigatorKey 属性
@@ -43,9 +44,15 @@ class VFTools {
 /// 工具库初始化配置
 ///
 class VFOptions {
+  final bool isDebug;
+  final String tag;
+
   final Color primary;
   final Color accent;
+
   VFOptions({
+    this.isDebug = false,
+    this.tag = "vftools",
     this.primary = VFColors.white,
     this.accent = VFColors.orange,
   });

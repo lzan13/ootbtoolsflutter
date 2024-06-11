@@ -23,7 +23,7 @@ class VFImgAvatar extends StatelessWidget {
   const VFImgAvatar({
     Key? key,
     this.path = "",
-    this.placeholder = "assets/images/img_default_avatar.png",
+    this.placeholder = "assets/images/img_default_avatar_female.png",
     this.isRound = true,
     this.borderColor = VFColors.white,
     this.borderWidth = VFDimens.d0,
@@ -48,7 +48,7 @@ class VFImgAvatar extends StatelessWidget {
         fit: BoxFit.cover,
       ),
     );
-    return InkWell(
+    return GestureDetector(
       onTap: onPressed,
       child: isRound
           ? ClipOval(

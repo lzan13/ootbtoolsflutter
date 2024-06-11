@@ -23,7 +23,7 @@ class VFStyles {
   /// 内容文字样式
   static final TextStyle appTextBody = TextStyle(
     fontSize: VFSizes.body,
-    color: VFColors.black54,
+    color: VFColors.black87,
     fontWeight: FontWeight.w300,
   );
 
