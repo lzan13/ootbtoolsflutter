@@ -1,10 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:vftools/themes/vfthemes.dart';
 import 'package:vftools/utils/vfutils.dart';
-
-/// 导出常量工具
 
 // 导出插件
 export 'plugin/vfplugin.dart';
@@ -15,29 +11,36 @@ export 'widgets/vfwidgets.dart';
 // 导出工具
 export 'utils/vfutils.dart';
 
-class VFTools {
+final VFTools = _VFTools();
+
+/// 工具库
+class _VFTools {
   /// 单例对象
-  static late final VFTools _instance = VFTools._internal();
+  static final _VFTools _instance = _VFTools._();
   // 私有构造方法
-  VFTools._internal();
+  _VFTools._();
   // 工厂方法，创建单例类的实例
-  factory VFTools() => _instance;
+  factory _VFTools() => _instance;
 
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
-  init(VFOptions options) {
+  init(VFOptions options) async {
     VFColors.primary = options.primary;
     VFColors.accent = options.accent;
 
-    VFPlatform().init();
     VFLog.init(debug: options.isDebug, tag: options.tag);
+
+    await VFPlatform.init();
+
+    // 初始化 key-value
+    await VFKVUtil.init();
   }
 
   /// 给根布局的 MaterialApp navigatorKey 属性
-  GlobalKey<NavigatorState> get navigatorKey => _instance._navigatorKey;
+  GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
 
   /// 获取全局 context
-  BuildContext? get appContext => _instance._navigatorKey.currentState?.context;
+  BuildContext get appContext => _navigatorKey.currentState!.context;
 }
 
 ///
@@ -54,6 +57,6 @@ class VFOptions {
     this.isDebug = false,
     this.tag = "vftools",
     this.primary = VFColors.white,
-    this.accent = VFColors.orange,
+    this.accent = VFColors.blue,
   });
 }

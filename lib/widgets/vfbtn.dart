@@ -18,22 +18,21 @@ class VFBtn extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const VFBtn({
-    Key? key,
+    super.key,
     this.title = "",
     this.color = VFColors.grey,
     this.width = VFDimens.d64,
     this.height = VFDimens.d42,
     this.isEnable = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        foregroundColor:
-            color.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
+        foregroundColor: color.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
         elevation: VFDimens.elevationLow,
         minimumSize: Size(width, height),
         shadowColor: color.withAlpha(128),
@@ -61,14 +60,14 @@ class VFBtnBorder extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const VFBtnBorder({
-    Key? key,
+    super.key,
     this.title = "",
     this.color = VFColors.black,
     this.width = VFDimens.d64,
     this.height = VFDimens.d42,
     this.isEnable = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +101,7 @@ class VFBtnGradient extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const VFBtnGradient({
-    Key? key,
+    super.key,
     this.title = "",
     this.startColor,
     this.endColor,
@@ -110,16 +109,14 @@ class VFBtnGradient extends StatelessWidget {
     this.height = VFDimens.d48,
     this.isEnable = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: VFColors.transparent,
-        foregroundColor: startColor!.computeLuminance() > 0.5
-            ? VFColors.black
-            : VFColors.white,
+        foregroundColor: startColor!.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
         elevation: VFDimens.elevationLow,
         padding: const EdgeInsets.all(VFDimens.d0),
         minimumSize: Size(width, height),
@@ -162,22 +159,21 @@ class VFBtnFlat extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const VFBtnFlat({
-    Key? key,
+    super.key,
     this.title = "",
     this.color = VFColors.grey,
     this.width = VFDimens.d64,
     this.height = VFDimens.d42,
     this.isEnable = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        foregroundColor:
-            color.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
+        foregroundColor: color.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
         elevation: VFDimens.elevationNo,
         minimumSize: Size(width, height),
       ),
@@ -204,14 +200,14 @@ class VFBtnFlatBorderless extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const VFBtnFlatBorderless({
-    Key? key,
+    super.key,
     this.title = "",
     this.color = VFColors.black,
     this.width = VFDimens.d64,
     this.height = VFDimens.d42,
     this.isEnable = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

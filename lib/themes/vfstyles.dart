@@ -8,6 +8,7 @@ class VFStyles {
     fontSize: VFSizes.title,
     color: VFColors.black,
     fontWeight: FontWeight.bold,
+    decoration: TextDecoration.none,
   );
 
   /// 亮色标题
@@ -25,6 +26,7 @@ class VFStyles {
     fontSize: VFSizes.body,
     color: VFColors.black87,
     fontWeight: FontWeight.w300,
+    decoration: TextDecoration.none,
   );
 
   /// TabBar 文字样式
@@ -32,11 +34,13 @@ class VFStyles {
     fontSize: VFSizes.tabNormal,
     color: VFColors.black87,
     fontWeight: FontWeight.w800,
+    decoration: TextDecoration.none,
   );
   static final TextStyle appTextTabUnselected = TextStyle(
     fontSize: VFSizes.tabNormal,
     color: VFColors.black54,
     fontWeight: FontWeight.w500,
+    decoration: TextDecoration.none,
   );
 
   /// 输入框文字样式
@@ -44,6 +48,7 @@ class VFStyles {
     fontSize: VFSizes.body,
     color: VFColors.black87,
     fontWeight: FontWeight.w500,
+    decoration: TextDecoration.none,
   );
 
   /// 输入框文字样式
@@ -51,6 +56,7 @@ class VFStyles {
     fontSize: VFSizes.body,
     color: VFColors.grey87,
     fontWeight: FontWeight.w500,
+    decoration: TextDecoration.none,
   );
 
   /// 描述文字样式
@@ -58,6 +64,7 @@ class VFStyles {
     fontSize: VFSizes.desc,
     color: VFColors.black87,
     fontWeight: FontWeight.w500,
+    decoration: TextDecoration.none,
   );
 
   /// 更多文字样式
@@ -65,6 +72,7 @@ class VFStyles {
     fontSize: VFSizes.more,
     color: VFColors.black54,
     fontWeight: FontWeight.w500,
+    decoration: TextDecoration.none,
   );
 
   /// tips文字样式
@@ -72,6 +80,7 @@ class VFStyles {
     fontSize: VFSizes.tips,
     color: VFColors.black54,
     fontWeight: FontWeight.w500,
+    decoration: TextDecoration.none,
   );
 
   /// 盒子投影

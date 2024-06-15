@@ -17,7 +17,7 @@ class VFEditMultiple extends StatelessWidget {
   final bool isEnable;
 
   const VFEditMultiple({
-    Key? key,
+    super.key,
     this.controller,
     this.hint = "",
     this.borderColor = VFColors.grey,
@@ -25,7 +25,7 @@ class VFEditMultiple extends StatelessWidget {
     this.borderWidth = VFDimens.d1,
     this.radius = VFDimens.radiusNormal,
     this.isEnable = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

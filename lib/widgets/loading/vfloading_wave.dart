@@ -13,14 +13,13 @@ class VFLWave extends StatefulWidget {
   final AnimationController? controller;
 
   const VFLWave(
-      {Key? key,
+      {super.key,
       this.color = VFColors.red,
       this.type = VFLWaveType.start,
       this.size = 50.0,
       this.itemBuilder,
       this.duration = const Duration(milliseconds: 1200),
-      this.controller})
-      : super(key: key);
+      this.controller});
 
   @override
   VFLWaveState createState() => VFLWaveState();
@@ -33,9 +32,7 @@ class VFLWaveState extends State<VFLWave> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _controller = (widget.controller ??
-        AnimationController(vsync: this, duration: widget.duration))
-      ..repeat();
+    _controller = (widget.controller ?? AnimationController(vsync: this, duration: widget.duration))..repeat();
   }
 
   @override
@@ -54,11 +51,8 @@ class VFLWaveState extends State<VFLWave> with SingleTickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(_bars.length, (i) {
             return ScaleYWidget(
-              scaleY: VFTween(begin: .4, end: 1.0, delay: _bars[i])
-                  .animate(_controller),
-              child: SizedBox.fromSize(
-                  size: Size(widget.size * 0.2, widget.size),
-                  child: _itemBuilder(i)),
+              scaleY: VFTween(begin: .4, end: 1.0, delay: _bars[i]).animate(_controller),
+              child: SizedBox.fromSize(size: Size(widget.size * 0.2, widget.size), child: _itemBuilder(i)),
             );
           }),
         ),
@@ -78,9 +72,8 @@ class VFLWaveState extends State<VFLWave> with SingleTickerProviderStateMixin {
     }
   }
 
-  Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder!(context, index)
-      : DecoratedBox(decoration: BoxDecoration(color: widget.color));
+  Widget _itemBuilder(int index) =>
+      widget.itemBuilder != null ? widget.itemBuilder!(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color));
 }
 
 class ScaleYWidget extends AnimatedWidget {
@@ -90,17 +83,14 @@ class ScaleYWidget extends AnimatedWidget {
   // Animation<double> get scale => listenable;
 
   const ScaleYWidget({
-    Key? key,
+    super.key,
     required Animation<double> scaleY,
     required this.child,
     this.alignment = Alignment.center,
-  }) : super(key: key, listenable: scaleY);
+  }) : super(listenable: scaleY);
 
   @override
   Widget build(BuildContext context) {
-    return Transform(
-        transform: Matrix4.identity()..scale(1.0, 1.0, 1.0),
-        alignment: alignment,
-        child: child);
+    return Transform(transform: Matrix4.identity()..scale(1.0, 1.0, 1.0), alignment: alignment, child: child);
   }
 }

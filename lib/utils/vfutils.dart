@@ -1,4 +1,5 @@
 export 'vfdate.dart';
+export 'vfkvutil.dart';
 export 'vflog.dart';
 export 'vfobj.dart';
 export 'vfplatform.dart';

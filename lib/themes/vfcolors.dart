@@ -17,7 +17,7 @@ class VFColors {
 
   /// 透明色
   static const Color transparent = Color(0x00000000);
-  static const Color translucent = Color(0x8a363636);
+  static const Color translucent = Color(0x12363636);
 
   /// 白色
   static const Color white = Color(0xffffffff);

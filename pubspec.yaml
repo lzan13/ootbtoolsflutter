@@ -128,7 +128,7 @@ flutter:
   # https://flutter.dev/custom-fonts/#from-packages
 
 # 国际化插件 使用教程https://juejin.cn/post/7192758172153561147
-flutter_intl:
-  enabled: true # 开启国际化支持
-  class_name: I10n # 国际化类名
-  main_locale: zh_CN # 默认语音
+# flutter_intl:
+#   enabled: true # 开启国际化支持
+#   class_name: I10n # 国际化类名
+#   main_locale: zh_CN # 默认语音

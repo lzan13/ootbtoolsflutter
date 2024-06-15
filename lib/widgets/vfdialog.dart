@@ -19,11 +19,12 @@ class VFDialog {
     VoidCallback? callback,
   }) {
     showDialog<bool>(
-      context: VFTools().appContext!,
+      context: VFTools.appContext,
       builder: (context) {
         return AlertDialog(
           title: Text(title, style: VFStyles.appTextTitle),
           content: Text(content, style: VFStyles.appTextBody),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(VFDimens.radiusLarge))),
           actions: <Widget>[
             VFBtnBorder(
               title: negative,
@@ -54,11 +55,12 @@ class VFDialog {
     VoidCallback? callback,
   }) {
     showDialog<bool>(
-      context: VFTools().appContext!,
+      context: VFTools.appContext,
       builder: (context) {
         return AlertDialog(
           title: Text(title, style: VFStyles.appTextTitle),
           content: Text(content),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(VFDimens.radiusLarge))),
           actions: <Widget>[
             VFBtnFlatBorderless(
               title: btn,
@@ -73,19 +75,21 @@ class VFDialog {
       },
     );
   }
-}
 
-// 展示界面对话框
-showView(
-  Widget child, {
-  VoidCallback? callback,
-}) {
-  showDialog<bool>(
-    context: VFTools().appContext!,
-    builder: (context) {
-      return Dialog(
-        child: child,
-      );
-    },
-  );
+  // 展示界面对话框
+  showView(
+    Widget child, {
+    VoidCallback? callback,
+  }) {
+    showDialog<bool>(
+      context: VFTools.appContext,
+      builder: (context) {
+        return Dialog(
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(VFDimens.radiusLarge))),
+          clipBehavior: Clip.antiAlias,
+          child: child,
+        );
+      },
+    );
+  }
 }

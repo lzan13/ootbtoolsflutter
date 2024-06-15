@@ -52,12 +52,12 @@ class VFLoading extends StatelessWidget {
   final VFLoadingType type;
 
   VFLoading({
-    Key? key,
+    super.key,
     this.color = VFColors.red,
     this.size = VFDimens.d20,
     this.borderWidth = VFDimens.d2,
     this.type = VFLoadingType.wave,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

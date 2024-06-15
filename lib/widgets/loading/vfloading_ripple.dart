@@ -10,14 +10,14 @@ class VFLRipple extends StatefulWidget {
   final AnimationController? controller;
 
   const VFLRipple({
-    Key? key,
+    super.key,
     this.color = VFColors.red,
     this.size = 50.0,
     this.borderWidth = 6.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   VFLRippleState createState() => VFLRippleState();
@@ -31,16 +31,11 @@ class VFLRippleState extends State<VFLRipple> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _controller = (widget.controller ??
-        AnimationController(vsync: this, duration: widget.duration))
+    _controller = (widget.controller ?? AnimationController(vsync: this, duration: widget.duration))
       ..addListener(() => setState(() {}))
       ..repeat();
-    _animation1 = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.0, 0.75, curve: Curves.linear)));
-    _animation2 = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.25, 1.0, curve: Curves.linear)));
+    _animation1 = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.75, curve: Curves.linear)));
+    _animation2 = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.25, 1.0, curve: Curves.linear)));
   }
 
   @override
@@ -56,13 +51,11 @@ class VFLRippleState extends State<VFLRipple> with TickerProviderStateMixin {
         children: <Widget>[
           Opacity(
             opacity: 1.0 - _animation1.value,
-            child: Transform.scale(
-                scale: _animation1.value, child: _itemBuilder(0)),
+            child: Transform.scale(scale: _animation1.value, child: _itemBuilder(0)),
           ),
           Opacity(
             opacity: 1.0 - _animation2.value,
-            child: Transform.scale(
-                scale: _animation2.value, child: _itemBuilder(1)),
+            child: Transform.scale(scale: _animation2.value, child: _itemBuilder(1)),
           ),
         ],
       ),
@@ -77,8 +70,7 @@ class VFLRippleState extends State<VFLRipple> with TickerProviderStateMixin {
           : DecoratedBox(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border:
-                    Border.all(color: widget.color, width: widget.borderWidth),
+                border: Border.all(color: widget.color, width: widget.borderWidth),
               ),
             ),
     );

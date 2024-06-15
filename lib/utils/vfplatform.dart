@@ -5,19 +5,19 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'package:vftools/utils/vflog.dart';
+final VFPlatform = _VFPlatform();
 
 ///
 /// Create by lzan13 on 2023/9/3
 /// 获取平台信息的工具类
 ///
-class VFPlatform {
+class _VFPlatform {
   /// 单例对象
-  static late final VFPlatform _instance = VFPlatform._internal();
+  static late final _VFPlatform _instance = _VFPlatform._();
   // 私有构造方法
-  VFPlatform._internal();
+  _VFPlatform._();
   // 工厂方法，创建单例类的实例
-  factory VFPlatform() => _instance;
+  factory _VFPlatform() => _instance;
 
   /// DeviceInfo 相关信息
   late Map<String, dynamic> _deviceInfo;
@@ -28,43 +28,24 @@ class VFPlatform {
   late String _appName;
   late String _appVersion;
 
-  ///
-  /// 初始化平台工具类
-  ///
-  init() async {
-    await setupPackageInfo();
-
-    await setupDeviceInfo();
-
-    if (isAndroid) {
-      await setupAndroidId();
-    }
-
-    // VFLog.d(_deviceInfo);
-  }
-
   /// 判断平台
-  static bool get isWeb => kIsWeb;
-  static bool get isAndroid => isWeb ? false : Platform.isAndroid;
-  static bool get isIOS => isWeb ? false : Platform.isIOS;
-  static bool get isLinux => isWeb ? false : Platform.isLinux;
-  static bool get isMacOS => isWeb ? false : Platform.isMacOS;
-  static bool get isWindows => isWeb ? false : Platform.isWindows;
-  static bool get isFuchsia => isWeb ? false : Platform.isFuchsia;
+  bool get isWeb => kIsWeb;
+  bool get isAndroid => isWeb ? false : Platform.isAndroid;
+  bool get isIOS => isWeb ? false : Platform.isIOS;
+  bool get isLinux => isWeb ? false : Platform.isLinux;
+  bool get isMacOS => isWeb ? false : Platform.isMacOS;
+  bool get isWindows => isWeb ? false : Platform.isWindows;
+  bool get isFuchsia => isWeb ? false : Platform.isFuchsia;
   // 移动平台
-  static bool get isMobile => isAndroid || isFuchsia || isIOS;
+  bool get isMobile => isAndroid || isFuchsia || isIOS;
   // 桌面平台
-  static bool get isDesktop => isLinux || isMacOS || isWindows;
+  bool get isDesktop => isLinux || isMacOS || isWindows;
 
-  ///
-  /// 初始化包信息
-  ///
-  setupPackageInfo() async {
-    _packageInfo = await PackageInfo.fromPlatform();
+  /// 获取设备id
+  String getDeviceId() => _deviceId;
 
-    _appName = _packageInfo.appName;
-    _appVersion = _packageInfo.version;
-  }
+  /// 获取设备信息
+  Map<String, dynamic> getDeviceInfo() => _deviceInfo;
 
   /// 获取包信息
   PackageInfo getAppPackageInfo() => _packageInfo;
@@ -74,9 +55,34 @@ class VFPlatform {
   String getAppVersion() => _appVersion;
 
   ///
+  /// 初始化平台工具类
+  ///
+  init() async {
+    await _setupPackageInfo();
+
+    await _setupDeviceInfo();
+
+    if (isAndroid) {
+      await _setupAndroidId();
+    }
+
+    // VFLog.d(_deviceInfo);
+  }
+
+  ///
+  /// 初始化包信息
+  ///
+  _setupPackageInfo() async {
+    _packageInfo = await PackageInfo.fromPlatform();
+
+    _appName = _packageInfo.appName;
+    _appVersion = _packageInfo.version;
+  }
+
+  ///
   /// 初始化设备信息
   ///
-  setupDeviceInfo() async {
+  _setupDeviceInfo() async {
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     if (kIsWeb) {
       _deviceInfo = _readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
@@ -97,7 +103,7 @@ class VFPlatform {
   }
 
   // 初始化 android id
-  setupAndroidId() async {
+  _setupAndroidId() async {
     if (isAndroid) {
       const androidIdPlugin = AndroidId();
       final androidId = await androidIdPlugin.getId() ?? "";
@@ -105,12 +111,6 @@ class VFPlatform {
       _deviceInfo['uniqueId'] = _deviceId;
     }
   }
-
-  /// 获取设备id
-  String getDeviceId() => _deviceId;
-
-  /// 获取设备信息
-  Map<String, dynamic> getDeviceInfo() => _deviceInfo;
 
   ///
   /// 获取指定平台deviceInfo

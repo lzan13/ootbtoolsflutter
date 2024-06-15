@@ -22,12 +22,12 @@ class VFBlur extends StatelessWidget {
   final double blurRadius;
 
   const VFBlur({
-    Key? key,
+    super.key,
     required this.child,
     this.type = VFBlurType.rect,
     this.radius = VFDimens.d6,
     this.blurRadius = VFDimens.d6,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

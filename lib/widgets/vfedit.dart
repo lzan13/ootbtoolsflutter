@@ -26,7 +26,7 @@ class VFEdit extends StatelessWidget {
   final bool isEnable;
 
   const VFEdit({
-    Key? key,
+    super.key,
     this.controller,
     this.hint = "",
     this.iconColor,
@@ -38,7 +38,7 @@ class VFEdit extends StatelessWidget {
     this.radius = VFDimens.radiusNormal,
     this.isObscure = false,
     this.isEnable = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

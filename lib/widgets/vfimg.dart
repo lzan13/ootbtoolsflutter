@@ -21,7 +21,7 @@ class VFImgAvatar extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const VFImgAvatar({
-    Key? key,
+    super.key,
     this.path = "",
     this.placeholder = "assets/images/img_default_avatar_female.png",
     this.isRound = true,
@@ -31,7 +31,7 @@ class VFImgAvatar extends StatelessWidget {
     this.width = VFDimens.avatarNormal,
     this.height = VFDimens.avatarNormal,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class VFImgCover extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const VFImgCover({
-    Key? key,
+    super.key,
     this.path = "",
     this.placeholder = "assets/images/img_default.png",
     this.borderColor = VFColors.white,
@@ -94,7 +94,7 @@ class VFImgCover extends StatelessWidget {
     this.radius = VFDimens.radiusNormal,
     this.radiusLTRB,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

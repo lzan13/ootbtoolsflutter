@@ -3,6 +3,14 @@
 ///
 class VFDimens {
   /// 通用尺寸
+  static const double md1 = -1.0;
+  static const double md2 = -2.0;
+  static const double md3 = -3.0;
+  static const double md4 = -4.0;
+  static const double md5 = -5.0;
+  static const double md6 = -6.0;
+  static const double md7 = -7.0;
+  static const double md8 = -8.0;
   static const double d0 = 0.0;
   static const double d01 = 0.1;
   static const double d05 = 0.5;
@@ -10,9 +18,9 @@ class VFDimens {
   static const double d2 = 2.0;
   static const double d3 = 3.0;
   static const double d4 = 4.0;
+  static const double d5 = 5.0;
   static const double d6 = 6.0;
   static const double d8 = 8.0;
-  static const double d9 = 9.0;
   static const double d10 = 10.0;
   static const double d11 = 11.0;
   static const double d12 = 12.0;
@@ -124,6 +132,10 @@ class VFSizes {
   static const double s36 = VFDimens.d36;
   static const double s40 = VFDimens.d40;
   static const double s48 = VFDimens.d48;
+  static const double s56 = VFDimens.d56;
+  static const double s64 = VFDimens.d64;
+  static const double s72 = VFDimens.d72;
+  static const double s96 = VFDimens.d96;
 
   /// 标题
   static const double headline = VFDimens.d24;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:vftools/themes/vfthemes.dart';
+import 'package:vftools/widgets/vficon.dart';
 
 class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
   // 高度
@@ -11,8 +12,6 @@ class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
 
   // 标题
   String title;
-  double titleSize;
-  Color titleColor;
 
   // 居中
   bool center;
@@ -22,36 +21,34 @@ class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
   Widget? titleWidget;
 
   // 左侧图标
-  IconData? leftIcon;
-  VoidCallback? leftAction;
-  Widget? leftWidget;
+  IconData? startIcon;
+  VoidCallback? startAction;
+  Widget? startWidget;
 
   // 右侧图标
-  IconData? rightIcon;
-  VoidCallback? rightAction;
-  Widget? rightWidget;
+  IconData? endIcon;
+  VoidCallback? endAction;
+  Widget? endWidget;
 
   // 底部控件
   PreferredSizeWidget? bottomWidget;
 
   VFTopBar({
-    Key? key,
+    super.key,
     this.height = VFDimens.barNormal,
     this.bgColor = VFColors.transparent,
     this.title = "",
-    this.titleSize = VFSizes.title,
-    this.titleColor = VFColors.black,
     this.titleWidget,
     this.center = false,
     this.isHide = false,
-    this.leftIcon,
-    this.leftAction,
-    this.leftWidget,
-    this.rightIcon,
-    this.rightAction,
-    this.rightWidget,
+    this.startIcon,
+    this.startAction,
+    this.startWidget,
+    this.endIcon,
+    this.endAction,
+    this.endWidget,
     this.bottomWidget,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -59,8 +56,7 @@ class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(
-      (isHide ? 0.0 : height) + (bottomWidget?.preferredSize.height ?? 0.0));
+  Size get preferredSize => Size.fromHeight((isHide ? 0.0 : height) + (bottomWidget?.preferredSize.height ?? 0.0));
 }
 
 ///
@@ -84,62 +80,47 @@ class VFTopBarState extends State<VFTopBar> {
                 color: widget.bgColor,
                 child: Row(
                   children: <Widget>[
-                    widget.leftIcon != null
-                        ? SizedBox(
-                            width: widget.height,
-                            height: widget.height,
-                            child: IconButton(
-                              icon: Icon(
-                                widget.leftIcon,
-                                size: VFDimens.d24,
-                                color: widget.titleColor,
-                              ),
-                              onPressed: widget.leftAction ??
-                                  () => {
-                                        Navigator.canPop(context)
-                                            ? Navigator.pop(context)
-                                            : SystemNavigator.pop()
-                                      },
+                    widget.startIcon != null
+                        ? Padding(
+                            padding: const EdgeInsets.all(VFDimens.d4),
+                            child: VFIcon(
+                              data: widget.startIcon,
+                              radius: VFDimens.d36,
+                              onPressed: widget.startAction ??
+                                  () {
+                                    Navigator.canPop(context) ? Navigator.pop(context) : SystemNavigator.pop();
+                                  },
                             ),
                           )
                         : SizedBox(
                             width: VFDimens.marginNormal,
                             height: widget.height,
                           ),
-                    widget.leftWidget ?? Container(),
+                    widget.startWidget ?? Container(),
                     widget.titleWidget ??
                         Expanded(
                           flex: 1,
                           child: Text(
                             widget.title,
                             overflow: TextOverflow.ellipsis,
-                            textAlign: widget.center
-                                ? TextAlign.center
-                                : TextAlign.start,
-                            style: TextStyle(
-                              color: widget.titleColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: widget.titleSize,
-                            ),
+                            textAlign: widget.center ? TextAlign.center : TextAlign.start,
+                            style: VFStyles.appTextTitle,
                           ),
                         ),
-                    widget.rightWidget ?? Container(),
-                    widget.rightIcon != null
-                        ? SizedBox(
-                            width: widget.height,
-                            height: widget.height,
-                            child: IconButton(
-                              icon: Icon(
-                                widget.rightIcon,
-                                size: VFDimens.d24,
-                                color: widget.titleColor,
-                              ),
-                              onPressed: widget.rightAction,
+                    widget.endWidget ?? Container(),
+                    widget.endIcon != null
+                        ? Padding(
+                            padding: const EdgeInsets.all(VFDimens.d4),
+                            child: VFIcon(
+                              data: widget.endIcon,
+                              radius: VFDimens.d36,
+                              onPressed: widget.endAction ??
+                                  () {
+                                    Navigator.canPop(context) ? Navigator.pop(context) : SystemNavigator.pop();
+                                  },
                             ),
                           )
-                        : Container(
-                            width: VFDimens.marginNormal,
-                          ),
+                        : const SizedBox(width: VFDimens.marginSmall),
                   ],
                 ),
               ),

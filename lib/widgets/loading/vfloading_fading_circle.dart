@@ -10,43 +10,27 @@ class VFLFadingCircle extends StatefulWidget {
   final AnimationController? controller;
 
   const VFLFadingCircle({
-    Key? key,
+    super.key,
     this.color = VFColors.red,
     this.size = 50.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   VFLFadingCircleState createState() => VFLFadingCircleState();
 }
 
-class VFLFadingCircleState extends State<VFLFadingCircle>
-    with SingleTickerProviderStateMixin {
-  final List<double> delays = [
-    .0,
-    -1.1,
-    -1.0,
-    -0.9,
-    -0.8,
-    -0.7,
-    -0.6,
-    -0.5,
-    -0.4,
-    -0.3,
-    -0.2,
-    -0.1
-  ];
+class VFLFadingCircleState extends State<VFLFadingCircle> with SingleTickerProviderStateMixin {
+  final List<double> delays = [.0, -1.1, -1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1];
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = (widget.controller ??
-        AnimationController(vsync: this, duration: widget.duration))
-      ..repeat();
+    _controller = (widget.controller ?? AnimationController(vsync: this, duration: widget.duration))..repeat();
   }
 
   @override
@@ -71,11 +55,8 @@ class VFLFadingCircleState extends State<VFLFadingCircle>
                 child: Align(
                   alignment: Alignment.center,
                   child: FadeTransition(
-                    opacity: VFTween(begin: 0.0, end: 1.0, delay: delays[i])
-                        .animate(_controller),
-                    child: SizedBox.fromSize(
-                        size: Size.square(widget.size * 0.15),
-                        child: _itemBuilder(i)),
+                    opacity: VFTween(begin: 0.0, end: 1.0, delay: delays[i]).animate(_controller),
+                    child: SizedBox.fromSize(size: Size.square(widget.size * 0.15), child: _itemBuilder(i)),
                   ),
                 ),
               ),
@@ -86,9 +67,6 @@ class VFLFadingCircleState extends State<VFLFadingCircle>
     );
   }
 
-  Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder!(context, index)
-      : DecoratedBox(
-          decoration:
-              BoxDecoration(color: widget.color, shape: BoxShape.circle));
+  Widget _itemBuilder(int index) =>
+      widget.itemBuilder != null ? widget.itemBuilder!(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color, shape: BoxShape.circle));
 }

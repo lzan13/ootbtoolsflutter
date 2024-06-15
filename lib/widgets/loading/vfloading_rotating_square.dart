@@ -9,20 +9,19 @@ class VFLRotatingSquare extends StatefulWidget {
   final AnimationController? controller;
 
   const VFLRotatingSquare({
-    Key? key,
+    super.key,
     this.color = VFColors.red,
     this.size = 50.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   VFLRotatingSquareState createState() => VFLRotatingSquareState();
 }
 
-class VFLRotatingSquareState extends State<VFLRotatingSquare>
-    with SingleTickerProviderStateMixin {
+class VFLRotatingSquareState extends State<VFLRotatingSquare> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation1, _animation2;
 
@@ -30,16 +29,11 @@ class VFLRotatingSquareState extends State<VFLRotatingSquare>
   void initState() {
     super.initState();
 
-    _controller = (widget.controller ??
-        AnimationController(vsync: this, duration: widget.duration))
+    _controller = (widget.controller ?? AnimationController(vsync: this, duration: widget.duration))
       ..addListener(() => setState(() {}))
       ..repeat();
-    _animation1 = Tween(begin: 0.0, end: 180.0).animate(CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeIn)));
-    _animation2 = Tween(begin: 0.0, end: 180.0).animate(CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.5, 1.0, curve: Curves.easeOut)));
+    _animation1 = Tween(begin: 0.0, end: 180.0).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.5, curve: Curves.easeIn)));
+    _animation2 = Tween(begin: 0.0, end: 180.0).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.5, 1.0, curve: Curves.easeOut)));
   }
 
   @override
@@ -64,7 +58,6 @@ class VFLRotatingSquareState extends State<VFLRotatingSquare>
     );
   }
 
-  Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder!(context, index)
-      : DecoratedBox(decoration: BoxDecoration(color: widget.color));
+  Widget _itemBuilder(int index) =>
+      widget.itemBuilder != null ? widget.itemBuilder!(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color));
 }

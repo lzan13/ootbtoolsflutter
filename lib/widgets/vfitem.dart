@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vftools/themes/vfthemes.dart';
+import 'package:vftools/widgets/vficon.dart';
 
 /// 自定义列表项
 class VFItem extends StatefulWidget {
@@ -10,16 +11,16 @@ class VFItem extends StatefulWidget {
   Color bgColor;
 
   // 左侧图标
-  IconData? leftIcon;
-  Color leftIconColor;
+  IconData? startIcon;
+  Color startIconColor;
   // 左侧控件
-  Widget? leftWidget;
+  Widget? startWidget;
 
   // 右侧图标
-  IconData? rightIcon;
-  Color rightIconColor;
+  IconData? endIcon;
+  Color endIconColor;
   // 右侧控件
-  Widget? rightWidget;
+  Widget? endWidget;
 
   // 标题
   String title;
@@ -35,22 +36,22 @@ class VFItem extends StatefulWidget {
 
   // 构造函数
   VFItem({
-    Key? key,
+    super.key,
     this.isNewGroup = false,
     this.bgColor = VFColors.transparent,
-    this.leftIcon,
-    this.leftWidget,
-    this.leftIconColor = VFColors.greyBlack,
-    this.rightIcon,
-    this.rightIconColor = VFColors.grey,
-    this.rightWidget,
+    this.startIcon,
+    this.startWidget,
+    this.startIconColor = VFColors.greyBlack,
+    this.endIcon,
+    this.endIconColor = VFColors.grey,
+    this.endWidget,
     this.title = "Title",
     this.titleColor = VFColors.black,
     this.describe = "",
     this.describeColor = VFColors.grey,
     this.showDivider = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   VFItemState createState() => VFItemState();
@@ -66,27 +67,23 @@ class VFItemState extends State<VFItem> {
         children: <Widget>[
           InkWell(
             onTap: widget.onPressed ?? () {},
-            // padding: EdgeInsets.all(VFDimens.d0),
             child: SizedBox(
               height: VFDimens.itemLarge,
               width: double.infinity,
               child: Row(
                 children: <Widget>[
+                  const SizedBox(width: VFDimens.d8),
                   // 左侧图标
-                  widget.leftIcon != null
-                      ? SizedBox(
-                          height: VFDimens.itemLarge,
-                          width: VFDimens.itemLarge,
-                          child: Icon(
-                            widget.leftIcon,
-                            size: VFDimens.d24,
-                            color: widget.leftIconColor,
-                          ),
+                  widget.startIcon != null
+                      ? VFIcon(
+                          data: widget.startIcon,
+                          radius: VFDimens.d36,
+                          size: VFDimens.d24,
                         )
                       : Container(
                           width: VFDimens.marginNormal,
                         ),
-                  widget.leftWidget ?? Container(),
+                  widget.startWidget ?? Container(),
                   // 中间内容
                   Expanded(
                     flex: 1,
@@ -110,26 +107,22 @@ class VFItemState extends State<VFItem> {
                                 widget.describe,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: widget.describeColor,
-                                    fontSize: VFSizes.itemDesc),
+                                style: TextStyle(color: widget.describeColor, fontSize: VFSizes.itemDesc),
                               ),
                       ],
                     ),
                   ),
+                  // 右侧控件
+                  widget.endWidget ?? Container(),
                   // 右侧图标
-                  widget.rightIcon != null
-                      ? SizedBox(
-                          height: VFDimens.itemNormal,
-                          width: VFDimens.itemNormal,
-                          child: Icon(
-                            widget.rightIcon,
-                            size: VFDimens.d20,
-                            color: widget.rightIconColor,
-                          ),
+                  widget.endIcon != null
+                      ? VFIcon(
+                          data: widget.endIcon,
+                          radius: VFDimens.d36,
+                          size: VFDimens.d16,
                         )
                       : Container(),
-                  widget.rightWidget ?? Container(),
+                  const SizedBox(width: VFDimens.d8),
                 ],
               ),
             ),

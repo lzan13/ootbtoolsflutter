@@ -10,29 +10,26 @@ class VFLFadingCube extends StatefulWidget {
   final AnimationController? controller;
 
   const VFLFadingCube({
-    Key? key,
+    super.key,
     this.color = VFColors.red,
     this.size = 50.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   VFLFadingCubeState createState() => VFLFadingCubeState();
 }
 
-class VFLFadingCubeState extends State<VFLFadingCube>
-    with TickerProviderStateMixin {
+class VFLFadingCubeState extends State<VFLFadingCube> with TickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = (widget.controller ??
-        AnimationController(vsync: this, duration: widget.duration))
-      ..repeat();
+    _controller = (widget.controller ?? AnimationController(vsync: this, duration: widget.duration))..repeat();
   }
 
   @override
@@ -63,10 +60,8 @@ class VFLFadingCubeState extends State<VFLFadingCube>
                       child: Align(
                         alignment: Alignment.center,
                         child: FadeTransition(
-                          opacity: VFTween(begin: 0.0, end: 1.0, delay: 0.3 * i)
-                              .animate(_controller),
-                          child: SizedBox.fromSize(
-                              size: Size.square(_size), child: _itemBuilder(i)),
+                          opacity: VFTween(begin: 0.0, end: 1.0, delay: 0.3 * i).animate(_controller),
+                          child: SizedBox.fromSize(size: Size.square(_size), child: _itemBuilder(i)),
                         ),
                       ),
                     ),
@@ -80,7 +75,6 @@ class VFLFadingCubeState extends State<VFLFadingCube>
     );
   }
 
-  Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder!(context, index)
-      : DecoratedBox(decoration: BoxDecoration(color: widget.color));
+  Widget _itemBuilder(int index) =>
+      widget.itemBuilder != null ? widget.itemBuilder!(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color));
 }
