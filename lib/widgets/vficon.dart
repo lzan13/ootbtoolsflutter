@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
 
-import 'package:vftools/themes/vfthemes.dart';
 import 'package:vftools/vftools.dart';
 
 /// 圆形边框Icon
 class VFIcon extends StatefulWidget {
   // Icon
-  final IconData? data;
+  IconData? data;
   // 颜色
-  final Color? color;
-  final Color? hoverColor;
+  Color? color;
+  Color? hoverColor;
 
   // 背景颜色
-  final Color? bgColor;
-  final Color? hoverBGColor;
-  final Color? pressBGColor;
-  final Color? splashBGColor;
+  Color? bgColor;
+  Color? hoverBGColor;
+  Color? pressBGColor;
+  Color? splashBGColor;
   // 圆角大小
-  final double radius;
+  double radius;
   // 图标大小
-  final double size;
+  double size;
   // 空间
-  final double space;
+  double space;
   // 回调
-  final VoidCallback? onPressed;
+  VoidCallback? onPressed;
 
-  const VFIcon({
+  VFIcon({
     super.key,
     this.data,
-    this.color = VFColors.greyBlack,
+    this.color,
     this.hoverColor = VFColors.greyBlack,
-    this.bgColor = VFColors.transparent,
+    this.bgColor,
     this.hoverBGColor = VFColors.translucent,
     this.pressBGColor = VFColors.translucent,
     this.splashBGColor = VFColors.translucent,
@@ -50,7 +49,7 @@ class _VFIconState extends State<VFIcon> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: widget.bgColor,
+      color: widget.bgColor ?? VFColors.transparent,
       borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
       child: InkWell(
         radius: widget.radius * 2,
@@ -69,7 +68,7 @@ class _VFIconState extends State<VFIcon> {
               : Icon(
                   widget.data,
                   size: widget.size,
-                  color: isHover ? widget.hoverColor : widget.color,
+                  color: isHover ? widget.hoverColor : widget.color ?? VFTheme.theme().iconTheme.color,
                 ),
         ),
         onTap: () {

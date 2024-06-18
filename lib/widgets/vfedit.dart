@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vftools/themes/vfthemes.dart';
-import 'package:vftools/widgets/vficon.dart';
+
+import 'package:vftools/vftools.dart';
 
 /// 输入框
 class VFEdit extends StatelessWidget {

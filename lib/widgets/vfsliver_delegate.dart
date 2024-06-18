@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:vftools/themes/vfthemes.dart';
+import 'package:vftools/vftools.dart';
 
 class VFSliverDelegate extends SliverPersistentHeaderDelegate {
   // 收缩后高度
@@ -75,9 +75,7 @@ class VFSliverDelegate extends SliverPersistentHeaderDelegate {
   /// 计算滑动过程中背景色
   ///
   Color calculateBGColor(shrinkOffset) {
-    final int alpha = (shrinkOffset / (maxExtent - minExtent) * 255)
-        .clamp(0, hasAlpha ? maxAlpha : 255)
-        .toInt();
+    final int alpha = (shrinkOffset / (maxExtent - minExtent) * 255).clamp(0, hasAlpha ? maxAlpha : 255).toInt();
     return bgColor.withAlpha(alpha);
   }
 
@@ -115,8 +113,7 @@ class VFSliverDelegate extends SliverPersistentHeaderDelegate {
                                   size: VFDimens.d24,
                                   color: color,
                                 ),
-                                onPressed:
-                                    leftAction ?? () => Navigator.pop(context),
+                                onPressed: leftAction ?? () => Navigator.pop(context),
                               ),
                             )
                           : Container(
@@ -128,8 +125,7 @@ class VFSliverDelegate extends SliverPersistentHeaderDelegate {
                         child: Text(
                           title,
                           overflow: TextOverflow.ellipsis,
-                          textAlign:
-                              center ? TextAlign.center : TextAlign.start,
+                          textAlign: center ? TextAlign.center : TextAlign.start,
                           style: TextStyle(
                             color: color,
                             fontWeight: FontWeight.w600,

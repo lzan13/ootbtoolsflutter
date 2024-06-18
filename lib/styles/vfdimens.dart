@@ -137,31 +137,38 @@ class VFSizes {
   static const double s72 = VFDimens.d72;
   static const double s96 = VFDimens.d96;
 
-  /// 标题
-  static const double headline = VFDimens.d24;
+  /// 标题内容
+  static const double headline1 = VFDimens.d24;
+  static const double headline2 = VFDimens.d24;
+  static const double headline3 = VFDimens.d24;
+  static const double headline4 = VFDimens.d24;
+  static const double headline5 = VFDimens.d24;
+  static const double headline6 = VFDimens.d20;
   static const double title = VFDimens.d18;
-  static const double subTitle = VFDimens.d16;
+  static const double subtitle = VFDimens.d16;
   static const double body = VFDimens.d14;
   static const double desc = VFDimens.d12;
-  static const double more = VFDimens.d12;
   static const double tips = VFDimens.d10;
+
+  /// 输入框
+  static const double input = VFDimens.d16;
 
   /// 列表
   static const double itemTitle = VFDimens.d16;
   static const double itemDesc = VFDimens.d12;
 
   /// 按钮
-  static const double btnSmall = VFDimens.d12;
-  static const double btnNormal = VFDimens.d16;
   static const double btnLarge = VFDimens.d18;
+  static const double btnNormal = VFDimens.d16;
+  static const double btnSmall = VFDimens.d12;
 
   /// 菜单
-  static const double menuSmall = VFDimens.d12;
-  static const double menuNormal = VFDimens.d16;
   static const double menuLarge = VFDimens.d18;
+  static const double menuNormal = VFDimens.d16;
+  static const double menuSmall = VFDimens.d12;
 
   /// Tab文本
-  static const double tabSmall = VFDimens.d12;
-  static const double tabNormal = VFDimens.d16;
   static const double tabLarge = VFDimens.d20;
+  static const double tabNormal = VFDimens.d16;
+  static const double tabSmall = VFDimens.d12;
 }

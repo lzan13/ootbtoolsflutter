@@ -1,7 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:vftools/themes/vfthemes.dart';
+
+import 'package:vftools/vftools.dart';
 
 import 'package:vftools/widgets/loading/vfloading_circle.dart';
 import 'package:vftools/widgets/loading/vfloading_cube_grid.dart';

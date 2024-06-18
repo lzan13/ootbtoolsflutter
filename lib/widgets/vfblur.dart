@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:vftools/themes/vfthemes.dart';
+
+import 'package:vftools/vftools.dart';
 
 enum VFBlurType {
   circle,

@@ -22,8 +22,8 @@ class VFDialog {
       context: VFTools.appContext,
       builder: (context) {
         return AlertDialog(
-          title: Text(title, style: VFStyles.appTextTitle),
-          content: Text(content, style: VFStyles.appTextBody),
+          title: Text(title, style: VFTheme.theme().textTheme.titleMedium),
+          content: Text(content, style: VFTheme.theme().textTheme.bodyLarge),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(VFDimens.radiusLarge))),
           actions: <Widget>[
             VFBtnBorder(
@@ -58,8 +58,8 @@ class VFDialog {
       context: VFTools.appContext,
       builder: (context) {
         return AlertDialog(
-          title: Text(title, style: VFStyles.appTextTitle),
-          content: Text(content),
+          title: Text(title, style: VFTheme.theme().textTheme.titleMedium),
+          content: Text(content, style: VFTheme.theme().textTheme.bodyLarge),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(VFDimens.radiusLarge))),
           actions: <Widget>[
             VFBtnFlatBorderless(

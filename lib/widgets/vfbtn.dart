@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vftools/themes/vfthemes.dart';
+
+import 'package:vftools/vftools.dart';
 
 ///
 /// 按钮
@@ -32,8 +33,8 @@ class VFBtn extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        foregroundColor: color.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
-        elevation: VFDimens.elevationLow,
+        foregroundColor: color.computeLuminance() > 0.5 ? VFColors.black87 : VFColors.white87,
+        elevation: isEnable ? VFDimens.elevationLow : VFDimens.elevationNo,
         minimumSize: Size(width, height),
         shadowColor: color.withAlpha(128),
       ),

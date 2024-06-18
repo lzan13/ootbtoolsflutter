@@ -8,15 +8,29 @@ class VFColors {
   static final Color primary38 = primary.withAlpha(98);
   static final Color primary12 = primary.withAlpha(31);
 
-  /// 色
+  /// 强调色
   static Color accent = const Color(0xff63a356);
   static final Color accent87 = accent.withAlpha(221);
   static final Color accent54 = accent.withAlpha(138);
   static final Color accent38 = accent.withAlpha(98);
   static final Color accent12 = accent.withAlpha(31);
 
+  /// 主题暗色
+  static Color primaryDark = const Color(0xff000000);
+  static final Color primaryDark87 = primaryDark.withAlpha(221);
+  static final Color primaryDark54 = primaryDark.withAlpha(138);
+  static final Color primaryDark38 = primaryDark.withAlpha(98);
+  static final Color primaryDark12 = primaryDark.withAlpha(31);
+
+  /// 强调暗色
+  static Color accentDark = const Color(0xff315a28);
+  static final Color accentDark87 = accentDark.withAlpha(221);
+  static final Color accentDark54 = accentDark.withAlpha(138);
+  static final Color accentDark38 = accentDark.withAlpha(98);
+  static final Color accentDark12 = accentDark.withAlpha(31);
+
   /// 透明色
-  static const Color transparent = Color(0x00000000);
+  static const Color transparent = Color(0x00ffffff);
   static const Color translucent = Color(0x12363636);
 
   /// 白色
@@ -188,6 +202,7 @@ class VFColors {
   static final Color brown12 = brown.withAlpha(31);
 
   static final Color divider = grey12;
-  static const Color bgLight = Color(0xfff6f7f8);
+  static const Color bgLight = Color(0xffffffff);
   static const Color bgDark = Color(0xff000000);
+  static const Color bgDarkDialog = greyBlack;
 }

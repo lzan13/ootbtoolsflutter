@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:vftools/themes/vfthemes.dart';
+
+import 'package:vftools/vftools.dart';
 
 class VFLDoubleBounce extends StatefulWidget {
   final Color color;

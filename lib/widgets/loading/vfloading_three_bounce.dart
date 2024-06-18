@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:vftools/themes/vfcolors.dart';
+
+import 'package:vftools/vftools.dart';
 import 'package:vftools/widgets/loading/vftween.dart';
 
 class VFLThreeBounce extends StatefulWidget {

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:vftools/themes/vfthemes.dart';
-import 'package:vftools/utils/vfutils.dart';
+
+import 'package:vftools/styles/index.dart';
+import 'package:vftools/utils/index.dart';
 
 // 导出插件
-export 'plugin/vfplugin.dart';
+export 'plugin/index.dart';
 // 导出主题
-export 'themes/vfthemes.dart';
+export 'styles/index.dart';
 // 导出小组件
-export 'widgets/vfwidgets.dart';
+export 'widgets/index.dart';
 // 导出工具
-export 'utils/vfutils.dart';
+export 'utils/index.dart';
 
 final VFTools = _VFTools();
 
@@ -27,6 +28,8 @@ class _VFTools {
   init(VFOptions options) async {
     VFColors.primary = options.primary;
     VFColors.accent = options.accent;
+    VFColors.primaryDark = options.primaryDark;
+    VFColors.accentDark = options.accentDark;
 
     VFLog.init(debug: options.isDebug, tag: options.tag);
 
@@ -34,6 +37,9 @@ class _VFTools {
 
     // 初始化 key-value
     await VFKVUtil.init();
+
+    // 初始化主题
+    VFTheme.init();
   }
 
   /// 给根布局的 MaterialApp navigatorKey 属性
@@ -52,11 +58,15 @@ class VFOptions {
 
   final Color primary;
   final Color accent;
+  final Color primaryDark;
+  final Color accentDark;
 
   VFOptions({
     this.isDebug = false,
     this.tag = "vftools",
     this.primary = VFColors.white,
     this.accent = VFColors.blue,
+    this.primaryDark = VFColors.white,
+    this.accentDark = VFColors.blue,
   });
 }

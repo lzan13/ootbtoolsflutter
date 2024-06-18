@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:vftools/themes/vfthemes.dart';
-import 'package:vftools/widgets/vficon.dart';
+import 'package:vftools/vftools.dart';
 
 /// 自定义列表项
 class VFItem extends StatefulWidget {
@@ -24,10 +23,10 @@ class VFItem extends StatefulWidget {
 
   // 标题
   String title;
-  Color titleColor;
+  Color? titleColor;
   // 描述
   String describe;
-  Color describeColor;
+  Color? describeColor;
 
   // 显示 divider
   bool showDivider;
@@ -46,9 +45,7 @@ class VFItem extends StatefulWidget {
     this.endIconColor = VFColors.grey,
     this.endWidget,
     this.title = "Title",
-    this.titleColor = VFColors.black,
     this.describe = "",
-    this.describeColor = VFColors.grey,
     this.showDivider = true,
     this.onPressed,
   });
@@ -95,10 +92,7 @@ class VFItemState extends State<VFItem> {
                         Text(
                           widget.title,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: widget.titleColor,
-                            fontSize: VFSizes.itemTitle,
-                          ),
+                          style: VFTheme.theme().textTheme.titleSmall,
                         ),
                         // 描述
                         widget.describe == ""
@@ -107,7 +101,7 @@ class VFItemState extends State<VFItem> {
                                 widget.describe,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(color: widget.describeColor, fontSize: VFSizes.itemDesc),
+                                style: VFTheme.theme().textTheme.bodyMedium,
                               ),
                       ],
                     ),

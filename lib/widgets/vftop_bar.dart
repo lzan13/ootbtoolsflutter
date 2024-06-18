@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:vftools/themes/vfthemes.dart';
-import 'package:vftools/widgets/vficon.dart';
+import 'package:vftools/vftools.dart';
 
 class VFTopBar extends StatefulWidget implements PreferredSizeWidget {
   // 高度
@@ -104,7 +103,7 @@ class VFTopBarState extends State<VFTopBar> {
                             widget.title,
                             overflow: TextOverflow.ellipsis,
                             textAlign: widget.center ? TextAlign.center : TextAlign.start,
-                            style: VFStyles.appTextTitle,
+                            style: VFTheme.theme().textTheme.titleLarge,
                           ),
                         ),
                     widget.endWidget ?? Container(),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:vftools/themes/vfthemes.dart';
-import 'package:vftools/widgets/loading/vfloading.dart';
+import 'package:vftools/vftools.dart';
 
 ///
 /// 正在加载弹出框
