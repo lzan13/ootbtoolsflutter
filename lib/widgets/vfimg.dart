@@ -5,7 +5,7 @@ import 'package:vftools/vftools.dart';
 ///
 /// 自定义头像控件
 ///
-class VFImgAvatar extends StatelessWidget {
+class VFAvatar extends StatelessWidget {
   // 路径
   final String path;
   final String placeholder;
@@ -21,7 +21,7 @@ class VFImgAvatar extends StatelessWidget {
   // 点击回调
   final VoidCallback? onPressed;
 
-  const VFImgAvatar({
+  const VFAvatar({
     super.key,
     this.path = "",
     this.placeholder = "assets/images/img_default_avatar_female.png",
@@ -68,7 +68,7 @@ class VFImgAvatar extends StatelessWidget {
 ///
 /// 自定义封面控件
 ///
-class VFImgCover extends StatelessWidget {
+class VFCover extends StatelessWidget {
   // 路径
   final String path;
   final String placeholder;
@@ -84,7 +84,7 @@ class VFImgCover extends StatelessWidget {
   // 点击回调
   final VoidCallback? onPressed;
 
-  const VFImgCover({
+  const VFCover({
     super.key,
     this.path = "",
     this.placeholder = "assets/images/img_default.png",

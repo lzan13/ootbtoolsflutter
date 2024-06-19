@@ -8,7 +8,6 @@ export 'vfbtn.dart';
 
 export 'vfdialog.dart';
 
-export 'vfedit_multiple.dart';
 export 'vfedit.dart';
 
 export 'vficon.dart';

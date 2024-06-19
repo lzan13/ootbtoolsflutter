@@ -71,9 +71,7 @@ class _VFIconState extends State<VFIcon> {
                   color: isHover ? widget.hoverColor : widget.color ?? VFTheme.theme().iconTheme.color,
                 ),
         ),
-        onTap: () {
-          widget.onPressed?.call();
-        },
+        onTap: widget.onPressed,
       ),
     );
   }
