@@ -26,7 +26,7 @@ class VFBlur extends StatelessWidget {
     super.key,
     required this.child,
     this.type = VFBlurType.rect,
-    this.radius = VFDimens.d6,
+    this.radius = VFDimens.d0,
     this.blurRadius = VFDimens.d6,
   });
 

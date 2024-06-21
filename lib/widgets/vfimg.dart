@@ -18,6 +18,7 @@ class VFAvatar extends StatelessWidget {
   // 宽高
   final double width;
   final double height;
+  final BoxFit fit;
   // 点击回调
   final VoidCallback? onPressed;
 
@@ -31,6 +32,7 @@ class VFAvatar extends StatelessWidget {
     this.radius = VFDimens.radiusNormal,
     this.width = VFDimens.avatarNormal,
     this.height = VFDimens.avatarNormal,
+    this.fit = BoxFit.cover,
     this.onPressed,
   });
 
@@ -41,12 +43,12 @@ class VFAvatar extends StatelessWidget {
       image: path,
       width: width,
       height: height,
-      fit: BoxFit.cover, // 头像充满
+      fit: fit, // 头像充满
       imageErrorBuilder: (ctx, err, stackTrace) => Image.asset(
         placeholder, // 失败占位图
         width: width,
         height: height,
-        fit: BoxFit.cover,
+        fit: fit,
       ),
     );
     return GestureDetector(
@@ -81,6 +83,7 @@ class VFCover extends StatelessWidget {
   // 圆角
   final double radius;
   final BorderRadius? radiusLTRB;
+  final BoxFit fit;
   // 点击回调
   final VoidCallback? onPressed;
 
@@ -94,6 +97,7 @@ class VFCover extends StatelessWidget {
     this.height = VFDimens.avatarNormal,
     this.radius = VFDimens.radiusNormal,
     this.radiusLTRB,
+    this.fit = BoxFit.cover,
     this.onPressed,
   });
 
@@ -109,7 +113,7 @@ class VFCover extends StatelessWidget {
         placeholder, // 失败占位图
         width: width,
         height: height,
-        fit: BoxFit.cover,
+        fit: fit,
       ),
     );
     return InkWell(

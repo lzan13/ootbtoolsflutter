@@ -107,7 +107,7 @@ class VFBtnGradient extends StatelessWidget {
     this.startColor,
     this.endColor,
     this.width = VFDimens.d64,
-    this.height = VFDimens.d48,
+    this.height = VFDimens.d42,
     this.isEnable = true,
     this.onPressed,
   });

@@ -52,6 +52,9 @@ class _VFTheme {
         iconTheme: const IconThemeData(color: Colors.white54),
         backgroundColor: VFColors.primary,
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: VFStyles.appTextHint.copyWith(color: VFColors.white54),
+      ),
       primaryTextTheme: TextTheme(
         titleLarge: VFStyles.appTextHeadline6.copyWith(color: VFColors.white87),
         titleMedium: VFStyles.appTextTitle.copyWith(color: VFColors.white87),
@@ -88,6 +91,9 @@ class _VFTheme {
       appBarTheme: AppBarTheme(
         iconTheme: const IconThemeData(color: Colors.black87),
         backgroundColor: VFColors.primary,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: VFStyles.appTextHint,
       ),
       primaryTextTheme: TextTheme(
         titleLarge: VFStyles.appTextTitle,

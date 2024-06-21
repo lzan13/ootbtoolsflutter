@@ -47,7 +47,7 @@ class VFEdit extends StatelessWidget {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: VFStyles.appTextHint,
+        hintStyle: VFTheme.theme().inputDecorationTheme.hintStyle,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
             isRound ? VFDimens.roundRadiusLarge : radius,
@@ -95,7 +95,7 @@ class VFEdit extends StatelessWidget {
       ),
       enabled: isEnable,
       obscureText: isObscure,
-      style: VFStyles.appTextEdit,
+      style: VFTheme.theme().textTheme.bodyLarge,
     );
   }
 }
@@ -133,7 +133,7 @@ class VFEditMultiple extends StatelessWidget {
       keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: VFStyles.appTextHint,
+        hintStyle: VFTheme.theme().inputDecorationTheme.hintStyle,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius),
           borderSide: BorderSide(
@@ -164,7 +164,7 @@ class VFEditMultiple extends StatelessWidget {
       ),
       enabled: isEnable,
       obscureText: false,
-      style: VFStyles.appTextEdit,
+      style: VFTheme.theme().textTheme.bodyLarge,
     );
   }
 }

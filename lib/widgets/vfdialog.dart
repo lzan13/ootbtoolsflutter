@@ -11,7 +11,7 @@ class VFDialog {
   factory VFDialog() => _instance;
 
   // 确认对话框
-  alert({
+  showAlert({
     String title = "",
     String content = "",
     String negative = "取消",
@@ -51,7 +51,7 @@ class VFDialog {
   showMsg({
     String title = "",
     String content = "",
-    String btn = "我知道了",
+    String positive = "我知道了",
     VoidCallback? callback,
   }) {
     showDialog<bool>(
@@ -63,7 +63,7 @@ class VFDialog {
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(VFDimens.radiusLarge))),
           actions: <Widget>[
             VFBtnFlatBorderless(
-              title: btn,
+              title: positive,
               color: VFColors.accent87,
               onPressed: () {
                 callback?.call();
