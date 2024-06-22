@@ -86,31 +86,29 @@ class _VFLThreeInOutState extends State<VFLThreeInOut> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size(widget.size * 2, widget.size),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _widgets
-              .asMap()
-              .map((index, value) {
-                Widget innerWidget = value;
+    return SizedBox.fromSize(
+      size: Size(widget.size * 2, widget.size),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: _widgets
+            .asMap()
+            .map((index, value) {
+              Widget innerWidget = value;
 
-                if (index == 0) {
-                  innerWidget = _wrapInAnimatedBuilder(innerWidget);
-                } else if (index == 3) {
-                  innerWidget = _wrapInAnimatedBuilder(
-                    innerWidget,
-                    inverse: true,
-                  );
-                }
+              if (index == 0) {
+                innerWidget = _wrapInAnimatedBuilder(innerWidget);
+              } else if (index == 3) {
+                innerWidget = _wrapInAnimatedBuilder(
+                  innerWidget,
+                  inverse: true,
+                );
+              }
 
-                return MapEntry<int, Widget>(index, innerWidget);
-              })
-              .values
-              .toList(),
-        ),
+              return MapEntry<int, Widget>(index, innerWidget);
+            })
+            .values
+            .toList(),
       ),
     );
   }

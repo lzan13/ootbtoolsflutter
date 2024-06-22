@@ -60,14 +60,12 @@ class _VFLSquareCircleState extends State<VFLSquareCircle> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     final sizeValue = widget.size * _animationSize.value;
-    return Center(
-      child: Transform(
-        transform: Matrix4.identity()..rotateZ(_animationCurve.value * math.pi),
-        alignment: FractionalOffset.center,
-        child: SizedBox.fromSize(
-          size: Size.square(sizeValue),
-          child: _itemBuilder(0, 0.5 * sizeValue * _animationCurve.value),
-        ),
+    return Transform(
+      transform: Matrix4.identity()..rotateZ(_animationCurve.value * math.pi),
+      alignment: FractionalOffset.center,
+      child: SizedBox.fromSize(
+        size: Size.square(sizeValue),
+        child: _itemBuilder(0, 0.5 * sizeValue * _animationCurve.value),
       ),
     );
   }

@@ -57,10 +57,9 @@ class _VFIconState extends State<VFIcon> {
         hoverColor: widget.hoverBGColor,
         splashColor: widget.splashBGColor,
         onHover: (value) {
-          setState(() {
-            isHover = value;
-          });
+          setState(() => isHover = value);
         },
+        onTap: widget.onPressed,
         child: Padding(
           padding: EdgeInsets.all(widget.space),
           child: widget.data == null
@@ -71,7 +70,6 @@ class _VFIconState extends State<VFIcon> {
                   color: isHover ? widget.hoverColor : widget.color ?? VFTheme.theme().iconTheme.color,
                 ),
         ),
-        onTap: widget.onPressed,
       ),
     );
   }

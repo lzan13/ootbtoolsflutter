@@ -44,19 +44,17 @@ class _VFLDoubleBounceState extends State<VFLDoubleBounce> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: <Widget>[
-          Transform.scale(
-            scale: (_animation.value.abs() - 1).abs(),
-            child: SizedBox.fromSize(size: Size.square(widget.size), child: _itemBuilder(0)),
-          ),
-          Transform.scale(
-            scale: (_animation.value).abs(),
-            child: SizedBox.fromSize(size: Size.square(widget.size), child: _itemBuilder(1)),
-          ),
-        ],
-      ),
+    return Stack(
+      children: <Widget>[
+        Transform.scale(
+          scale: (_animation.value.abs() - 1).abs(),
+          child: SizedBox.fromSize(size: Size.square(widget.size), child: _itemBuilder(0)),
+        ),
+        Transform.scale(
+          scale: (_animation.value).abs(),
+          child: SizedBox.fromSize(size: Size.square(widget.size), child: _itemBuilder(1)),
+        ),
+      ],
     );
   }
 

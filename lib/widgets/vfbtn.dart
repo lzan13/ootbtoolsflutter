@@ -35,22 +35,16 @@ class VFBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: isEnable && !isLoading ? color : disableColor,
-            foregroundColor: color.computeLuminance() > 0.5 ? VFColors.black87 : VFColors.white87,
-            elevation: isEnable ? VFDimens.elevationLow : VFDimens.elevationNo,
-            minimumSize: Size(width, height),
-            shadowColor: color.withAlpha(128),
-          ),
-          onPressed: isEnable ? onPressed : null,
-          child: Text(title),
-        ),
-        isLoading ? VFLoading(type: VFLoadingType.circle) : Container()
-      ],
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isEnable && !isLoading ? color : disableColor,
+        foregroundColor: color.computeLuminance() > 0.5 ? VFColors.black87 : VFColors.white87,
+        elevation: isEnable ? VFDimens.elevationLow : VFDimens.elevationNo,
+        minimumSize: Size(width, height),
+        shadowColor: color.withAlpha(128),
+      ),
+      onPressed: isEnable ? onPressed : null,
+      child: isLoading ? VFLoading(type: VFLoadingType.circle) : Text(title),
     );
   }
 }
@@ -88,22 +82,16 @@ class VFBtnBorder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            foregroundColor: isEnable && !isLoading ? color : disableColor,
-            minimumSize: Size(width, height),
-            side: BorderSide(
-              color: isEnable && !isLoading ? color : disableColor,
-            ),
-          ),
-          onPressed: isEnable ? onPressed : null,
-          child: Text(title),
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: isEnable && !isLoading ? color : disableColor,
+        minimumSize: Size(width, height),
+        side: BorderSide(
+          color: isEnable && !isLoading ? color : disableColor,
         ),
-        isLoading ? VFLoading(type: VFLoadingType.circle) : Container()
-      ],
+      ),
+      onPressed: isEnable ? onPressed : null,
+      child: isLoading ? VFLoading(type: VFLoadingType.circle) : Text(title),
     );
   }
 }
@@ -143,34 +131,28 @@ class VFBtnGradient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: VFColors.transparent,
-            foregroundColor: startColor!.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
-            elevation: isEnable && !isLoading ? VFDimens.elevationLow : VFDimens.elevationNo,
-            padding: const EdgeInsets.all(VFDimens.d0),
-            minimumSize: Size(width, height),
-            shadowColor: isEnable && !isLoading ? startColor!.withAlpha(128) : disableColor,
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: VFColors.transparent,
+        foregroundColor: startColor!.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
+        elevation: isEnable && !isLoading ? VFDimens.elevationLow : VFDimens.elevationNo,
+        padding: const EdgeInsets.all(VFDimens.d0),
+        minimumSize: Size(width, height),
+        shadowColor: isEnable && !isLoading ? startColor!.withAlpha(128) : disableColor,
+      ),
+      onPressed: isEnable ? onPressed : null,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: isEnable && !isLoading ? [startColor!, endColor!] : [disableColor, disableColor],
           ),
-          onPressed: isEnable ? onPressed : null,
-          child: Container(
-            width: width,
-            height: height,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: isEnable && !isLoading ? [startColor!, endColor!] : [disableColor, disableColor],
-              ),
-              borderRadius: BorderRadius.circular(VFDimens.roundRadiusNormal),
-            ),
-            alignment: Alignment.center,
-            child: Text(title),
-          ),
+          borderRadius: BorderRadius.circular(VFDimens.roundRadiusNormal),
         ),
-        isLoading ? VFLoading(type: VFLoadingType.circle) : Container(),
-      ],
+        alignment: Alignment.center,
+        child: isLoading ? VFLoading(type: VFLoadingType.circle) : Text(title),
+      ),
     );
   }
 }
@@ -206,21 +188,15 @@ class VFBtnFlat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: isEnable && !isLoading ? color : disableColor,
-            foregroundColor: color.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
-            elevation: VFDimens.elevationNo,
-            minimumSize: Size(width, height),
-          ),
-          onPressed: isEnable ? onPressed : null,
-          child: Text(title),
-        ),
-        isLoading ? VFLoading(type: VFLoadingType.circle) : Container(),
-      ],
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isEnable && !isLoading ? color : disableColor,
+        foregroundColor: color.computeLuminance() > 0.5 ? VFColors.black : VFColors.white,
+        elevation: VFDimens.elevationNo,
+        minimumSize: Size(width, height),
+      ),
+      onPressed: isEnable ? onPressed : null,
+      child: isLoading ? VFLoading(type: VFLoadingType.circle) : Text(title),
     );
   }
 }
@@ -256,19 +232,13 @@ class VFBtnFlatBorderless extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        TextButton(
-          style: TextButton.styleFrom(
-            foregroundColor: isEnable && !isLoading ? color : disableColor,
-            minimumSize: Size(width, height),
-          ),
-          onPressed: isEnable ? onPressed : null,
-          child: Text(title),
-        ),
-        isLoading ? VFLoading(type: VFLoadingType.circle) : Container(),
-      ],
+    return TextButton(
+      style: TextButton.styleFrom(
+        foregroundColor: isEnable && !isLoading ? color : disableColor,
+        minimumSize: Size(width, height),
+      ),
+      onPressed: isEnable ? onPressed : null,
+      child: isLoading ? VFLoading(type: VFLoadingType.circle) : Text(title),
     );
   }
 }

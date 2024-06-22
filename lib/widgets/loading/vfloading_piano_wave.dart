@@ -53,25 +53,23 @@ class _VFLPianoWaveState extends State<VFLPianoWave> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final List<double> bars = getAnimationDelay(widget.itemCount);
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size(widget.size * 1.25, widget.size),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(bars.length, (i) {
-            return DottedScaleXWidget(
-              scaleX: VFTween(
-                begin: .4,
-                end: 1.0,
-                delay: bars[i],
-              ).animate(_controller),
-              child: SizedBox.fromSize(
-                size: Size(widget.size / widget.itemCount, widget.size),
-                child: _itemBuilder(i),
-              ),
-            );
-          }),
-        ),
+    return SizedBox.fromSize(
+      size: Size(widget.size * 1.25, widget.size),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(bars.length, (i) {
+          return DottedScaleXWidget(
+            scaleX: VFTween(
+              begin: .4,
+              end: 1.0,
+              delay: bars[i],
+            ).animate(_controller),
+            child: SizedBox.fromSize(
+              size: Size(widget.size / widget.itemCount, widget.size),
+              child: _itemBuilder(i),
+            ),
+          );
+        }),
       ),
     );
   }

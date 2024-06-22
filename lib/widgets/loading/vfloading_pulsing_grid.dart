@@ -49,44 +49,42 @@ class _VFLPulsingGridState extends State<VFLPulsingGrid> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size.square(widget.size),
-        child: Stack(
-          children: List.generate(_gridCount * _gridCount, (i) {
-            final row = (i / _gridCount).floor();
-            final column = i % _gridCount;
-            final mid = i == (_gridCount * _gridCount - 1) / 2;
-            final position = widget.size * .7;
-            final delay = mid
-                ? .25
-                : i.isOdd
-                    ? .5
-                    : .75;
+    return SizedBox.fromSize(
+      size: Size.square(widget.size),
+      child: Stack(
+        children: List.generate(_gridCount * _gridCount, (i) {
+          final row = (i / _gridCount).floor();
+          final column = i % _gridCount;
+          final mid = i == (_gridCount * _gridCount - 1) / 2;
+          final position = widget.size * .7;
+          final delay = mid
+              ? .25
+              : i.isOdd
+                  ? .5
+                  : .75;
 
-            return Positioned.fill(
-              left: position * (-1 + column),
-              top: position * (-1 + row),
-              child: Align(
-                alignment: Alignment.center,
-                child: ScaleTransition(
-                  scale: CurvedAnimation(
-                    parent: VFTween(
-                      begin: 0.0,
-                      end: 1.0,
-                      delay: delay,
-                    ).animate(_controller),
-                    curve: Curves.easeOut,
-                  ),
-                  child: SizedBox.fromSize(
-                    size: Size.square(widget.size / 4),
-                    child: _itemBuilder(i),
-                  ),
+          return Positioned.fill(
+            left: position * (-1 + column),
+            top: position * (-1 + row),
+            child: Align(
+              alignment: Alignment.center,
+              child: ScaleTransition(
+                scale: CurvedAnimation(
+                  parent: VFTween(
+                    begin: 0.0,
+                    end: 1.0,
+                    delay: delay,
+                  ).animate(_controller),
+                  curve: Curves.easeOut,
+                ),
+                child: SizedBox.fromSize(
+                  size: Size.square(widget.size / 4),
+                  child: _itemBuilder(i),
                 ),
               ),
-            );
-          }),
-        ),
+            ),
+          );
+        }),
       ),
     );
   }

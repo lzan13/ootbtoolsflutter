@@ -69,19 +69,17 @@ class _VFLRingState extends State<VFLRing> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Transform(
-        transform: Matrix4.identity()..rotateZ((_animation1.value) * 5 * pi / 6),
-        alignment: FractionalOffset.center,
-        child: SizedBox.fromSize(
-          size: Size.square(widget.size),
-          child: CustomPaint(
-            foregroundPainter: RingPainter(
-              paintWidth: widget.lineWidth,
-              trackColor: widget.color,
-              progressPercent: _animation3.value,
-              startAngle: pi * _animation2.value,
-            ),
+    return Transform(
+      transform: Matrix4.identity()..rotateZ((_animation1.value) * 5 * pi / 6),
+      alignment: FractionalOffset.center,
+      child: SizedBox.fromSize(
+        size: Size.square(widget.size),
+        child: CustomPaint(
+          foregroundPainter: RingPainter(
+            paintWidth: widget.lineWidth,
+            trackColor: widget.color,
+            progressPercent: _animation3.value,
+            startAngle: pi * _animation2.value,
           ),
         ),
       ),

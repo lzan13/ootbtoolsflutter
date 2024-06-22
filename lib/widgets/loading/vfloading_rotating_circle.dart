@@ -45,14 +45,12 @@ class _VFLRotatingCircleState extends State<VFLRotatingCircle> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Transform(
-        transform: Matrix4.identity()
-          ..rotateX((0 - _animation1.value) * 0.0174533)
-          ..rotateY((0 - _animation2.value) * 0.0174533),
-        alignment: FractionalOffset.center,
-        child: SizedBox.fromSize(size: Size.square(widget.size), child: _itemBuilder(0)),
-      ),
+    return Transform(
+      transform: Matrix4.identity()
+        ..rotateX((0 - _animation1.value) * 0.0174533)
+        ..rotateY((0 - _animation2.value) * 0.0174533),
+      alignment: FractionalOffset.center,
+      child: SizedBox.fromSize(size: Size.square(widget.size), child: _itemBuilder(0)),
     );
   }
 

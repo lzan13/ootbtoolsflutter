@@ -59,17 +59,15 @@ class _VFLChasingDotsState extends State<VFLChasingDots> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size.square(widget.size),
-        child: Transform.rotate(
-          angle: _rotate.value * 0.0174533,
-          child: Stack(
-            children: <Widget>[
-              Positioned(top: 0.0, child: _circle(1.0 - _scale.value.abs(), 0)),
-              Positioned(bottom: 0.0, child: _circle(_scale.value.abs(), 1)),
-            ],
-          ),
+    return SizedBox.fromSize(
+      size: Size.square(widget.size),
+      child: Transform.rotate(
+        angle: _rotate.value * 0.0174533,
+        child: Stack(
+          children: <Widget>[
+            Positioned(top: 0.0, child: _circle(1.0 - _scale.value.abs(), 0)),
+            Positioned(bottom: 0.0, child: _circle(_scale.value.abs(), 1)),
+          ],
         ),
       ),
     );

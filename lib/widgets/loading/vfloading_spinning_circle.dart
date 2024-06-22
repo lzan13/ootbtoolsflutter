@@ -60,14 +60,12 @@ class _VFLSpinningCircleState extends State<VFLSpinningCircle> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Transform(
-        transform: Matrix4.identity()..rotateY((0 - _animation.value) * pi),
-        alignment: FractionalOffset.center,
-        child: SizedBox.fromSize(
-          size: Size.square(widget.size),
-          child: _itemBuilder(0),
-        ),
+    return Transform(
+      transform: Matrix4.identity()..rotateY((0 - _animation.value) * pi),
+      alignment: FractionalOffset.center,
+      child: SizedBox.fromSize(
+        size: Size.square(widget.size),
+        child: _itemBuilder(0),
       ),
     );
   }

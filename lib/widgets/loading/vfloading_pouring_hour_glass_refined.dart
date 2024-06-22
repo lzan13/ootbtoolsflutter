@@ -60,17 +60,15 @@ class _VFLPouringHourGlassRefinedState extends State<VFLPouringHourGlassRefined>
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: RotationTransition(
-        turns: _rotationAnimation,
-        child: SizedBox.fromSize(
-          size: Size.square(widget.size * math.sqrt1_2),
-          child: CustomPaint(
-            painter: _HourGlassPaint(
-              poured: _pouringAnimation.value,
-              color: widget.color,
-              strokeWidth: widget.strokeWidth,
-            ),
+    return RotationTransition(
+      turns: _rotationAnimation,
+      child: SizedBox.fromSize(
+        size: Size.square(widget.size * math.sqrt1_2),
+        child: CustomPaint(
+          painter: _HourGlassPaint(
+            poured: _pouringAnimation.value,
+            color: widget.color,
+            strokeWidth: widget.strokeWidth,
           ),
         ),
       ),

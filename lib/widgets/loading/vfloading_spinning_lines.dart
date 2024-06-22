@@ -56,21 +56,19 @@ class _VFLSpinningLinesState extends State<VFLSpinningLines> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: AnimatedBuilder(
-        builder: (BuildContext context, Widget? child) {
-          return CustomPaint(
-            painter: SpinningLinesPainter(
-              _animation.value,
-              lineWidth: widget.lineWidth,
-              color: widget.color,
-              itemCount: widget.itemCount,
-            ),
-            child: SizedBox.fromSize(size: Size.square(widget.size)),
-          );
-        },
-        animation: _animation,
-      ),
+    return AnimatedBuilder(
+      builder: (BuildContext context, Widget? child) {
+        return CustomPaint(
+          painter: SpinningLinesPainter(
+            _animation.value,
+            lineWidth: widget.lineWidth,
+            color: widget.color,
+            itemCount: widget.itemCount,
+          ),
+          child: SizedBox.fromSize(size: Size.square(widget.size)),
+        );
+      },
+      animation: _animation,
     );
   }
 }

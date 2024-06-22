@@ -8,10 +8,10 @@ class VFLWave extends StatefulWidget {
   const VFLWave({
     super.key,
     this.color,
-    this.type = VFLWaveType.center,
+    this.type = VFLWaveType.start,
     this.size = 50.0,
     this.itemBuilder,
-    this.itemCount = 5,
+    this.itemCount = 8,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
   })  : assert(
@@ -53,25 +53,23 @@ class _VFLWaveState extends State<VFLWave> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final List<double> bars = getAnimationDelay(widget.itemCount);
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size(widget.size * 1.25, widget.size),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(bars.length, (i) {
-            return ScaleYWidget(
-              scaleY: VFTween(
-                begin: .4,
-                end: 1.0,
-                delay: bars[i],
-              ).animate(_controller),
-              child: SizedBox.fromSize(
-                size: Size(widget.size / widget.itemCount, widget.size),
-                child: _itemBuilder(i),
-              ),
-            );
-          }),
-        ),
+    return SizedBox.fromSize(
+      size: Size(widget.size * 1.25, widget.size),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(bars.length, (i) {
+          return ScaleYWidget(
+            scaleY: VFTween(
+              begin: .4,
+              end: 1.0,
+              delay: bars[i],
+            ).animate(_controller),
+            child: SizedBox.fromSize(
+              size: Size(widget.size / widget.itemCount, widget.size),
+              child: _itemBuilder(i),
+            ),
+          );
+        }),
       ),
     );
   }

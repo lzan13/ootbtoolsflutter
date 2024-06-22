@@ -51,15 +51,13 @@ class _VFLPulseState extends State<VFLPulse> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Opacity(
-        opacity: 1.0 - _animation.value,
-        child: Transform.scale(
-          scale: _animation.value,
-          child: SizedBox.fromSize(
-            size: Size.square(widget.size),
-            child: _itemBuilder(0),
-          ),
+    return Opacity(
+      opacity: 1.0 - _animation.value,
+      child: Transform.scale(
+        scale: _animation.value,
+        child: SizedBox.fromSize(
+          size: Size.square(widget.size),
+          child: _itemBuilder(0),
         ),
       ),
     );

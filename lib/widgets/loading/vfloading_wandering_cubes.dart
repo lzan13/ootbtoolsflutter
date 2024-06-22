@@ -90,15 +90,13 @@ class _VFLWanderingCubesState extends State<VFLWanderingCubes> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size.square(widget.size),
-        child: Stack(
-          children: <Widget>[
-            _cube(0),
-            _cube(1, true),
-          ],
-        ),
+    return SizedBox.fromSize(
+      size: Size.square(widget.size),
+      child: Stack(
+        children: <Widget>[
+          _cube(0),
+          _cube(1, true),
+        ],
       ),
     );
   }

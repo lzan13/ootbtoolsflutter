@@ -42,28 +42,26 @@ class VFLCircleState extends State<VFLCircle> with SingleTickerProviderStateMixi
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size.square(widget.size),
-        child: Stack(
-          children: List.generate(delays.length, (index) {
-            final position = widget.size * .5;
-            return Positioned.fill(
-              left: position,
-              top: position,
-              child: Transform(
-                transform: Matrix4.rotationZ(30.0 * index * 0.0174533),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: ScaleTransition(
-                    scale: VFTween(begin: 0.0, end: 1.0, delay: delays[index]).animate(_controller),
-                    child: SizedBox.fromSize(size: Size.square(widget.size * 0.15), child: _itemBuilder(index)),
-                  ),
+    return SizedBox.fromSize(
+      size: Size.square(widget.size),
+      child: Stack(
+        children: List.generate(delays.length, (index) {
+          final position = widget.size * .5;
+          return Positioned.fill(
+            left: position,
+            top: position,
+            child: Transform(
+              transform: Matrix4.rotationZ(30.0 * index * 0.0174533),
+              child: Align(
+                alignment: Alignment.center,
+                child: ScaleTransition(
+                  scale: VFTween(begin: 0.0, end: 1.0, delay: delays[index]).animate(_controller),
+                  child: SizedBox.fromSize(size: Size.square(widget.size * 0.15), child: _itemBuilder(index)),
                 ),
               ),
-            );
-          }),
-        ),
+            ),
+          );
+        }),
       ),
     );
   }

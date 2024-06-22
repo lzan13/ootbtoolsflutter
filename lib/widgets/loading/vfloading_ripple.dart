@@ -47,19 +47,17 @@ class VFLRippleState extends State<VFLRipple> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: <Widget>[
-          Opacity(
-            opacity: 1.0 - _animation1.value,
-            child: Transform.scale(scale: _animation1.value, child: _itemBuilder(0)),
-          ),
-          Opacity(
-            opacity: 1.0 - _animation2.value,
-            child: Transform.scale(scale: _animation2.value, child: _itemBuilder(1)),
-          ),
-        ],
-      ),
+    return Stack(
+      children: <Widget>[
+        Opacity(
+          opacity: 1.0 - _animation1.value,
+          child: Transform.scale(scale: _animation1.value, child: _itemBuilder(0)),
+        ),
+        Opacity(
+          opacity: 1.0 - _animation2.value,
+          child: Transform.scale(scale: _animation2.value, child: _itemBuilder(1)),
+        ),
+      ],
     );
   }
 

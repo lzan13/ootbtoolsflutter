@@ -4,13 +4,13 @@ import 'package:flutter/widgets.dart';
 
 class VFLDualRing extends StatefulWidget {
   const VFLDualRing({
-    Key? key,
+    super.key,
     required this.color,
     this.lineWidth = 7.0,
     this.size = 50.0,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  }) : super(key: key);
+  });
 
   final Color color;
   final double lineWidth;
@@ -55,18 +55,16 @@ class _VFLDualRingState extends State<VFLDualRing> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Transform(
-        transform: Matrix4.identity()..rotateZ((_animation.value) * math.pi * 2),
-        alignment: FractionalOffset.center,
-        child: CustomPaint(
-          painter: _DualRingPainter(
-            angle: 90,
-            paintWidth: widget.lineWidth,
-            color: widget.color,
-          ),
-          child: SizedBox.fromSize(size: Size.square(widget.size)),
+    return Transform(
+      transform: Matrix4.identity()..rotateZ((_animation.value) * math.pi * 2),
+      alignment: FractionalOffset.center,
+      child: CustomPaint(
+        painter: _DualRingPainter(
+          angle: 90,
+          paintWidth: widget.lineWidth,
+          color: widget.color,
         ),
+        child: SizedBox.fromSize(size: Size.square(widget.size)),
       ),
     );
   }

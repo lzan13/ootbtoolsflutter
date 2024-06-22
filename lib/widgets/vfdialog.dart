@@ -37,8 +37,8 @@ class VFDialog {
               title: positive,
               color: VFColors.accent87,
               onPressed: () {
-                callback?.call();
                 Navigator.of(context).pop(true);
+                callback?.call();
               },
             ),
           ],

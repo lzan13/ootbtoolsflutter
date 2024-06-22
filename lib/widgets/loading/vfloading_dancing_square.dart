@@ -48,103 +48,101 @@ class _VFLDancingSquareState extends State<VFLDancingSquare> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size.square(widget.size),
-        child: Stack(
-          children: List.generate(_itemCount, (index) {
-            final position = widget.size * .5;
-            final delay = index / _itemCount;
-            return Stack(
-              children: [
-                Positioned.fill(
-                  left: position,
-                  top: position,
-                  child: Transform(
-                    transform: Matrix4.rotationX(30.0 * index * 0.0174533),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: ScaleTransition(
-                        scale: VFTween(
-                          begin: 0.0,
-                          end: 1.0,
-                          delay: delay,
-                        ).animate(_controller),
-                        child: SizedBox.fromSize(
-                          size: Size.square(widget.size * 0.15),
-                          child: _itemBuilder(index),
-                        ),
+    return SizedBox.fromSize(
+      size: Size.square(widget.size),
+      child: Stack(
+        children: List.generate(_itemCount, (index) {
+          final position = widget.size * .5;
+          final delay = index / _itemCount;
+          return Stack(
+            children: [
+              Positioned.fill(
+                left: position,
+                top: position,
+                child: Transform(
+                  transform: Matrix4.rotationX(30.0 * index * 0.0174533),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: ScaleTransition(
+                      scale: VFTween(
+                        begin: 0.0,
+                        end: 1.0,
+                        delay: delay,
+                      ).animate(_controller),
+                      child: SizedBox.fromSize(
+                        size: Size.square(widget.size * 0.15),
+                        child: _itemBuilder(index),
                       ),
                     ),
                   ),
                 ),
-                Positioned.fill(
-                  left: position,
-                  top: -1 * position,
-                  child: Transform(
-                    transform: Matrix4.rotationY(30.0 * index * 0.0174533),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: ScaleTransition(
-                        scale: VFTween(
-                          begin: 0.0,
-                          end: 1.0,
-                          delay: delay,
-                        ).animate(_controller),
-                        child: SizedBox.fromSize(
-                          size: Size.square(widget.size * 0.15),
-                          child: _itemBuilder(index),
-                        ),
+              ),
+              Positioned.fill(
+                left: position,
+                top: -1 * position,
+                child: Transform(
+                  transform: Matrix4.rotationY(30.0 * index * 0.0174533),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: ScaleTransition(
+                      scale: VFTween(
+                        begin: 0.0,
+                        end: 1.0,
+                        delay: delay,
+                      ).animate(_controller),
+                      child: SizedBox.fromSize(
+                        size: Size.square(widget.size * 0.15),
+                        child: _itemBuilder(index),
                       ),
                     ),
                   ),
                 ),
-                Positioned.fill(
-                  left: -1 * position,
-                  top: position,
-                  child: Transform(
-                    transform: Matrix4.rotationX(30.0 * index * 0.0174533),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: ScaleTransition(
-                        scale: VFTween(
-                          begin: 0.0,
-                          end: 1.0,
-                          delay: delay,
-                        ).animate(_controller),
-                        child: SizedBox.fromSize(
-                          size: Size.square(widget.size * 0.15),
-                          child: _itemBuilder(index),
-                        ),
+              ),
+              Positioned.fill(
+                left: -1 * position,
+                top: position,
+                child: Transform(
+                  transform: Matrix4.rotationX(30.0 * index * 0.0174533),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: ScaleTransition(
+                      scale: VFTween(
+                        begin: 0.0,
+                        end: 1.0,
+                        delay: delay,
+                      ).animate(_controller),
+                      child: SizedBox.fromSize(
+                        size: Size.square(widget.size * 0.15),
+                        child: _itemBuilder(index),
                       ),
                     ),
                   ),
                 ),
-                Positioned.fill(
-                  left: position,
-                  top: position,
-                  child: Transform(
-                    transform: Matrix4.rotationY(30.0 * index * 0.0174533),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: ScaleTransition(
-                        scale: VFTween(
-                          begin: 0.0,
-                          end: 1.0,
-                          delay: delay,
-                        ).animate(_controller),
-                        child: SizedBox.fromSize(
-                          size: Size.square(widget.size * 0.15),
-                          child: _itemBuilder(index),
-                        ),
+              ),
+              Positioned.fill(
+                left: position,
+                top: position,
+                child: Transform(
+                  transform: Matrix4.rotationY(30.0 * index * 0.0174533),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: ScaleTransition(
+                      scale: VFTween(
+                        begin: 0.0,
+                        end: 1.0,
+                        delay: delay,
+                      ).animate(_controller),
+                      child: SizedBox.fromSize(
+                        size: Size.square(widget.size * 0.15),
+                        child: _itemBuilder(index),
                       ),
                     ),
                   ),
                 ),
-              ],
-            );
-          }),
-        ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
