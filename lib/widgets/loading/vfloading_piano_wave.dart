@@ -2,13 +2,13 @@ import 'package:flutter/widgets.dart';
 
 import 'package:vftools/widgets/loading/vftween.dart';
 
-enum VFLWaveType { start, end, center }
+enum VFLPianoWaveType { start, end, center }
 
-class VFLWave extends StatefulWidget {
-  const VFLWave({
+class VFLPianoWave extends StatefulWidget {
+  const VFLPianoWave({
     super.key,
     this.color,
-    this.type = VFLWaveType.center,
+    this.type = VFLPianoWaveType.start,
     this.size = 50.0,
     this.itemBuilder,
     this.itemCount = 5,
@@ -23,16 +23,16 @@ class VFLWave extends StatefulWidget {
   final Color? color;
   final int itemCount;
   final double size;
-  final VFLWaveType type;
+  final VFLPianoWaveType type;
   final IndexedWidgetBuilder? itemBuilder;
   final Duration duration;
   final AnimationController? controller;
 
   @override
-  State<VFLWave> createState() => _VFLWaveState();
+  State<VFLPianoWave> createState() => _VFLPianoWaveState();
 }
 
-class _VFLWaveState extends State<VFLWave> with SingleTickerProviderStateMixin {
+class _VFLPianoWaveState extends State<VFLPianoWave> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -59,8 +59,8 @@ class _VFLWaveState extends State<VFLWave> with SingleTickerProviderStateMixin {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(bars.length, (i) {
-            return ScaleYWidget(
-              scaleY: VFTween(
+            return DottedScaleXWidget(
+              scaleX: VFTween(
                 begin: .4,
                 end: 1.0,
                 delay: bars[i],
@@ -78,11 +78,11 @@ class _VFLWaveState extends State<VFLWave> with SingleTickerProviderStateMixin {
 
   List<double> getAnimationDelay(int itemCount) {
     switch (widget.type) {
-      case VFLWaveType.start:
+      case VFLPianoWaveType.start:
         return _startAnimationDelay(itemCount);
-      case VFLWaveType.end:
+      case VFLPianoWaveType.end:
         return _endAnimationDelay(itemCount);
-      case VFLWaveType.center:
+      case VFLPianoWaveType.center:
       default:
         return _centerAnimationDelay(itemCount);
     }
@@ -134,13 +134,13 @@ class _VFLWaveState extends State<VFLWave> with SingleTickerProviderStateMixin {
       widget.itemBuilder != null ? widget.itemBuilder!(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color));
 }
 
-class ScaleYWidget extends AnimatedWidget {
-  const ScaleYWidget({
-    super.key,
-    required Animation<double> scaleY,
+class DottedScaleXWidget extends AnimatedWidget {
+  const DottedScaleXWidget({
+    Key? key,
+    required Animation<double> scaleX,
     required this.child,
     this.alignment = Alignment.center,
-  }) : super(listenable: scaleY);
+  }) : super(key: key, listenable: scaleX);
 
   final Widget child;
   final Alignment alignment;
@@ -150,7 +150,7 @@ class ScaleYWidget extends AnimatedWidget {
   @override
   Widget build(BuildContext context) {
     return Transform(
-      transform: Matrix4.identity()..scale(1.0, scale.value, 1.0),
+      transform: Matrix4.identity()..scale(scale.value * 0.8, 1.0, 1.0),
       alignment: alignment,
       child: child,
     );
