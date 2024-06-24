@@ -14,7 +14,10 @@ class VFIcon extends StatefulWidget {
   Color? bgColor;
   Color? hoverBGColor;
   Color? pressBGColor;
+  Color? selectedBGColor;
   Color? splashBGColor;
+  // 是否选中
+  bool isSelected;
   // 圆角大小
   double radius;
   // 图标大小
@@ -32,7 +35,9 @@ class VFIcon extends StatefulWidget {
     this.bgColor,
     this.hoverBGColor = VFColors.translucent,
     this.pressBGColor = VFColors.translucent,
+    this.selectedBGColor = VFColors.translucent,
     this.splashBGColor = VFColors.translucent,
+    this.isSelected = false,
     this.radius = VFDimens.d8,
     this.size = VFDimens.d24,
     this.space = VFDimens.d8,
@@ -49,7 +54,7 @@ class _VFIconState extends State<VFIcon> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: widget.bgColor ?? VFColors.transparent,
+      color: widget.isSelected ? widget.selectedBGColor : widget.bgColor ?? VFColors.transparent,
       borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
       child: InkWell(
         radius: widget.radius * 2,
