@@ -38,19 +38,26 @@ class VFAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imgWidget = FadeInImage.assetNetwork(
-      placeholder: placeholder,
-      image: path,
-      width: width,
-      height: height,
-      fit: fit, // 头像充满
-      imageErrorBuilder: (ctx, err, stackTrace) => Image.asset(
-        placeholder, // 失败占位图
-        width: width,
-        height: height,
-        fit: fit,
-      ),
-    );
+    final imgWidget = path.startsWith("assets/")
+        ? Image.asset(
+            path,
+            width: width,
+            height: height,
+            fit: fit, // 填充方式
+          )
+        : FadeInImage.assetNetwork(
+            placeholder: placeholder,
+            image: path,
+            width: width,
+            height: height,
+            fit: fit, // 填充方式
+            imageErrorBuilder: (ctx, err, stackTrace) => Image.asset(
+              placeholder, // 失败占位图
+              width: width,
+              height: height,
+              fit: fit,
+            ),
+          );
     return GestureDetector(
       onTap: onPressed,
       child: isRound
@@ -103,19 +110,26 @@ class VFCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imgWidget = FadeInImage.assetNetwork(
-      placeholder: placeholder,
-      image: path,
-      width: height,
-      height: height,
-      fit: BoxFit.cover,
-      imageErrorBuilder: (ctx, err, stackTrace) => Image.asset(
-        placeholder, // 失败占位图
-        width: width,
-        height: height,
-        fit: fit,
-      ),
-    );
+    final imgWidget = path.startsWith("assets/")
+        ? Image.asset(
+            path,
+            width: width,
+            height: height,
+            fit: fit, // 填充方式
+          )
+        : FadeInImage.assetNetwork(
+            placeholder: placeholder,
+            image: path,
+            width: height,
+            height: height,
+            fit: BoxFit.cover,
+            imageErrorBuilder: (ctx, err, stackTrace) => Image.asset(
+              placeholder, // 失败占位图
+              width: width,
+              height: height,
+              fit: fit,
+            ),
+          );
     return InkWell(
       onTap: onPressed,
       child: ClipRRect(
