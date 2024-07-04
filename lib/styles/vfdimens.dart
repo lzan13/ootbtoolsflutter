@@ -49,6 +49,7 @@ class VFDimens {
   static const double d192 = 192.0;
   static const double d220 = 220.0;
   static const double d256 = 256.0;
+  static const double d300 = 300.0;
   static const double d320 = 320.0;
   static const double d360 = 360.0;
   static const double d400 = 400.0;
@@ -56,7 +57,12 @@ class VFDimens {
   static const double d480 = 480.0;
   static const double d512 = 512.0;
   static const double d520 = 520.0;
+  static const double d600 = 600.0;
   static const double d640 = 640.0;
+  static const double d720 = 720.0;
+  static const double d800 = 800.0;
+  static const double d960 = 960.0;
+  static const double d1080 = 1080.0;
 
   /// 定义头像尺寸
   static const double avatarLittle = d24;
