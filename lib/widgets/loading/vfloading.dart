@@ -92,7 +92,7 @@ class VFLoading extends StatelessWidget {
     this.color = VFColors.red,
     this.size = VFDimens.d20,
     this.borderWidth = VFDimens.d2,
-    this.type = VFLoadingType.wave,
+    this.type = VFLoadingType.circle,
   });
 
   @override
