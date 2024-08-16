@@ -24,7 +24,7 @@ class _OTTheme {
 
   /// 动态获取当前主题
   ThemeData theme() {
-    return Theme.of(OTTools.appContext);
+    return Theme.of(OTools.appContext);
   }
 
   ///

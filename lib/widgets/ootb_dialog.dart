@@ -19,7 +19,7 @@ class OTDialog {
     VoidCallback? callback,
   }) {
     showDialog<bool>(
-      context: OTTools.appContext,
+      context: OTools.appContext,
       builder: (context) {
         return AlertDialog(
           title: Text(title, style: OTTheme.theme().textTheme.titleMedium),
@@ -55,7 +55,7 @@ class OTDialog {
     VoidCallback? callback,
   }) {
     showDialog<bool>(
-      context: OTTools.appContext,
+      context: OTools.appContext,
       builder: (context) {
         return AlertDialog(
           title: Text(title, style: OTTheme.theme().textTheme.titleMedium),
@@ -82,7 +82,7 @@ class OTDialog {
     VoidCallback? callback,
   }) {
     showDialog<bool>(
-      context: OTTools.appContext,
+      context: OTools.appContext,
       builder: (context) {
         return Dialog(
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(OTDimens.radiusLarge))),

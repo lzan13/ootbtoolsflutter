@@ -12,16 +12,16 @@ export 'widgets/index.dart';
 // 导出工具
 export 'utils/index.dart';
 
-final OTTools = _OTTools();
+final OTools = _OTools();
 
 /// 工具库
-class _OTTools {
+class _OTools {
   /// 单例对象
-  static final _OTTools _instance = _OTTools._();
+  static final _OTools _instance = _OTools._();
   // 私有构造方法
-  _OTTools._();
+  _OTools._();
   // 工厂方法，创建单例类的实例
-  factory _OTTools() => _instance;
+  factory _OTools() => _instance;
 
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 

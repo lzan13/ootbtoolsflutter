@@ -11,13 +11,13 @@ import 'plugin/ootb_tools_platform.dart';
 ///
 /// Web 端没有 Native 交互，因此它的平台方法需要单独实现
 ///
-class OTToolsWeb extends OTToolsPlatform {
+class OToolsWeb extends OToolsPlatform {
   /// 构造方法
-  OTToolsWeb();
+  OToolsWeb();
 
   /// 单独的实例注册
   static void registerWith(Registrar registrar) {
-    OTToolsPlatform.instance = OTToolsWeb();
+    OToolsPlatform.instance = OToolsWeb();
   }
 
   /// 获取平台版本

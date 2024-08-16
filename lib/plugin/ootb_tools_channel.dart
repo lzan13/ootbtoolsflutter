@@ -5,9 +5,9 @@ import 'package:flutter/services.dart';
 import 'ootb_tools_platform.dart';
 
 ///
-/// [OTToolsPlatform]的通道实现
+/// [OToolsPlatform]的通道实现
 ///
-class OTToolsChannel extends OTToolsPlatform {
+class OToolsChannel extends OToolsPlatform {
   /// 与 Native 交互的通道实例
   @visibleForTesting
   final mChannel = const MethodChannel('ootbtoolsflutter');

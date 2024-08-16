@@ -5,7 +5,7 @@ import 'package:ootbtoolsflutter/plugin/ootb_tools_channel.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  OTToolsChannel platform = OTToolsChannel();
+  OToolsChannel platform = OToolsChannel();
   const MethodChannel channel = MethodChannel('ootbtoolsflutter');
 
   setUp(() {

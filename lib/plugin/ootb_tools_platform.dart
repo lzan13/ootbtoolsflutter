@@ -5,18 +5,18 @@ import 'ootb_tools_channel.dart';
 ///
 /// 平台接口定义
 ///
-abstract class OTToolsPlatform extends PlatformInterface {
+abstract class OToolsPlatform extends PlatformInterface {
   /// 构造方法
-  OTToolsPlatform() : super(token: _token);
+  OToolsPlatform() : super(token: _token);
 
   static final Object _token = Object();
 
-  /// 使用[OTToolsPlatform]的默认实现，这里默认是[OTToolsChannel]
-  static OTToolsPlatform _instance = OTToolsChannel();
-  static OTToolsPlatform get instance => _instance;
+  /// 使用[OToolsPlatform]的默认实现，这里默认是[OToolsChannel]
+  static OToolsPlatform _instance = OToolsChannel();
+  static OToolsPlatform get instance => _instance;
 
-  /// 特定平台应该由指定平台自己扩展[OTToolsPlatform]实现并注册进来
-  static set instance(OTToolsPlatform instance) {
+  /// 特定平台应该由指定平台自己扩展[OToolsPlatform]实现并注册进来
+  static set instance(OToolsPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }
