@@ -1,3 +1,3 @@
 // 导出插件
-export 'vftools_channel.dart';
-export "vftools_platform.dart";
+export 'ootb_tools_channel.dart';
+export "ootb_tools_platform.dart";
