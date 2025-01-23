@@ -7,10 +7,11 @@ import 'ootb_platform.dart';
 
 final OTKVUtil = _OTKVUtil();
 
+/// author: lzan13
+/// date: 2023/08/31
+/// github: https://github.com/lzan13
 ///
-/// Create by lzan13 on 2023/8/31
 /// key-value 数据工具类
-///
 class _OTKVUtil {
   /// app 全局配置数据存储，android/ios 平台使用
   late MMKV _mmkv;

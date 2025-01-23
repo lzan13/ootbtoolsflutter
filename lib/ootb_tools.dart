@@ -12,9 +12,13 @@ export 'widgets/index.dart';
 // 导出工具
 export 'utils/index.dart';
 
+/// Author: lzan13
+/// Date: 2025/01/22
+/// Github: https://github.com/lzan13
+///
+/// 工具库
 final OTools = _OTools();
 
-/// 工具库
 class _OTools {
   /// 单例对象
   static final _OTools _instance = _OTools._();
@@ -49,9 +53,7 @@ class _OTools {
   BuildContext get appContext => _navigatorKey.currentState!.context;
 }
 
-///
 /// 工具库初始化配置
-///
 class OTOptions {
   final bool isDebug;
   final String tag;

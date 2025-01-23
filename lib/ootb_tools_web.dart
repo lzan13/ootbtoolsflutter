@@ -8,9 +8,11 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'plugin/ootb_tools_platform.dart';
 
+/// Author: lzan13
+/// Date: 2025/01/22
+/// Github: https://github.com/lzan13
 ///
 /// Web 端没有 Native 交互，因此它的平台方法需要单独实现
-///
 class OToolsWeb extends OToolsPlatform {
   /// 构造方法
   OToolsWeb();

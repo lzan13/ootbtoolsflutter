@@ -1,6 +1,8 @@
+/// Author: lzan13
+/// Date: 2025/01/22
+/// Github: https://github.com/lzan13
 ///
 /// 策略类
-///
 class OTStrategies {
   // 是否必填
   String require(value, String message) {

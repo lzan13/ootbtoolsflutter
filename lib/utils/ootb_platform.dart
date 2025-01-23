@@ -7,10 +7,11 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 final OTPlatform = _OTPlatform();
 
+/// author: lzan13
+/// date: 2023/09/03
+/// github: https://github.com/lzan13
 ///
-/// Create by lzan13 on 2023/9/3
 /// 获取平台信息的工具类
-///
 class _OTPlatform {
   /// 单例对象
   static late final _OTPlatform _instance = _OTPlatform._();

@@ -1,14 +1,14 @@
 import 'dart:async';
 
-///
 /// 倒计时回调
 ///  callback.(millisUntilFinished 毫秒).
-///
 typedef void OnTimerCallback(int millisUntilFinished);
 
+/// author: lzan13
+/// date: 2023/08/31
+/// github: https://github.com/lzan13
 ///
 /// 倒计时工具类
-///
 class OTTimer {
   /// Timer.
   Timer? _mTimer;

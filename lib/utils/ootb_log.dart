@@ -1,6 +1,8 @@
+/// author: lzan13
+/// date: 2023/08/31
+/// github: https://github.com/lzan13
 ///
 /// 自定义 log 工具类
-///
 class OTLog {
   static const String logTag = "ootbtoolsflutter";
 

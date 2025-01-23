@@ -1,13 +1,119 @@
-/**
- * @Author: Sky24n
- * @GitHub: https://github.com/Sky24n
- * @Description: Timeline Util.
- * @Date: 2018/10/3
- */
-
 import 'package:ootbtoolsflutter/utils/ootb_date.dart';
 
-///(xx)Configurable output.
+/// author: lzan13
+/// date: 2023/08/31
+/// github: https://github.com/lzan13
+///
+/// TimelineUtil
+class TimelineUtil {
+  static final Map<String, TimelineInfo> _timelineInfoMap = {
+    'zh': ZhInfo(),
+    'en': EnInfo(),
+    'zh_normal': ZhNormalInfo(), //keepTwoDays() => false
+    'en_normal': EnNormalInfo(), //keepTwoDays() => false
+  };
+
+  ///add custom configuration.
+  void setLocaleInfo(String locale, TimelineInfo timelineInfo) {
+    _timelineInfoMap[locale] = timelineInfo;
+  }
+
+  /// format time by DateTime.
+  /// dateTime
+  /// locDateTime: current time or schedule time.
+  /// locale: output key.
+  static String formatByDateTime(DateTime dateTime, {DateTime? locDateTime, String locale = "", DayFormat? dayFormat}) {
+    int _locDateTime = (locDateTime == null ? 0 : locDateTime.millisecondsSinceEpoch);
+    return format(dateTime.millisecondsSinceEpoch, locTimeMillis: _locDateTime, locale: locale, dayFormat: dayFormat);
+  }
+
+  /// format time by millis.
+  /// dateTime : millis.
+  /// locDateTime: current time or schedule time. millis.
+  /// locale: output key.
+  static String format(int timeMillis, {int locTimeMillis = 0, String locale = "zh", DayFormat? dayFormat}) {
+    int _locTimeMillis = locTimeMillis == 0 ? DateTime.now().millisecondsSinceEpoch : locTimeMillis;
+    String _locale = locale;
+    TimelineInfo _info = _timelineInfoMap[_locale] ?? ZhInfo();
+    DayFormat _dayFormat = dayFormat ?? DayFormat.Common;
+
+    int elapsed = _locTimeMillis - timeMillis;
+    String suffix;
+    if (elapsed < 0) {
+      elapsed = elapsed.abs();
+      suffix = _info.suffixAfter();
+      _dayFormat = DayFormat.Simple;
+    } else {
+      suffix = _info.suffixAgo();
+    }
+
+    String timeline;
+    if (_info.customYesterday().isNotEmpty && OTDate.isYesterdayByMillis(timeMillis, _locTimeMillis)) {
+      return _getYesterday(timeMillis, _info, _dayFormat);
+    }
+
+    if (!OTDate.yearIsEqualByMillis(timeMillis, _locTimeMillis)) {
+      timeline = _getYear(timeMillis, _dayFormat);
+      if (timeline.isNotEmpty) return timeline;
+    }
+
+    final num seconds = elapsed / 1000;
+    final num minutes = seconds / 60;
+    final num hours = minutes / 60;
+    final num days = hours / 24;
+    if (seconds < 120) {
+      timeline = _info.oneMinute(1);
+      if (suffix != _info.suffixAfter() && _info.lessThanTenSecond().isNotEmpty && seconds < 10) {
+        timeline = _info.lessThanTenSecond();
+        suffix = "";
+      }
+    } else if (minutes < 60) {
+      timeline = _info.minutes(minutes.round());
+    } else if (hours < 24) {
+      timeline = _info.hours(hours.round());
+    } else {
+      if ((days.round() == 1 && _info.keepOneDay() == true) || (days.round() == 2 && _info.keepTwoDays() == true)) {
+        _dayFormat = DayFormat.Simple;
+      }
+      timeline = _formatDays(timeMillis, days.round(), _info, _dayFormat);
+      suffix = (_dayFormat == DayFormat.Simple ? suffix : "");
+    }
+    return timeline + suffix;
+  }
+
+  /// get Yesterday.
+  /// 获取昨天.
+  static String _getYesterday(int timeMillis, TimelineInfo info, DayFormat dayFormat) {
+    return info.customYesterday() + (dayFormat == DayFormat.Full ? (" " + OTDate.getDateStrByMs(timeMillis, format: DateFormat.hourMinute)) : "");
+  }
+
+  /// get is not year info.
+  /// 获取非今年信息.
+  static String _getYear(int timeMillis, DayFormat dayFormat) {
+    if (dayFormat != DayFormat.Simple) {
+      return OTDate.getDateStrByMs(timeMillis, format: (dayFormat == DayFormat.Common ? DateFormat.yearMonthDay : DateFormat.yearMonthDayHourMinute));
+    }
+    return "";
+  }
+
+  /// format Days.
+  static String _formatDays(int timeMillis, num days, TimelineInfo timelineInfo, DayFormat dayFormat) {
+    String timeline;
+    switch (dayFormat) {
+      case DayFormat.Simple:
+        timeline = (days == 1 ? timelineInfo.oneDay(days.round()) : timelineInfo.days(days.round()));
+        break;
+      case DayFormat.Common:
+        timeline = OTDate.getDateStrByMs(timeMillis, format: DateFormat.monthDay);
+        break;
+      case DayFormat.Full:
+        timeline = OTDate.getDateStrByMs(timeMillis, format: DateFormat.monthDayHourMinute);
+        break;
+    }
+    return timeline;
+  }
+}
+
 ///(xx)为可配置输出.
 enum DayFormat {
   ///(less than 10s->just now)、x minutes、x hours、(Yesterday)、x days.
@@ -24,8 +130,11 @@ enum DayFormat {
   Full,
 }
 
-///Timeline information configuration.
-///Timeline信息配置.
+/// author: lzan13
+/// date: 2023/08/31
+/// github: https://github.com/lzan13
+///
+/// Timeline信息配置.
 abstract class TimelineInfo {
   String suffixAgo(); //suffix ago(后缀 后).
 
@@ -154,114 +263,4 @@ class EnNormalInfo implements TimelineInfo {
   String oneDay(int days) => 'a day';
 
   String days(int days) => '$days days';
-}
-
-Map<String, TimelineInfo> _timelineInfoMap = {
-  'zh': ZhInfo(),
-  'en': EnInfo(),
-  'zh_normal': ZhNormalInfo(), //keepTwoDays() => false
-  'en_normal': EnNormalInfo(), //keepTwoDays() => false
-};
-
-///add custom configuration.
-void setLocaleInfo(String locale, TimelineInfo timelineInfo) {
-  _timelineInfoMap[locale] = timelineInfo;
-}
-
-/// TimelineUtil
-class TimelineUtil {
-  /// format time by DateTime.
-  /// dateTime
-  /// locDateTime: current time or schedule time.
-  /// locale: output key.
-  static String formatByDateTime(DateTime dateTime, {DateTime? locDateTime, String locale = "", DayFormat? dayFormat}) {
-    int _locDateTime = (locDateTime == null ? 0 : locDateTime.millisecondsSinceEpoch);
-    return format(dateTime.millisecondsSinceEpoch, locTimeMillis: _locDateTime, locale: locale, dayFormat: dayFormat);
-  }
-
-  /// format time by millis.
-  /// dateTime : millis.
-  /// locDateTime: current time or schedule time. millis.
-  /// locale: output key.
-  static String format(int timeMillis, {int locTimeMillis = 0, String locale = "zh", DayFormat? dayFormat}) {
-    int _locTimeMillis = locTimeMillis == 0 ? DateTime.now().millisecondsSinceEpoch : locTimeMillis;
-    String _locale = locale;
-    TimelineInfo _info = _timelineInfoMap[_locale] ?? ZhInfo();
-    DayFormat _dayFormat = dayFormat ?? DayFormat.Common;
-
-    int elapsed = _locTimeMillis - timeMillis;
-    String suffix;
-    if (elapsed < 0) {
-      elapsed = elapsed.abs();
-      suffix = _info.suffixAfter();
-      _dayFormat = DayFormat.Simple;
-    } else {
-      suffix = _info.suffixAgo();
-    }
-
-    String timeline;
-    if (_info.customYesterday().isNotEmpty && OTDate.isYesterdayByMillis(timeMillis, _locTimeMillis)) {
-      return _getYesterday(timeMillis, _info, _dayFormat);
-    }
-
-    if (!OTDate.yearIsEqualByMillis(timeMillis, _locTimeMillis)) {
-      timeline = _getYear(timeMillis, _dayFormat);
-      if (timeline.isNotEmpty) return timeline;
-    }
-
-    final num seconds = elapsed / 1000;
-    final num minutes = seconds / 60;
-    final num hours = minutes / 60;
-    final num days = hours / 24;
-    if (seconds < 120) {
-      timeline = _info.oneMinute(1);
-      if (suffix != _info.suffixAfter() && _info.lessThanTenSecond().isNotEmpty && seconds < 10) {
-        timeline = _info.lessThanTenSecond();
-        suffix = "";
-      }
-    } else if (minutes < 60) {
-      timeline = _info.minutes(minutes.round());
-    } else if (hours < 24) {
-      timeline = _info.hours(hours.round());
-    } else {
-      if ((days.round() == 1 && _info.keepOneDay() == true) || (days.round() == 2 && _info.keepTwoDays() == true)) {
-        _dayFormat = DayFormat.Simple;
-      }
-      timeline = _formatDays(timeMillis, days.round(), _info, _dayFormat);
-      suffix = (_dayFormat == DayFormat.Simple ? suffix : "");
-    }
-    return timeline + suffix;
-  }
-
-  /// get Yesterday.
-  /// 获取昨天.
-  static String _getYesterday(int timeMillis, TimelineInfo info, DayFormat dayFormat) {
-    return info.customYesterday() + (dayFormat == DayFormat.Full ? (" " + OTDate.getDateStrByMs(timeMillis, format: DateFormat.hourMinute)) : "");
-  }
-
-  /// get is not year info.
-  /// 获取非今年信息.
-  static String _getYear(int timeMillis, DayFormat dayFormat) {
-    if (dayFormat != DayFormat.Simple) {
-      return OTDate.getDateStrByMs(timeMillis, format: (dayFormat == DayFormat.Common ? DateFormat.yearMonthDay : DateFormat.yearMonthDayHourMinute));
-    }
-    return "";
-  }
-
-  /// format Days.
-  static String _formatDays(int timeMillis, num days, TimelineInfo timelineInfo, DayFormat dayFormat) {
-    String timeline;
-    switch (dayFormat) {
-      case DayFormat.Simple:
-        timeline = (days == 1 ? timelineInfo.oneDay(days.round()) : timelineInfo.days(days.round()));
-        break;
-      case DayFormat.Common:
-        timeline = OTDate.getDateStrByMs(timeMillis, format: DateFormat.monthDay);
-        break;
-      case DayFormat.Full:
-        timeline = OTDate.getDateStrByMs(timeMillis, format: DateFormat.monthDayHourMinute);
-        break;
-    }
-    return timeline;
-  }
 }

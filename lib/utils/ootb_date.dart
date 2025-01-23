@@ -1,6 +1,8 @@
+/// author: lzan13
+/// date: 2025/01/22
+/// github: https://github.com/lzan13
 ///
 /// 时间日期工具类
-///
 enum DateFormat {
   defaultMilli, //yyyy-MM-dd HH:mm:ss.SSS
   normal, //yyyy-MM-dd HH:mm:ss
@@ -405,7 +407,11 @@ class OTDate {
       int spDay = getDayOfYear(locDateTime) - getDayOfYear(dateTime);
       return spDay == 1;
     } else {
-      return ((locDateTime.year - dateTime.year == 1) && dateTime.month == 12 && locDateTime.month == 1 && dateTime.day == 31 && locDateTime.day == 1);
+      return ((locDateTime.year - dateTime.year == 1) &&
+          dateTime.month == 12 &&
+          locDateTime.month == 1 &&
+          dateTime.day == 31 &&
+          locDateTime.day == 1);
     }
   }
 

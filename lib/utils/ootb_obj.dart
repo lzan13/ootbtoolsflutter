@@ -1,6 +1,8 @@
+/// author: lzan13
+/// date: 2023/08/31
+/// github: https://github.com/lzan13
 ///
 /// 对象操作工具类
-///
 class OTObj {
   ///
   /// 判断对象是否为空
