@@ -11,9 +11,9 @@ enum SecretKeyStyle { upperCase, lowerCase, upperLowerCase }
 /// Desc: TOTP 基于时间的一次性密码工具类
 class OTTotp {
   /// 使用Base32字母表生成密钥，适用于TOTP（基于时间的一次性密码）应用程序。
-  /// [length] : 要生成的密钥长度。必须在16到255之间，默认值为32。
-  /// [autoPadding] : 如果为true，则每4个字母创建一个分段，默认值为false。
-  /// [secretKeyStyle] : SecretKeyStyle用于设置密钥的大小写，默认值为upperCase。
+  /// [length] 要生成的密钥长度。必须在16到255之间，默认值为32。
+  /// [autoPadding] 如果为true，则每4个字母创建一个分段，默认值为false。
+  /// [secretKeyStyle] SecretKeyStyle用于设置密钥的大小写，默认值为upperCase。
   static String createSecret({int length = 32, bool autoPadding = false, SecretKeyStyle secretKeyStyle = SecretKeyStyle.upperCase}) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; // Base32字母表
     if (length < 16 || length > 255) {
